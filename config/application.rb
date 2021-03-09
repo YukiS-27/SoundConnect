@@ -11,6 +11,12 @@ module App
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
 
+    # deviseの日本語化
+    config.i18n.default_locale = :ja
+
+    # タイムゾーンを日本に変更
+    config.time_zone = 'Asia/Tokyo'
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
