@@ -22,12 +22,12 @@
           <%= link_to 'プロフィール変更', edit_user_registration_path %> |
           <%= link_to "ログアウト", sign_out_path %>
         <% else %>
-          <%= link_to "サインイン", new_user_registration_path %> |
+          <%= link_to "サインアップ", new_user_registration_path %> |
           <%= link_to "ログイン", new_user_session_path %>
         <% end %>
       </nav>
     </header>
-    
+
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
 
