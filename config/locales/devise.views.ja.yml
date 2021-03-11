@@ -27,7 +27,7 @@ ja:
         updated_at: 更新日
     models:
       user: ユーザ
-  devise:
+  users:   # devise -> users
     confirmations:
       confirmed: メールアドレスが確認できました。
       new:
