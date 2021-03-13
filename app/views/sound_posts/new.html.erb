@@ -2,8 +2,21 @@
 <h2>ファイルのアップロード</h2>
 
 <%= form_with model: @sound_post do |f| %>
-  <%= f.label :file %>
-  <%= f.file_field :file, :size => 140 %>
+
+  <div class="field">
+    <%= f.label :sound_source %><br >
+    <%= f.file_field :sound_source, :size => 140 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %><br >
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br >
+    <%= f.text_field :description %>
+  </div>
 
   <%= f.submit "アップロード" %>
 <% end %>
