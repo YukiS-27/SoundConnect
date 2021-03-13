@@ -1,0 +1,2 @@
+class SoundPost < ApplicationRecord
+end
