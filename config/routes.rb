@@ -3,9 +3,12 @@ Rails.application.routes.draw do
   get 'home/show'
   root to: "home#index"
 
+  # deviseのコントローラーを継承
   devise_for :users, :controllers => {
+    :confirmations => 'users/confirmations',
     :registrations => 'users/registrations',
-    :sessions => 'users/sessions'
+    :sessions => 'users/sessions',
+    :passwords => 'users/passwords'
   }
 
   devise_scope :user do
