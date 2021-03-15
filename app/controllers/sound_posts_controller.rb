@@ -2,6 +2,7 @@ class SoundPostsController < ApplicationController
 
   def new
     @sound_post = SoundPost.new
+    @instruments = Instrument.all
   end
 
   def create
