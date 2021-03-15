@@ -22,6 +22,11 @@ gem 'jbuilder', '~> 2.7'
 # Use Active Model has_secure_password (3.1.7)
 gem 'bcrypt', '~> 3.1.16'
 
+# ファイルアップロード
+gem 'carrierwave'
+# 音声ファイルの再生機能（とダウンロード機能）
+gem 'audiojs-rails'
+
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -65,3 +70,6 @@ gem 'devise'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+
+# シードファイルの使い勝手向上
+gem 'seed-fu'

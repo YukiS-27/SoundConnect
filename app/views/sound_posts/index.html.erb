@@ -1,0 +1,16 @@
+<h2>音源ファイル一覧ページ</h2>
+
+<%= link_to("アップロードする", new_sound_post_path) %>
+
+<!-- 再生テスト -->
+
+
+<% @sound_posts.each do |sound_post| %>
+  <% instrument = Instrument.find(sound_post.instrument_id) %>
+  <div class="post">
+    <%= instrument.name %><br >
+    <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
+      <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
+    </audio>
+  </div>
+<% end %>

@@ -1,0 +1,2 @@
+module SoundPostsHelper
+end

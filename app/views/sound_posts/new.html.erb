@@ -1,0 +1,28 @@
+<!-- 仮作成 -->
+<h2>ファイルのアップロード</h2>
+
+<%= form_with model: @sound_post do |f| %>
+
+  <div class="field">
+    <%= f.label :sound_source %><br >
+    <%= f.file_field :sound_source, :size => 140 %>
+  </div>
+
+  <!-- 楽器の名前を表示して、クリックして選択 -> instrument.idを取得にしたい -->
+  <div class="field">
+    <%= f.label :instrument_id %><br >
+    <%= f.number_field :instrument_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :title %><br >
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :description %><br >
+    <%= f.text_field :description %>
+  </div>
+
+  <%= f.submit "アップロード" %>
+<% end %>
