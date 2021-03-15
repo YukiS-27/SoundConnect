@@ -8,6 +8,12 @@
     <%= f.file_field :sound_source, :size => 140 %>
   </div>
 
+  <!-- 楽器の名前を表示して、クリックして選択 -> instrument.idを取得にしたい -->
+  <div class="field">
+    <%= f.label :instrument_id %><br >
+    <%= f.number_field :instrument_id %>
+  </div>
+
   <div class="field">
     <%= f.label :title %><br >
     <%= f.text_field :title %>

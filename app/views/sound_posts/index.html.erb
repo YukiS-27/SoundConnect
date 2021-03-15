@@ -5,10 +5,12 @@
 <!-- 再生テスト -->
 
 
-<% @sound_posts.each do |t| %>
+<% @sound_posts.each do |sound_post| %>
+  <% instrument = Instrument.find(sound_post.instrument_id) %>
   <div class="post">
-    <audio src="<%= "#{t.sound_source}" %>" controls="">
-      <!-- <a src="<%= "#{t.sound_source}" %>">ダウンロード</a> -->
+    <%= instrument.name %><br >
+    <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
+      <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
     </audio>
   </div>
 <% end %>
