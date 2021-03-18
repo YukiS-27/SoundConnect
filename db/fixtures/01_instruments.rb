@@ -1,9 +1,7 @@
-Instrument.seed do |s|
-  s.id = 1
-  s.name = 'ピアノ'
-end
-
-Instrument.seed do |s|
-  s.id = 2
-  s.name = 'ギター'
-end
+Instrument.seed(:id,
+  { id: 1, name: "ピアノ" },
+  { id: 2, name: "ギター" },
+  { id: 3, name: "ベース" },
+  { id: 4, name: "シンセサイザー" },
+  { id: 5, name: "ドラム" }
+)
