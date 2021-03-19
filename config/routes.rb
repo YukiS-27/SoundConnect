@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  get 'home/index'
-  get 'home/show'
   # トップページを音源投稿一覧ページへ
   # root to: "home#index"
   root to: "sound_posts#index"
+  get 'home/index'
+  get 'home/show'
 
+  get 'profiles/show', to: 'profiles#show'
+  
   # deviseのコントローラーを継承
   devise_for :users, :controllers => {
     :confirmations => 'users/confirmations',
