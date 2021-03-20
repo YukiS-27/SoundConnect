@@ -8,7 +8,7 @@ class SoundPostsController < ApplicationController
   def create
     @sound_post = SoundPost.new(sound_post_params)
     @sound_post.user_id = current_user.id
-    
+
     # 仮データ挿入
     # @sound_post.instrument_id = Instrument.find(1)
     @sound_post.sound_source_path = "sample.mp3"
@@ -29,7 +29,9 @@ class SoundPostsController < ApplicationController
   private
 
   def sound_post_params
-    params.require(:sound_post).permit(:title, :discription, :sound_source, :instrument_id)
+    params.require(:sound_post).permit(
+      :title, :discription, :sound_source, :instrument_id
+    )
   end
 
 end
