@@ -17,18 +17,19 @@
     <header>
       <nav>
         <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-        <% if user_signed_in? %> 
+        <% if user_signed_in? %>
           <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
           <%= link_to 'プロフィール変更', edit_user_registration_path %> |
+          <%= link_to "マイページ", detail_user_path(current_user) %> |
+          <%= link_to "ユーザー一覧", users_path %> |
           <%= link_to "ログアウト", sign_out_path %>
         <% else %>
           <%= link_to "サインアップ", new_user_registration_path %> |
           <%= link_to "ログイン", new_user_session_path %>
         <% end %>
-
-        <%= link_to "マイページ", detail_user_path(current_user) %> |
-        <%= link_to "ユーザー一覧", users_path %>
       </nav>
+
+      <p><%= current_user.name %>としてログイン</p>
     </header>
 
     <p class="notice"><%= notice %></p>
