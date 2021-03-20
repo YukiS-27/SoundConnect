@@ -16,6 +16,8 @@
   <body>
     <header>
       <nav>
+        <%= link_to "トップページへ", root_path %> |
+
         <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
         <% if user_signed_in? %>
           <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
