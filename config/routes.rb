@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   get 'home/index'
   get 'home/show'
 
-  get 'profiles/show', to: 'profiles#show'
+  get 'users/:id', to: 'profiles#show', as: 'users'
   
   # deviseのコントローラーを継承
   devise_for :users, :controllers => {
