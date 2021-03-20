@@ -1,6 +1,8 @@
 <h2>音源ファイル一覧ページ</h2>
 
-<%= link_to("アップロードする", new_sound_post_path) %>
+<% if user_signed_in? %>
+  <%= link_to("アップロードする", new_sound_post_path) %>
+<% end %>
 
 <% @sound_posts.each do |sound_post| %>
 <!-- 楽器のIDから楽器名を取得 -->
