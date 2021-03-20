@@ -1,4 +1,8 @@
 <h1>Profiles#show</h1>
 <p>マイページ（ユーザーページ）</p>
 
+<%= @user.name %><br >
+<%= @user.email %><br >
+<%= @user.introduction %><br >
+
 <%= link_to 'プロフィール変更', edit_user_registration_path %>

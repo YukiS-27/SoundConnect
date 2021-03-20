@@ -26,7 +26,8 @@
           <%= link_to "ログイン", new_user_session_path %>
         <% end %>
 
-        <%= link_to "マイページ", users_path %>
+        <%= link_to "マイページ", detail_user_path(current_user) %> |
+        <%= link_to "ユーザー一覧", users_path %>
       </nav>
     </header>
 
