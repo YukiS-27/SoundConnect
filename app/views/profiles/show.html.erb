@@ -8,21 +8,20 @@
 自己紹介文：<br >
 <%= @user.introduction %><br >
 
-<!-- 自分と他のユーザーのページで表示内容を変えたい -->
-<% if current_user.id == @user.id %>
+<%# 自分と他のユーザーのページで表示内容を変えたい %>
+<% if !current_user.blank? && current_user.id == @user.id %>
   <%= link_to 'プロフィール変更', edit_user_registration_path %>
 <% else %>
-  <!-- 今後メッセージ画面へのリンクを追加 -->
+  <%# 今後メッセージ画面へのリンクを追加 %>
   <p>メッセージを送る</p>
 <% end %>
 
-<!-- ユーザーの投稿を表示 -->
+<%# ユーザーの投稿を表示 %>
 <% @sound_posts.each do |sound_post| %>
-  <!-- <% instrument = Instrument.find(sound_post.instrument_id) %> -->
 
   <div class="post">
     <p><%= sound_post.title %></p>
-    <!-- 楽器の名前を表示 -->
+    <%#  楽器の名前を表示 %>
     <%= sound_post.instrument.name %><br >
     <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
       <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
