@@ -1,0 +1,2 @@
+class SoundPostPlaylist < ApplicationRecord
+end
