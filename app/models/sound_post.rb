@@ -1,6 +1,6 @@
 class SoundPost < ApplicationRecord
   belongs_to :user
-  has_one :instrument
+  belongs_to :instrument
 
   mount_uploader :sound_source, AudiofileUploader
 end

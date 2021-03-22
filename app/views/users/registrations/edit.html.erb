@@ -1,10 +1,11 @@
+<%# アカウント設定 %>
 <h2><%= t('.title', resource: resource.model_name.human) %></h2>
 
 <%= form_with(model: @user, url: user_registration_path, html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name %><br />
+    <%= f.label :name, 'ユーザー名' %><br />
     <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
   </div>
 
@@ -14,7 +15,6 @@
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div><%= t('.currently_waiting_confirmation_for_name', name: resource.unconfirmed_name) %></div>
     <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
   <% end %>
 
@@ -46,4 +46,6 @@
 
 <p><%= t('.unhappy') %> <%= button_to t('.cancel_my_account'), registration_path(resource_name), data: { confirm: t('.are_you_sure') }, method: :delete %></p>
 
-<%= link_to t('devise.shared.links.back'), :back %>
+<%# 戻るボタン %>
+<%= link_to t('devise.shared.links.back'), detail_user_path(current_user) %>
+
