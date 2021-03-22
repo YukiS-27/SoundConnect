@@ -25,8 +25,8 @@ Rails.application.routes.draw do
     get 'sign_out', :to => 'users/sessions#destroy'
 
     # プロフィール設定を追加
-    get 'edit/profile', to: 'users/registrations#edit_profile'
-    patch 'update/profile', to: 'users/registrations#update_profile'
+    get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
+    patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
   end
 
   get 'users/index', to: 'profiles#index', as: 'users'
