@@ -3,7 +3,7 @@
 
 class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
-  before_action :configure_account_update_params, only: [:update, :update_profile]
+  # before_action :configure_account_update_params, only: [:update, :update_profile]
 
   # GET /resource/sign_up
   # def new
@@ -29,13 +29,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    current_user.assign_attributes(configure_account_update_params)
-    # @user = current_user
-    # @user.name = params[:name]
-    # @user.introduction = params[:introduction]
+    # ▼これだとエラー出る
+    # current_user.assign_attributes(configure_account_update_params)
+    @user = current_user
+    @user.name = params[:name]
+    @user.introduction = params[:introduction]
 
-    if current_user.save
-      redirect_to detail_user_path(current_user)
+    if @user.save
+      redirect_to detail_user_path(@user.id)
     else
       render :edit_profile
     end
@@ -57,10 +58,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def configure_account_update_params
+  def profile_update_params
+    params.require(:user).permit(:name, :introduction)
+  end
+
+    # def configure_account_update_params
       # 情報更新時にnameの取得を許可する
-      devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction])
-    end
+      # devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction])
+    # end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
