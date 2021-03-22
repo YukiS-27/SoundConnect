@@ -34,4 +34,6 @@ Rails.application.routes.draw do
 
   resources :sound_posts
 
+  resources :playlists
+
 end
