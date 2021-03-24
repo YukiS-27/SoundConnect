@@ -11,7 +11,7 @@ class PlaylistsController < ApplicationController
   end
 
   def create
-    @playlist = Playlist.new
+    @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
     @playlist.title = params[:title]
 

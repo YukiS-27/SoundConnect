@@ -26,6 +26,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   def edit_profile
+    @user = current_user
   end
 
   def update_profile

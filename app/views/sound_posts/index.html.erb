@@ -16,7 +16,7 @@
       <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
     </audio>
 
-    <%= link_to new_playlist_path(sound_post_id: sound_post.id), method: :post do %>
+    <%= link_to new_playlist_path(sound_post_id: sound_post.id) do %>
       プレイリストに追加する
     <% end %>
   </div>

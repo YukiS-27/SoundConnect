@@ -5,8 +5,8 @@
 <% end %>
 
 <%= form_with model: @playlist, url: playlists_path do |f| %>
-  <%= f.label :title, "タイトル" %>
-  <%= f.text_field :title%>
+  <%= f.label :title, "タイトル" %><br >
+  <%= f.text_field :title %>
 
   <%= f.submit "プレイリストに追加" %>
 <% end %>
