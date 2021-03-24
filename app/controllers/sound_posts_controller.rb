@@ -14,7 +14,7 @@ class SoundPostsController < ApplicationController
     @sound_post.sound_source_path = "sample.mp3"
 
     if @sound_post.save
-      redirect_to sound_posts_path
+      redirect_to root_path
     else
       render :new
     end
@@ -30,7 +30,7 @@ class SoundPostsController < ApplicationController
 
   def sound_post_params
     params.require(:sound_post).permit(
-      :title, :discription, :sound_source, :instrument_id
+      :title, :description, :sound_source, :instrument_id
     )
   end
 

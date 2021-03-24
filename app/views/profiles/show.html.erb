@@ -10,7 +10,8 @@
 
 <%# 自分と他のユーザーのページで表示内容を変えたい %>
 <% if !current_user.blank? && current_user.id == @user.id %>
-  <%= link_to 'プロフィール変更', edit_profile_path %>
+  <%= link_to 'プロフィール変更', edit_profile_path %> │
+  <%= link_to 'プレイリスト', playlists_path %>
 <% else %>
   <%# 今後メッセージ画面へのリンクを追加 %>
   <p>メッセージを送る</p>

@@ -1,7 +1,7 @@
 <h2>音源ファイル一覧ページ</h2>
 
 <% if user_signed_in? %>
-  <%= link_to("アップロードする", new_sound_post_path) %>
+  <%= link_to "アップロードする", new_sound_post_path %>
 <% end %>
 
 <% @sound_posts.each do |sound_post| %>
@@ -9,10 +9,16 @@
   <% instrument = Instrument.find(sound_post.instrument_id) %>
 
   <div class="post">
+    <%= sound_post.title %><br >
+    <%= sound_post.description %><br >
     <!-- 楽器の名前を表示 -->
     <%= instrument.name %><br >
     <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
       <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
     </audio>
+
+    <%= link_to new_playlist_path(sound_post_id: sound_post.id), method: :post do %>
+      プレイリストに追加する
+    <% end %>
   </div>
 <% end %>

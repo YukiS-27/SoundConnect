@@ -1,10 +1,25 @@
 class PlaylistsController < ApplicationController
-  def new
-    @playlist = Playlist.new
-  end
 
   def index
-    @playlists = Playlist.all
+    set_playlists
+  end
+
+  def new
+    @sound_post = SoundPost.find(params[:sound_post_id])
+    @playlist = Playlist.new
+    set_playlists
+  end
+
+  def create
+    @playlist = Playlist.new
+    @playlist.user_id = current_user.id
+    @playlist.title = params[:title]
+
+    if @playlist.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
@@ -12,4 +27,9 @@ class PlaylistsController < ApplicationController
   def playlist_params
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
   end
+
+  def set_playlists
+    @playlists = current_user.playlists
+  end
+
 end
