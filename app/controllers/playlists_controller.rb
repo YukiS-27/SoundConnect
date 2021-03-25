@@ -4,6 +4,11 @@ class PlaylistsController < ApplicationController
     set_playlists
   end
 
+  def show
+    @playlist = Playlist.find(params[:id])
+    @sound_posts = SoundPost.where(playlists_id: @playlist.id)
+  end
+
   def new
     @sound_post = SoundPost.find(params[:sound_post_id])
     @playlist = Playlist.new
@@ -24,6 +29,7 @@ class PlaylistsController < ApplicationController
   private
 
   def playlist_params
+    # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
   end
 

@@ -1,5 +1,8 @@
 <h1>プレイリスト一覧</h1>
 
 <% @playlists.each do |playlist| %>
-  <%= playlist.title %><br >
+
+  <%= link_to playlist_path(id: playlist.id) do %>
+    <%= playlist.title %><br >
+  <% end %>
 <% end %>

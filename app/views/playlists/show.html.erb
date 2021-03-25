@@ -1,0 +1,6 @@
+<h1>プレイリストの詳細</h1>
+
+<%= @playlist.title %>
+<% @playlist.sound_posts.each do |sound_post| %>
+  <%= sound_post.title %>
+<% end %>
