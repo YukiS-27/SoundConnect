@@ -13,7 +13,6 @@ class PlaylistsController < ApplicationController
   def create
     @playlist = Playlist.new(playlist_params)
     @playlist.user_id = current_user.id
-    @playlist.title = params[:title]
 
     if @playlist.save
       redirect_to root_path

@@ -1,10 +1,10 @@
 <h1>プレイリストに追加</h1>
 
-<%= @playlists.each do |playlist| %>
-  <% playlist.title %><br >
+<% @playlists.each do |playlist| %>
+  <%= playlist.title %><br >
 <% end %>
 
-<%= form_with model: @playlist, url: playlists_path do |f| %>
+<%= form_with model: @playlist, url: playlists_path, method: :post do |f| %>
   <%= f.label :title, "タイトル" %><br >
   <%= f.text_field :title %>
 

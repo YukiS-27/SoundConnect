@@ -31,13 +31,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_profile
     # ▼これだとエラー出る
-    # current_user.assign_attributes(configure_account_update_params)
-    @user = current_user
-    @user.name = params[:name]
-    @user.introduction = params[:introduction]
+    current_user.assign_attributes(configure_account_update_params)
+    # @user = current_user
+    # @user.name = params[:name]
+    # @user.introduction = params[:introduction]
 
-    if @user.save
-      redirect_to detail_user_path(@user.id)
+    if current_user.save
+      redirect_to detail_user_path(current_user)
     else
       render :edit_profile
     end
@@ -59,14 +59,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-  def profile_update_params
-    params.require(:user).permit(:name, :introduction)
-  end
-
-    # def configure_account_update_params
-      # 情報更新時にnameの取得を許可する
-      # devise_parameter_sanitizer.permit(:account_update, keys: [:name, :introduction])
-    # end
+    def configure_account_update_params
+      params.permit(:name, :introduction)
+    end
 
   # If you have extra params to permit, append them to the sanitizer.
   # def configure_sign_up_params
