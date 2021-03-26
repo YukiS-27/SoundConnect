@@ -35,5 +35,6 @@ Rails.application.routes.draw do
   resources :sound_posts
 
   resources :playlists
+  put 'playlists/:id', to: 'playlists#update', as: 'add_playlist'
 
 end

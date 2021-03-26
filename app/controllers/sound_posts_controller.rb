@@ -6,19 +6,18 @@ class SoundPostsController < ApplicationController
   end
 
   def create
-    @sound_post = SoundPost.new(sound_post_params)
-    @sound_post.user_id = current_user.id
+    sound_post = SoundPost.new(sound_post_params)
+    sound_post.user_id = current_user.id
 
     # 仮データ挿入
     # @sound_post.instrument_id = Instrument.find(1)
-    @sound_post.sound_source_path = "sample.mp3"
+    sound_post.sound_source_path = "sample.mp3"
 
-    if @sound_post.save
+    if sound_post.save
       redirect_to root_path
     else
       render :new
     end
-
 
   end
 

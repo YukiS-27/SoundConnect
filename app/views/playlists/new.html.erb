@@ -1,9 +1,13 @@
 <h1>プレイリストに追加</h1>
 
+<%# 既存のプレイリストを表示 -> 追加 %>
 <% @playlists.each do |playlist| %>
-  <%= playlist.title %><br >
+  <%= link_to playlist_path(sound_post_id: @sound_post.id), method: :put do %>
+    <%= playlist.title %><br >
+  <% end %>
 <% end %>
 
+<%# 新規プレイリストを作成 %>
 <%= form_with model: @playlist, url: playlists_path, method: :post do |f| %>
   <%= f.label :title, "タイトル" %><br >
   <%= f.text_field :title %>
