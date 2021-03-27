@@ -17,6 +17,6 @@
     </audio>
 
   <%# プレイリスト %>
-    <%= link_to 'プレイリストに追加', new_sound_post_playlist_path %>
+    <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id) %>
   </div>
 <% end %>
