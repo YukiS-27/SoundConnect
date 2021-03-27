@@ -1,7 +1,7 @@
 <h1>プレイリストを作成</h1>
 
 <%# 新規プレイリストを作成 %>
-<%= form_with model: @playlist, url: new_playlist_path do |f| %>
+<%= form_with model: @playlist do |f| %>
   <%= f.label :title, "タイトル" %><br >
   <%= f.text_field :title %><br >
 

@@ -18,10 +18,10 @@ class PlaylistsController < ApplicationController
   def create
     playlist = Playlist.new(create_playlist_params)
     playlist.user_id = current_user.id
-    sound_post_playlist = sound_post.playlists.build(sound_post.id)
+    # sound_post_playlist = sound_post.playlists.build(sound_post.id)
 
     if playlist.save
-      redirect_to root_path
+      redirect_to new_sound_post_playlist_path
     else
       render :new
     end
@@ -43,10 +43,6 @@ class PlaylistsController < ApplicationController
   def create_playlist_params
     # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
-  end
-
-  def playlist_params
-    params.re
   end
 
   def set_playlists
