@@ -11,14 +11,15 @@ class PlaylistsController < ApplicationController
   end
 
   def new
-    @sound_post = SoundPost.find(params[:sound_post_id])
-    @playlist = @sound_post.playlists.build
+    @sound_post = SoundPost.find(params[:id])
+    @psound_post_playlist = @sound_post.playlists.build
     set_playlists
   end
 
   def create
-    playlist = Playlist.new(playlist_params)
+    playlist = Playlist.new(create_playlist_params)
     playlist.user_id = current_user.id
+    sound_post_playlist = sound_post.playlists.build(sound_post.id)
 
     if playlist.save
       redirect_to root_path
@@ -32,7 +33,6 @@ class PlaylistsController < ApplicationController
     sound_post_playlist = SoundPostPlaylist.new(playlist_id: playlist.id, sound_post_id: sound_post.id)
 
     if sound_post_playlist.save
-      binding.pry
       redirect_to root_path
     else
       render :new
@@ -41,9 +41,13 @@ class PlaylistsController < ApplicationController
 
   private
 
-  def playlist_params
+  def create_playlist_params
     # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
+  end
+
+  def playlist_params
+    params.re
   end
 
   def set_playlists
