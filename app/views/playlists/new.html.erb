@@ -1,18 +1,9 @@
-<h1>プレイリストに追加</h1>
-
-<%# 既存のプレイリストを表示 -> 追加 %>
-<div class="checkbox">
-  <%= form_with model: @user, url: add_playlist_path do |f| %>
-    <%= f.collection_check_boxes(:sound_post.playlist_ids, Playlist.all, :id, :title) do |b| %>
-      <%= b.label { b.check_box + b.text } %>
-    <% end %>
-  <% end %>
-</div>
+<h1>プレイリストを作成</h1>
 
 <%# 新規プレイリストを作成 %>
-<%= form_with model: @playlist, url: playlists_path, method: :post do |f| %>
+<%= form_with model: @playlist, url: new_playlist_path do |f| %>
   <%= f.label :title, "タイトル" %><br >
-  <%= f.text_field :title %>
+  <%= f.text_field :title %><br >
 
-  <%= f.submit "プレイリストに追加" %>
+  <%= f.submit "プレイリストを作成" %>
 <% end %>

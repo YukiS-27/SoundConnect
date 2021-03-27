@@ -11,9 +11,8 @@ class PlaylistsController < ApplicationController
   end
 
   def new
-    @sound_post = SoundPost.find(params[:id])
-    @psound_post_playlist = @sound_post.playlists.build
-    set_playlists
+    # @psound_post_playlist = @sound_post.playlists.build
+    @playlist = Playlist.new
   end
 
   def create
