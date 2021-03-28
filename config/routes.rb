@@ -35,8 +35,7 @@ Rails.application.routes.draw do
 
   resources :sound_posts
   resources :playlists
-  resources :sound_post_playlists, only: [:new, :create, :destroy]
 
-  # put 'playlists/:id', to: 'sound_post_playlists#update', as: 'add_playlist'
+  resources :sound_post_playlists, only: [:new, :create, :destroy]
 
 end

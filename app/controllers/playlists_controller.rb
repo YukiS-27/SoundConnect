@@ -25,26 +25,46 @@ class PlaylistsController < ApplicationController
     end
   end
 
-  # def update
-    # sound_post = SoundPost.find(params[:id])
-    # sound_post_playlist = SoundPostPlaylist.new(playlist_id: playlist.id, sound_post_id: sound_post.id)
-#
-    # if sound_post_playlist.save
-      # redirect_to root_path
-    # else
-      # render :new
-    # end
-  # end
+  def edit
+    @playlist = Playlist.find(params[:id])
+  end
+
+  def update
+    # playlist.assign_attributes(configure_playlist_update_params)
+
+    playlist = Playlist.find(params[:id])
+    # playlist.title = params[:title]
+    if playlist.update(playlist_update_params)
+      redirect_to playlists_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    playlist = Playlist.find(params[:id])
+    playlist.destroy if playlist.present?
+
+    if playlist.destroyed?
+      redirect_to playlists_path
+    else
+      render :edit
+    end
+  end
 
   private
+
+  def set_playlists
+    @playlists = current_user.playlists
+  end
 
   def create_playlist_params
     # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
   end
 
-  def set_playlists
-    @playlists = current_user.playlists
+  def playlist_update_params
+    params.permit(:title)
   end
 
 end

@@ -1,0 +1,16 @@
+<h1>プレイリストを編集</h1>
+
+<p>プレイリスト名：<%= @playlist.title %></p>
+
+<%= form_with model: @playlist do |f| %>
+  <div class="field">
+    <%= f.text_field :title, value: @playlist.title, name: "title", autofocus: true %>
+    <%= f.submit "変更を保存" %>
+  </div>
+
+<%= link_to('削除', playlist_path(@playlist), method: :delete) %><br >
+
+<% end %>
+
+<%# マイページへ戻る %>
+<%= link_to 'キャンセル', playlist_path(@playlist) %>
