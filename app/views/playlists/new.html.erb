@@ -1,9 +1,16 @@
 <h1>プレイリストを作成</h1>
 
+<%= @sound_post %>
 <%# 新規プレイリストを作成 %>
 <%= form_with model: @playlist do |f| %>
   <%= f.label :title, "タイトル" %><br >
   <%= f.text_field :title %><br >
 
-  <%= f.submit "プレイリストを作成" %>
+  <% if @sound_post.present? %>
+    <%= hidden_field_tag :sound_post_id, @sound_post.id %>
+    <%= f.submit "プレイリストを作成する（投稿から）" %>
+  <% else %>
+    <%= f.submit "プレイリストを作成" %>
+  <% end %>
+
 <% end %>

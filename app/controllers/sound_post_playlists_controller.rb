@@ -2,7 +2,7 @@ class SoundPostPlaylistsController < ApplicationController
 
   def new
     set_playlists
-    @sound_post = SoundPost.find(params[:sound_post_id])
+    @sound_post = SoundPost.find(params[:sound_post_id]) if params[:sound_post_id].present?
   end
 
   def create
@@ -13,8 +13,10 @@ class SoundPostPlaylistsController < ApplicationController
     )
 
     if sound_post_playlist.save
+      flash[:success] = "プレイリストに追加しました"
       redirect_to root_path
     else
+      # flash[:danger] = "保存に失敗しました"
       render :new
     end
 
