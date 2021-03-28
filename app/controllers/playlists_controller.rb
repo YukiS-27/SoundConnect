@@ -48,8 +48,6 @@ class PlaylistsController < ApplicationController
   end
 
   def update
-    # playlist.assign_attributes(configure_playlist_update_params)
-
     playlist = Playlist.find(params[:id])
     # playlist.title = params[:title]
     if playlist.update(playlist_update_params)
@@ -80,7 +78,6 @@ class PlaylistsController < ApplicationController
   def create_playlist_params
     # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
-    # params.permit(:sound_post_id)
   end
 
   def playlist_update_params
