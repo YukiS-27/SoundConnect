@@ -31,6 +31,7 @@ class SoundPostsController < ApplicationController
   end
 
   def edit
+    @instruments = Instrument.all
   end
 
   def update
