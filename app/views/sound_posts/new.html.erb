@@ -8,10 +8,10 @@
     <%= f.file_field :sound_source, :size => 140 %>
   </div>
 
-  <!-- 楽器の名前を表示して、クリックして選択 -> instrument.idを取得にしたい -->
+  <%# プルダウンから楽器を一つ選択 %>
   <div class="field">
     <%= f.label :instrument_id %><br >
-    <%= f.number_field :instrument_id %>
+    <%= f.collection_select :instrument_id, @instruments, :id, :name, {prompt: "楽器を選択してください"} %>
   </div>
 
   <div class="field">
