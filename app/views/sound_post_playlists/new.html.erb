@@ -1,0 +1,20 @@
+<h1>プレイリストに追加</h1>
+
+<%= form_with model: @sound_post, url: sound_post_playlists_path, method: :post do |f| %>
+  <%= f.collection_check_boxes :playlist_ids, @playlists, :id, :title, include_hidden: false do |b| %>
+    <%= b.label { b.check_box + b.text } %><br >
+  <% end %>
+  <%= f.hidden_field :sound_post_id, value: @sound_post.id %>
+  <%= f.submit "保存する" %>
+<% end %>
+
+<!--
+<% @playlists.each do |playlist| %>
+  <%= link_to sound_post_playlists_path(playlist_id: playlist.id, sound_post_id: @sound_post.id), method: :post do %>
+    <%= playlist.title %><br >
+  <% end %>
+<% end %>
+-->
+
+<%# 新規プレイリストを作成 %>
+<%= link_to '＋新規プレイリストを作成', new_playlist_path(sound_post_id: @sound_post.id) %>

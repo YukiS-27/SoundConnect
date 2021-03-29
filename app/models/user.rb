@@ -5,4 +5,6 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :sound_posts
+  has_many :playlists
+  has_many :playlist_sound_posts, through: :playlists, source: :sound_post
 end

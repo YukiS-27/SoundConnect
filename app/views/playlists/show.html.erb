@@ -1,0 +1,14 @@
+<h1>プレイリストの詳細</h1>
+
+<p>プレイリスト名：<%= @playlist.title %></p>
+<%= link_to 'プレイリストを編集する', edit_playlist_path(@playlist) %><br >
+
+<% @playlist.sound_posts.each do |sound_post| %>
+  <%= sound_post.title %><br >
+  <%= sound_post.description %><br >
+  <%# 楽器の名前を表示 %>
+  <%= sound_post.instrument.name %><br >
+  <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
+    <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
+  </audio><br >
+<% end %>

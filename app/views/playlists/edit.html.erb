@@ -1,0 +1,28 @@
+<h1>プレイリストを編集</h1>
+
+<p>プレイリスト名：<%= @playlist.title %></p>
+
+<%= form_with model: @playlist do |f| %>
+  <div class="field">
+    <%= f.text_field :title, value: @playlist.title, name: "title", autofocus: true, size: 30 %>
+    <%= f.submit "変更を保存" %>
+  </div>
+
+  <%= link_to('プレイリストを削除', playlist_path(@playlist), method: :delete) %><br >
+<% end %>
+
+<% @playlist.sound_posts.each do |sound_post| %>
+  <%= sound_post.title %><br >
+  <%= sound_post.description %><br >
+  <%# 楽器の名前を表示 %>
+  <%= sound_post.instrument.name %><br >
+  <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
+    <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
+  </audio>
+
+  <%= link_to('プレイリストから削除', sound_post_playlist_path(playlist_id: @playlist.id, sound_post_id: sound_post.id,), method: :delete) %><br >
+
+<% end %>
+
+<%# プレイリスト詳細へ戻る %>
+<%= link_to 'キャンセル', playlist_path(@playlist) %>

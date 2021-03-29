@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_22_050119) do
+ActiveRecord::Schema.define(version: 2021_03_22_064657) do
 
   create_table "instruments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 2021_03_22_050119) do
     t.string "title", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "sound_post_playlists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.integer "sound_post_id", null: false
+    t.integer "playlist_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["playlist_id"], name: "index_sound_post_playlists_on_playlist_id"
+    t.index ["sound_post_id"], name: "index_sound_post_playlists_on_sound_post_id"
   end
 
   create_table "sound_posts", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|

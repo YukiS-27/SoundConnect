@@ -29,9 +29,13 @@ Rails.application.routes.draw do
     patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
   end
 
+  # プロフィール設定
   get 'users/index', to: 'profiles#index', as: 'users'
   get 'users/:id', to: 'profiles#show', as: 'detail_user'
 
   resources :sound_posts
+  resources :playlists
+
+  resources :sound_post_playlists, only: [:new, :create, :destroy]
 
 end
