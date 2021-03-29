@@ -6,24 +6,43 @@ class SoundPostPlaylistsController < ApplicationController
   end
 
   def create
-    @sound_post = SoundPost.find(params[:sound_post][:sound_post_id])
+    # チェックされているかを判定
+    # if params[:sound_post][:playlist_ids].present?
+      @sound_post = SoundPost.find(params[:sound_post][:sound_post_id])
 
-    SoundPostPlaylist.transaction do
-      params[:sound_post][:playlist_ids].each do |playlist_id|
-        sound_post_playlist = SoundPostPlaylist.new(
-          playlist_id: playlist_id,
-          sound_post_id: params[:sound_post][:sound_post_id]
-        )
-        sound_post_playlist.save!
+      # チェックされた数だけ中間テーブルのレコードを生成
+      SoundPostPlaylist.transaction do
+        params[:sound_post][:playlist_ids].each do |playlist_id|
+          sound_post_playlist = SoundPostPlaylist.new(
+            playlist_id: playlist_id,
+            sound_post_id: params[:sound_post][:sound_post_id]
+          )
+          sound_post_playlist.save!
+        end
       end
+
+        flash[:success] = "プレイリストに追加しました"
+        redirect_to root_path
+
+      rescue => e
+        flash[:danger] = "保存に失敗しました" + e.to_s
+        render :new
+  end
+
+  def destroy
+    sound_post_playlist = SoundPostPlaylist.find_by(
+      playlist_id: params[:playlist_id],
+      sound_post_id: params[:sound_post_id]
+    )
+
+    sound_post_playlist.destroy if sound_post_playlist.present?
+
+    if sound_post_playlist.destroyed?
+      flash[:success] = "プレイリストから削除しました"
+      redirect_to controller: :playlists, action: :show, id: params[:playlist_id]
+    else
+      render template: "playlists/edit"
     end
-
-      flash[:success] = "プレイリストに追加しました"
-      redirect_to root_path
-
-    rescue => e
-      flash[:danger] = "保存に失敗しました" + e.to_s
-      render :new
   end
 
   private
@@ -32,7 +51,7 @@ class SoundPostPlaylistsController < ApplicationController
     @playlists = current_user.playlists
   end
 
-  def sound_post_params
-    params.require(:sound_post).permit(:title, :description)
-  end
+  # def sound_post_playlist_params
+  #   params.permit(:playlist_id, :sound_post_id)
+  # end
 end

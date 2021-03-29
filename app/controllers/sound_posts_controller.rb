@@ -1,5 +1,9 @@
 class SoundPostsController < ApplicationController
 
+  def index
+    @sound_posts = SoundPost.all
+  end
+
   def new
     @sound_post = SoundPost.new
     @instruments = Instrument.all
@@ -18,11 +22,6 @@ class SoundPostsController < ApplicationController
     else
       render :new
     end
-
-  end
-
-  def index
-    @sound_posts = SoundPost.all
   end
 
   private

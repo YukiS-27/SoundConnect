@@ -23,7 +23,6 @@ class PlaylistsController < ApplicationController
       sound_post = SoundPost.find(params[:sound_post_id])
 
       if playlist.save
-        # redirect_to new_sound_post_playlist_path
         redirect_to controller: :sound_post_playlists, action: :new, sound_post_id: params[:sound_post_id]
       else
         render :new
