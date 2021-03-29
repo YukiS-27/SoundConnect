@@ -12,7 +12,7 @@
 <% end %>
 
 <% @playlist.sound_posts.each do |sound_post| %>
-  <%= sound_post.title %><br >
+  <strong><%= sound_post.title %></strong><br >
   <%= sound_post.description %><br >
   <%# 楽器の名前を表示 %>
   <%= sound_post.instrument.name %><br >

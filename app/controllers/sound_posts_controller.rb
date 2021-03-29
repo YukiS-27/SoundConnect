@@ -4,6 +4,10 @@ class SoundPostsController < ApplicationController
     @sound_posts = SoundPost.all
   end
 
+  def show
+    @sound_post = SoundPost.find(params[:id])
+  end
+
   def new
     @sound_post = SoundPost.new
     @instruments = Instrument.all
@@ -22,6 +26,14 @@ class SoundPostsController < ApplicationController
     else
       render :new
     end
+  end
+
+  def edit
+    @sound_post = SoundPost.find(params[:id])
+  end
+
+  def update
+
   end
 
   private
