@@ -30,9 +30,24 @@ class SoundPostsController < ApplicationController
 
   def edit
     @sound_post = SoundPost.find(params[:id])
+
+    # 自分以外の編集画面へのアクセス制限
+    if current_user.id != @sound_post.user_id
+      flash[:danger] = "アクセスできません。"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
   def update
+    sound_post = SoundPost.find(params[:id])
+    sound_post.assign_attributes(sound_post_params)
+
+    if sound_post.save
+      flash[:success] = "変更を保存しました"
+      redirect_to sound_post_path, id: sound_post.id
+    else
+      render :edit
+    end
 
   end
 
