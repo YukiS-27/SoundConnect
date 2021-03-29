@@ -13,6 +13,7 @@
   <%# プレイリスト %>
     <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: @sound_post.id) %><br>
     <% if !current_user.blank? && current_user.id == @sound_post.user_id %>
-      <%= link_to "編集する", edit_sound_post_path(@sound_post) %>
+      <%= link_to "編集する", edit_sound_post_path(@sound_post) %> │
+      <%= link_to "削除", sound_post_path(@sound_post), method: :delete %>
     <% end %>
   </div>

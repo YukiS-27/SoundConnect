@@ -1,4 +1,5 @@
 class SoundPostsController < ApplicationController
+  before_action :posted_user?, only: %i[edit destroy]
 
   def index
     @sound_posts = SoundPost.all
@@ -22,6 +23,7 @@ class SoundPostsController < ApplicationController
     sound_post.sound_source_path = "sample.mp3"
 
     if sound_post.save
+      flash[:success] = "アップロードしました"
       redirect_to root_path
     else
       render :new
@@ -29,13 +31,6 @@ class SoundPostsController < ApplicationController
   end
 
   def edit
-    @sound_post = SoundPost.find(params[:id])
-
-    # 自分以外の編集画面へのアクセス制限
-    if current_user.id != @sound_post.user_id
-      flash[:danger] = "アクセスできません。"
-      redirect_back(fallback_location: root_path)
-    end
   end
 
   def update
@@ -48,7 +43,17 @@ class SoundPostsController < ApplicationController
     else
       render :edit
     end
+  end
 
+  def destroy
+    @sound_post.destroy if @sound_post.present?
+
+    if @sound_post.destroyed?
+      flash[:success] = "投稿を削除しました"
+      redirect_to root_path
+    else
+      render :edit
+    end
   end
 
   private
@@ -57,6 +62,16 @@ class SoundPostsController < ApplicationController
     params.require(:sound_post).permit(
       :title, :description, :sound_source, :instrument_id
     )
+  end
+
+  def posted_user?
+    @sound_post = SoundPost.find(params[:id])
+
+    # 自分以外の編集画面へのアクセス制限
+    if current_user.id != @sound_post.user_id
+      flash[:danger] = "アクセスできません。"
+      redirect_back(fallback_location: root_path)
+    end
   end
 
 end
