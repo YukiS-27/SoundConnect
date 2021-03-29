@@ -1,4 +1,11 @@
 class SoundPost < ApplicationRecord
+  with_options presence: true do
+    validates :user_id
+    validates :title
+    validates :description
+    validates :sound_source
+  end
+
   belongs_to :user
   belongs_to :instrument
 

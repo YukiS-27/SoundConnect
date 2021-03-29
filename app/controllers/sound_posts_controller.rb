@@ -1,5 +1,6 @@
 class SoundPostsController < ApplicationController
   before_action :posted_user?, only: %i[edit destroy]
+  before_action :set_instruments, only: %i[new edit]
 
   def index
     @sound_posts = SoundPost.all
@@ -11,22 +12,21 @@ class SoundPostsController < ApplicationController
 
   def new
     @sound_post = SoundPost.new
-    @instruments = Instrument.all
   end
 
   def create
     sound_post = SoundPost.new(sound_post_params)
     sound_post.user_id = current_user.id
 
-    # 仮データ挿入
-    # @sound_post.instrument_id = Instrument.find(1)
-    sound_post.sound_source_path = "sample.mp3"
+    # 仮データ挿入 -> もしかしてsound_source_pathのカラム要らない？
+    sound_post.sound_source_path = "test"
 
     if sound_post.save
       flash[:success] = "アップロードしました"
       redirect_to root_path
     else
-      render :new
+      flash[:danger] = "アップロードに失敗しました"
+      redirect_to new_sound_post_path
     end
   end
 
@@ -63,6 +63,10 @@ class SoundPostsController < ApplicationController
     params.require(:sound_post).permit(
       :title, :description, :sound_source, :instrument_id
     )
+  end
+
+  def set_instruments
+    @instruments = Instrument.all
   end
 
   def posted_user?
