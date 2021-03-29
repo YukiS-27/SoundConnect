@@ -1,0 +1,19 @@
+<h1>投稿の詳細</h1>
+
+  <div class="post">
+    ▼<%= @sound_post.user.name %>が投稿<br >
+    <strong><%= @sound_post.title %></strong><br >
+    <%= @sound_post.description %><br >
+    <%# 楽器の名前を表示 %>
+    楽器：<%= @sound_post.instrument.name %><br >
+    <audio src="<%= "#{@sound_post.sound_source}" %>" controls="">
+      <!-- <a src="<%= "#{@sound_post.sound_source}" %>">ダウンロード</a> -->
+    </audio>
+
+  <%# プレイリスト %>
+    <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: @sound_post.id) %><br>
+    <% if !current_user.blank? && current_user.id == @sound_post.user_id %>
+      <%= link_to "編集する", edit_sound_post_path(@sound_post) %> │
+      <%= link_to "削除", sound_post_path(@sound_post), method: :delete %>
+    <% end %>
+  </div>
