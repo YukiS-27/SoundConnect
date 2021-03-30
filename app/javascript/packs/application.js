@@ -5,7 +5,7 @@
 //= require audiojs
 //= require_tree .
 
-require('jquery')
+import "jquery"
 import Rails from "@rails/ujs"
 import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
