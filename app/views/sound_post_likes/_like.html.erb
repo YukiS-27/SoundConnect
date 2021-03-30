@@ -1,0 +1,12 @@
+<div id="sound_post_likes_buttons_<%= @sound_post.id %>">
+
+  <% if user_signed_in? %>
+    <% if current_user.liked_by?(@sound_post) %>
+      <%= link_to "いいねを外す", sound_post_like_path(@sound_post), method: :delete, remote: true %> <%= @sound_post.sound_post_likes.count %><br >
+    <% else %>
+      <%= link_to "いいね！", sound_post_likes_path(sound_post_id: @sound_post.id), method: :post, remote: true %> <%= @sound_post.sound_post_likes.count %><br >
+    <% end %>
+  <% else %>
+    いいね数: <%= @sound_post.sound_post_likes.count %><br >
+  <% end %>
+</div>

@@ -12,11 +12,8 @@
 
     <%# プレイリスト %>
     <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: @sound_post.id) %> │
-    <% if current_user.liked_by?(@sound_post) %>
-      <%= link_to "いいねを外す", sound_post_like_path(@sound_post), method: :delete %> <%= sound_post.sound_post_likes.count %><br >
-    <% else %>
-      <%= link_to "いいね！", sound_post_likes_path(sound_post_id: @sound_post.id), method: :post %> <%= sound_post.sound_post_likes.count %><br >
-    <% end %>
+
+    <%= render partial: 'sound_post_likes/like', locals: { sound_post: @sound_post } %>
 
     <% if !current_user.blank? && current_user.id == @sound_post.user_id %>
       <%= link_to "編集する", edit_sound_post_path(@sound_post) %> │
