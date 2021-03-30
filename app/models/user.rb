@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :playlists
   has_many :playlist_sound_posts, through: :playlists, source: :sound_post
 
+  mount_uploader :avatar, ImageUploader
+
   def liked_by?(sound_post)
     sound_post_likes.where(sound_post_id: sound_post.id).exists?
   end
