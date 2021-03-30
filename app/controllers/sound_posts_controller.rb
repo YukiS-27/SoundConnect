@@ -1,5 +1,6 @@
 class SoundPostsController < ApplicationController
-  before_action :posted_user?, only: %i[edit destroy]
+  before_action :authenticate_user!, only: %i[new edit]
+  before_action :posted_user?, only: %i[edit]
   before_action :set_instruments, only: %i[new edit]
 
   def index
