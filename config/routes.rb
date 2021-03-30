@@ -36,6 +36,6 @@ Rails.application.routes.draw do
   resources :sound_posts
   resources :playlists
   resources :sound_post_playlists, only: [:new, :create, :destroy]
-  resources :sound_post_likes
+  resources :sound_post_likes, only: [:create, :destroy]
 
 end
