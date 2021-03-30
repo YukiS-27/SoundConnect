@@ -7,8 +7,6 @@ class SoundPostLikesController < ApplicationController
       user_id: current_user.id,
       sound_post_id: params[:sound_post_id]
     )
-    # 一旦トップページへ
-    # redirect_to root_path
   end
 
   def destroy
@@ -18,12 +16,11 @@ class SoundPostLikesController < ApplicationController
       sound_post_id: params[:id]
     )
     sound_post_like.destroy if sound_post_like.present?
-    # redirect_to root_path
   end
 
   private
 
-  def sound_post_params
-    @sound_post = SoundPost.find(params[:id])
-  end
+  # def sound_post_params
+  #   @sound_post = SoundPost.find(params[:id])
+  # end
 end
