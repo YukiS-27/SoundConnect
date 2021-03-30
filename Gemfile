@@ -77,3 +77,5 @@ gem 'devise-i18n-views'
 
 # シードファイルの使い勝手向上
 gem 'seed-fu'
+
+gem 'jquery-rails'

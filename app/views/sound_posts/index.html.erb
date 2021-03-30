@@ -16,7 +16,9 @@
 
     <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id) %>
 
-    <%# いいねを部分テンプレートで呼び出し %>
-    <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
+    <div class="sound_post_like">
+      <%# いいねを部分テンプレートで呼び出し %>
+      <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
+    </div>
   </div>
 <% end %>

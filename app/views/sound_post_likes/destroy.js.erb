@@ -1,1 +1,2 @@
-$('#sound_post_likes_buttons_<%= @sound_post.id %>').html("<%= j(render partial: 'sound_post_likes/like', locals: {sound_post: @sound_post}) %>");
+// $('#sound_post_likes_buttons_<%= @sound_post.id %>').html("<%= j(render partial: 'sound_post_likes/like', locals: {sound_post: @sound_post}) %>");
+$('.sound_post_like').html("<%= j(render partial: 'sound_post_likes/like', locals: {sound_post: @sound_post}) %>");
