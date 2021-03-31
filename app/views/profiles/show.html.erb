@@ -1,6 +1,12 @@
 <h1>Profiles#show</h1>
 <p>マイページ（ユーザーページ）</p>
 
+<% if @user.avatar.present? %>
+  <%= image_tag @user.avatar.url, size: '120x120' %>
+<% else %>
+  <%= image_tag 'default.jpg', size: '80x80', alt: 'プロフィール画像' %>
+<% end %>
+
 ユーザー名：
 <%= @user.name %><br >
 メールアドレス：

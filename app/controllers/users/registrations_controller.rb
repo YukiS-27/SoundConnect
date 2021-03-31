@@ -30,8 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    # ▼これだとエラー出る
+
     current_user.assign_attributes(configure_account_update_params)
+    current_user.avatar = params[:user][:avatar]
     # @user = current_user
     # @user.name = params[:name]
     # @user.introduction = params[:introduction]
