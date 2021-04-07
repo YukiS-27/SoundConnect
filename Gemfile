@@ -30,6 +30,8 @@ gem 'pry-byebug'
 gem 'carrierwave'
 # 音声ファイルの再生機能（とダウンロード機能）
 gem 'audiojs-rails'
+# 画像の加工
+gem 'mini_magick'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

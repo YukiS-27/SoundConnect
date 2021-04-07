@@ -2,9 +2,9 @@
 <p>マイページ（ユーザーページ）</p>
 
 <% if @user.avatar.present? %>
-  <%= image_tag @user.avatar.url, size: '120x120' %>
+  <%= image_tag @user.avatar.url, size: '100x100', class: 'icon' %>
 <% else %>
-  <%= image_tag 'default.jpg', size: '80x80', alt: 'プロフィール画像' %>
+  <%= image_tag 'default.jpg', size: '80x80', alt: 'プロフィール画像', class: 'icon' %>
 <% end %>
 
 ユーザー名：
@@ -24,8 +24,7 @@
 <% end %>
 
 <%# ユーザーの投稿を表示 %>
-<% @sound_posts.each do |sound_post| %>
-
+<% @user.sound_posts.each do |sound_post| %>
   <div class="post">
     <strong><%= link_to sound_post.title, sound_post_path(sound_post.id) %></strong><br >
     <%#  楽器の名前を表示 %>
