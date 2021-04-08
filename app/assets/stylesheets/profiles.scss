@@ -2,6 +2,12 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
+
+.user-names {
+  display: flex;
+  align-items: flex-end;
+  padding: 10px 20px;
+}
 .icon {
   border-radius: 50%;
 }
