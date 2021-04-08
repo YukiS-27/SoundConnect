@@ -1,11 +1,7 @@
 <h1>Profiles#index</h1>
 
 <% @users.each do |user| %>
-  <% if user.avatar.present? %>
-    <%= image_tag user.avatar.url, size: '30x30', class: 'icon' %>
-  <% else %>
-    <%= image_tag 'default.jpg', size: '30x30', alt: 'プロフィール画像', class: 'icon' %>
-  <% end %>
+  <%= image_tag user.avatar.thumb30.url, class: 'icon', alt: 'プロフィール画像' %>
 
   <%= link_to user.name, detail_user_path(user.id) %><br >
 <% end %>

@@ -31,11 +31,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def update_profile
 
-    current_user.assign_attributes(configure_account_update_params)
-    current_user.avatar = params[:user][:avatar]
+    current_user.assign_attributes(configure_profile_update_params)
+    # current_user.avatar = params[:user][:avatar]
     # @user = current_user
     # @user.name = params[:name]
     # @user.introduction = params[:introduction]
+    current_user.avatar = params[:user][:avatar]
 
     if current_user.save
       redirect_to detail_user_path(current_user)
@@ -60,8 +61,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def configure_account_update_params
+    def configure_profile_update_params
       params.permit(:name, :introduction)
+    end
+
+    def avatar_params
+      params.require(:user).permit(:avatar)
     end
 
   # If you have extra params to permit, append them to the sanitizer.
