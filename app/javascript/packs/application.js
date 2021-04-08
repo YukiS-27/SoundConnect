@@ -15,4 +15,6 @@ Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
 
+import "../profile/avatar_preview"
+
 // window.$ = jQuery;
