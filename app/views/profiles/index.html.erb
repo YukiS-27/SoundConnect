@@ -1,5 +1,9 @@
 <h1>Profiles#index</h1>
 
 <% @users.each do |user| %>
-  <%= link_to user.name, detail_user_path(user.id) %><br >
+  <div class="user-names">
+    <%= image_tag user.avatar.thumb40.url, class: 'icon', alt: 'プロフィール画像' %>
+
+    <%= link_to user.name, detail_user_path(user.id), class: 'user-name' %><br >
+  </div>
 <% end %>

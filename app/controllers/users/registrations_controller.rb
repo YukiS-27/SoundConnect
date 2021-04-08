@@ -11,9 +11,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super
-  end
+  # def create
+  #   super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -30,8 +30,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-    # ▼これだとエラー出る
-    current_user.assign_attributes(configure_account_update_params)
+
+    current_user.assign_attributes(configure_profile_update_params)
+    current_user.avatar = params[:user][:avatar]
     # @user = current_user
     # @user.name = params[:name]
     # @user.introduction = params[:introduction]
@@ -59,8 +60,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def configure_account_update_params
+    def configure_profile_update_params
       params.permit(:name, :introduction)
+    end
+
+    def avatar_params
+      params.require(:user).permit(:avatar)
     end
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -79,7 +84,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+    detail_user_path(resource)
+  end
 end

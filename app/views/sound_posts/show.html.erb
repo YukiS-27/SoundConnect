@@ -13,7 +13,10 @@
     <%# プレイリスト %>
     <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: @sound_post.id) %> │
 
-    <%= render partial: 'sound_post_likes/like', locals: { sound_post: @sound_post } %>
+    <div id="sound_post_likes_button_<%= @sound_post.id %>">
+      <%# いいねを部分テンプレートで呼び出し %>
+      <%= render partial: 'sound_post_likes/like', locals: { sound_post: @sound_post } %>
+    </div>
 
     <% if !current_user.blank? && current_user.id == @sound_post.user_id %>
       <%= link_to "編集する", edit_sound_post_path(@sound_post) %> │

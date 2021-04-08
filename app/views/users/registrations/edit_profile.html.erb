@@ -1,6 +1,12 @@
 <h1>プロフィール編集</h1>
 
-<%= form_with(model: @user, url: update_profile_path, html: { method: :patch }) do |f| %>
+<%= form_with(model: @user, url: update_profile_path) do |f| %>
+  <div class="field">
+    <%= image_tag @user.avatar.thumb80.url, class: 'icon preview', id: :img_prev, alt: 'プロフィール画像' %>
+
+    <%= f.file_field :avatar, id: :user_img %>
+  </div>
+
   <div class="field">
     <%= f.label :name, 'ユーザー名' %><br />
     <%= f.text_field :name, value: @user.name, name: "name", autofocus: true, autocomplete: "name" %>
