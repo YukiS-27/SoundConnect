@@ -30,9 +30,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def update_profile
-
     current_user.assign_attributes(configure_profile_update_params)
-    current_user.avatar = params[:user][:avatar]
+    # binding.pry
+
+    if params.has_key?(:user)
+      # current_user.avatar = params[:user][:avatar]
+      current_user.avatar = avatar_params[:avatar]
+    end
+
     # @user = current_user
     # @user.name = params[:name]
     # @user.introduction = params[:introduction]

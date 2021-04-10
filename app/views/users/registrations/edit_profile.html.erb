@@ -2,8 +2,7 @@
 
 <%= form_with(model: @user, url: update_profile_path) do |f| %>
   <div class="field">
-    <%= image_tag @user.avatar.thumb80.url, class: 'icon preview', id: :img_prev, alt: 'プロフィール画像' %>
-
+    <%= image_tag @user.avatar.thumb80.url, class: 'icon preview', id: :img_prev, alt: 'プロフィール画像', name: "avatar" %>
     <%= f.file_field :avatar, id: :user_img %>
   </div>
 
