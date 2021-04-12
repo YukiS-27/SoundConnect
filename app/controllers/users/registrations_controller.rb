@@ -6,12 +6,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  #def new
+  def new
+    @user_registration_form = UserRegistrationForm.new
+
     # super do |user|
     #   # フォームにprofileの要素を表示するためにbuild
     #   user.build_profile
     # end
-  #end
+  end
 
   # POST /resource
   # def create
