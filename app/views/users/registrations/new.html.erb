@@ -1,11 +1,13 @@
 <h2><%= t('.sign_up') %></h2>
 
-<%= form_with(model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true) do |f| %>
+<%= form_with model: @user, url: user_registration_path, id: 'new_user', class: 'new_user', local: true do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
   <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+    <%= f.fields_for :profile do |p| %>
+      <%= p.label :name, "ユーザー名" %><br />
+      <%= p.text_field :name, autofocus: true, autocomplete: "name" %>
+    <% end %>
   </div>
 
   <div class="field">

@@ -23,15 +23,14 @@ Rails.application.routes.draw do
   devise_scope :user do
     get 'sign_in', :to => 'users/sessions#new'
     get 'sign_out', :to => 'users/sessions#destroy'
-
-    # プロフィール設定を追加
-    get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
-    patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
   end
 
   # プロフィール設定
   get 'users/index', to: 'profiles#index', as: 'users'
-  get 'users/:id', to: 'profiles#show', as: 'detail_user'
+  get 'users/:id', to: 'profiles#show', as: 'user_profile'
+  resources :profiles, only: [:edit, :update]
+  # get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
+  # patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
 
   resources :sound_posts
   resources :playlists

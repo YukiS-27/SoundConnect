@@ -1,14 +1,14 @@
 <h1>Profiles#show</h1>
 <p>マイページ（ユーザーページ）</p>
 
-<%= image_tag @user.avatar.thumb80.url, class: 'icon' %>
+<%= image_tag @user.profile.avatar.thumb80.url, class: 'icon' %>
 
 ユーザー名：
-<%= @user.name %><br >
+<%= @profile.name %><br >
 メールアドレス：
-<%= @user.email %><br >
+<%= @profile.user.email %><br >
 自己紹介文：<br >
-<%= @user.introduction %><br >
+<%= @profile.introduction %><br >
 
 <%# 自分と他のユーザーのページで表示内容を変えたい %>
 <% if !current_user.blank? && current_user.id == @user.id %>

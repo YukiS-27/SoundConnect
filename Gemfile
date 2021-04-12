@@ -71,7 +71,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 # ユーザー関連機能
 gem 'devise'
-
 # 日本語化
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'

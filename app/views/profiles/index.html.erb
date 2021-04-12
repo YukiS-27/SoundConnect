@@ -2,8 +2,8 @@
 
 <% @users.each do |user| %>
   <div class="user-names">
-    <%= image_tag user.avatar.thumb40.url, class: 'icon', alt: 'プロフィール画像' %>
+    <%= image_tag user.profile.avatar.thumb40.url, class: 'icon', alt: 'プロフィール画像' %>
 
-    <%= link_to user.name, detail_user_path(user.id), class: 'user-name' %><br >
+    <%= link_to user.profile.name, user_profile_path(user.id), class: 'user-name' %><br >
   </div>
 <% end %>

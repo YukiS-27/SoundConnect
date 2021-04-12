@@ -8,6 +8,7 @@ $(function () {
       reader.readAsDataURL(input.files[0]);
     }
   }
+  console.log('test');
 
   $('#user_img').change(function () {
     readURL(this);

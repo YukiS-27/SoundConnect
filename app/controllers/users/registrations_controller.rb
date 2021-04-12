@@ -2,15 +2,18 @@
 # frozen_string_literal: true
 
 class Users::RegistrationsController < Devise::RegistrationsController
-  # before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update, :update_profile]
+  before_action :configure_sign_up_params, only: [:create]
+  # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super do |user|
+      # フォームにprofileの要素を表示するためにbuild
+      user.build_profile
+    end
+  end
 
-  # POST /resource
+  # # POST /resource
   # def create
   #   super
   # end
@@ -24,25 +27,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def update
   #   super
   # end
-
-  def edit_profile
-    @user = current_user
-  end
-
-  def update_profile
-
-    current_user.assign_attributes(configure_profile_update_params)
-    current_user.avatar = params[:user][:avatar]
-    # @user = current_user
-    # @user.name = params[:name]
-    # @user.introduction = params[:introduction]
-
-    if current_user.save
-      redirect_to detail_user_path(current_user)
-    else
-      render :edit_profile
-    end
-  end
 
   # DELETE /resource
   # def destroy
@@ -60,22 +44,23 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   private
 
-    def configure_profile_update_params
-      params.permit(:name, :introduction)
-    end
+  # def configure_profile_update_params
+  #   params.permit(:name, :introduction)
+  # end
 
-    def avatar_params
-      params.require(:user).permit(:avatar)
-    end
-
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_up_params
-  #   devise_parameter_sanitizer.permit(:sign_up, keys: [:attribute])
+  # def avatar_params
+  #   params.require(:user).permit(:avatar)
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
+  def configure_sign_up_params
+    devise_parameter_sanitizer.permit(:sign_up,
+      keys: [:email, :password, profile_attributes: [:name]])
+  end
+
+  # If you have extra params to permit, append them to the sanitizer.
   # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [])
   # end
 
   # The path used after sign up.
