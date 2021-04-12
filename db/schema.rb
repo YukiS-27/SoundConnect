@@ -26,7 +26,7 @@ ActiveRecord::Schema.define(version: 2021_04_10_163118) do
   end
 
   create_table "profiles", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
-    t.bigint "user_id"
+    t.bigint "user_id", null: false
     t.string "name", null: false
     t.text "introduction", null: false
     t.string "avatar"

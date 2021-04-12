@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_one :profile, class_name: 'User::Profile', dependent: :destroy, required: true, inverse_of: :user
+  has_one :profile, class_name: 'User::Profile', dependent: :destroy, inverse_of: :user
   accepts_nested_attributes_for :profile
 
   has_many :sound_posts
