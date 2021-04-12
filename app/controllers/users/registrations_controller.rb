@@ -4,10 +4,11 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
+  # before_action :user_registration_form_params, only: [:create]
 
   # GET /resource/sign_up
   def new
-    @user_registration_form = UserRegistrationForm.new
+    # @user_registration_form = UserRegistrationForm.new
 
     # super do |user|
     #   # フォームにprofileの要素を表示するためにbuild
@@ -16,9 +17,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    # @user_registration_form = UserRegistrationForm.new(user_registration_form_params)
+
+    # if @user_registration_form.save
+    #   redirect_to root_path
+    # else
+    #   render :new
+    # end
+  end
 
   # GET /resource/edit
   # def edit
@@ -69,6 +76,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
+
+    # def user_registration_form_params
+    #   params.require(:user_registration_form).permit(
+    #     :email, :password,
+    #     profile_attributes: [:name, :genre]
+    #   )
+    # end
 
     def configure_profile_update_params
       params.permit(:name, :introduction)
