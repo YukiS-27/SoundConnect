@@ -5,7 +5,7 @@
 
   <div class="field">
     <%= f.fields_for :profile do |p| %>
-      <%= p.label :name %><br />
+      <%= p.label :name, "ユーザー名" %><br />
       <%= p.text_field :name, autofocus: true, autocomplete: "name" %>
     <% end %>
   </div>
