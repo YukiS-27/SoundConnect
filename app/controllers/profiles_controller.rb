@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  before_action :authenticate_user!, only: %i[edit update]
+
   def index
     @users = User.all
   end
@@ -18,13 +20,6 @@ class ProfilesController < ApplicationController
     profile = Profile.find(params[:id])
     profile.assign_attributes(configure_profile_update_params)
 
-    # profile.avatar = avatar_params[:avatar]
-
-    # if params.has_key?(:user)
-      # current_user.avatar = params[:user][:avatar]
-      # current_user.avatar = avatar_params[:avatar]
-    # end
-
     if profile.save
       redirect_to user_profile_path(current_user)
     else
@@ -37,9 +32,5 @@ class ProfilesController < ApplicationController
   def configure_profile_update_params
     params.require(:profile).permit(:name, :introduction, :avatar, :avatar_cache)
   end
-
-  # def avatar_params
-  #   params.permit(:avatar)
-  # end
 
 end

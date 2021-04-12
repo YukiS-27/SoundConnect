@@ -14,7 +14,3 @@ import "channels"
 Rails.start()
 Turbolinks.start()
 ActiveStorage.start()
-
-// window.$ = jQuery;
-
-import "../profile/avatar_preview"
