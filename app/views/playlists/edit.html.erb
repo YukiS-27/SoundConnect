@@ -4,7 +4,7 @@
 
 <%= form_with model: @playlist do |f| %>
   <div class="field">
-    <%= f.text_field :title, value: @playlist.title, name: "title", autofocus: true, size: 30 %>
+    <%= f.text_field :title, value: @playlist.title, size: 30 %>
     <%= f.submit "変更を保存" %>
   </div>
 

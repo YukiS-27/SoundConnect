@@ -11,12 +11,12 @@
 
   <div class="field">
     <%= f.label :name, 'ユーザー名' %><br />
-    <%= f.text_field :name, value: @profile.name, autofocus: true, autocomplete: "name" %>
+    <%= f.text_field :name %>
   </div>
 
   <div class="field">
     <%= f.label :introduction, '自己紹介文' %><br />
-    <%= f.text_area :introduction, value: @profile.introduction %>
+    <%= f.text_area :introduction %>
   </div>
 
   <div class="actions">
