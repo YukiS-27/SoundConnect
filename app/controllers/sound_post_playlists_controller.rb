@@ -7,7 +7,10 @@ class SoundPostPlaylistsController < ApplicationController
 
   def create
     # チェックされているかを判定
-    # if params[:sound_post][:playlist_ids].present?
+    # if params[:sound_post][:playlist_ids].nil?
+      # flash[:danger] = "プレイリストを選択してください"
+      # render :new
+    # end
       @sound_post = SoundPost.find(params[:sound_post][:sound_post_id])
 
       # チェックされた数だけ中間テーブルのレコードを生成

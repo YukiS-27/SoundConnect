@@ -14,6 +14,7 @@ class PlaylistsController < ApplicationController
     @sound_post = SoundPost.find(params[:sound_post_id]) if params[:sound_post_id].present?
   end
 
+  # プレイリストの作成自体はコードまとめられそう
   def create
     # ▼音源の投稿からプレイリストを作成する場合 = sound_post_idが存在するとき
     if params[:sound_post_id].present?
