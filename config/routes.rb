@@ -39,4 +39,7 @@ Rails.application.routes.draw do
   # 投稿に対するいいね
   resources :sound_post_likes, only: [:create, :destroy]
 
+  # メッセージルーム
+  resources :rooms, only: [:index, :show, :create]
+
 end
