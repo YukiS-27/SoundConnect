@@ -14,9 +14,9 @@ class RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
-    # @roomにいる自分ではないユーザー（相手）の情報を取得
-    @room_user = @room.room_users.where.not(user_id: current_user.id).first.user
-    @messages = Message.where(room: @room)
+      @room = Room.find(params[:id])
+      # @roomにいる自分ではないユーザー（相手）の情報を取得
+      @room_user = @room.room_users.where.not(user_id: current_user.id).first.user
+      @messages = Message.where(room: @room)
   end
 end
