@@ -1,1 +1,9 @@
 <h3>メッセージルーム</h3>
+
+<div id="messages">
+  <%= render @messages %>
+</div>
+
+<form>
+  <textarea data-behavior="room_speaker" data-room_id="<%= @room.id %>" placeholder="メッセージを入力" class="room__message-form_textarea"></textarea>
+</form>
