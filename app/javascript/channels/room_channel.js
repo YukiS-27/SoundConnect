@@ -27,28 +27,30 @@ document.addEventListener('turbolinks:load', () => {
   // チャットルームかどうかを判定
   if(/rooms/.test(location.pathname)) {
 
-    // エンターキーを押したときに発火
-    // $(document).on('keydown', '.room__message-form_textarea', (e) => {
-    //   if (e.key === 'Enter') {
-    //     const room_id = $('textarea').data('room_id');
-    //     appRoom.speak(e.target.value, room_id);    // speakアクションを実行
-    //     e.target.value = '';
-    //     e.preventDefault();
-    //   }
-    // });
-
     const documentElement = document.documentElement;
     const messageButton = document.getElementById('message_button');
-    // const messageContent = document.getElementById('message_content');
     const messageContent = document.getElementById('message_content');
+    const room_id = messageContent.dataset.room_id;
+
+    // Control (Command) + Enter を押したときに発火
+    $(document).on('keydown', '#message_content', (e) => {
+      if (e.ctrlKey || e.metaKey) {
+        if (e.key === 'Enter') {
+          appRoom.speak(e.target.value, room_id); // speakアクションを実行
+          e.target.value = '';
+          e.preventDefault();
+        }
+      }
+    });
 
     // 送信ボタンが押されたときに発火
     $(document).on('click', '#message_button', (e) => {
-      const room_id = messageContent.dataset.room_id;
       appRoom.speak(messageContent.value, room_id);
       messageContent.value = '';
       e.preventDefault();
     });
+
+
 
     // 一番下まで移動する関数
     window.scrollToBottom = () => {
