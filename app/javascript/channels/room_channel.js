@@ -22,6 +22,7 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
 
 // チャットルームかどうかを判定
 if(/rooms/.test(location.pathname)) {
+
   // エンターキーを押したときに発火
   // $(document).on('keydown', '.room__message-form_textarea', (e) => {
   //   if (e.key === 'Enter') {
@@ -34,9 +35,10 @@ if(/rooms/.test(location.pathname)) {
 
   // 送信ボタンが押されたときに発火
   $(document).on('click', '#message-button', (e) => {
-    const room_id = $('#message-input').data('room_id');
-    appRoom.speak($('#message-input').val(), room_id);
-    $('#message-input').val('');
+    const messageInput = $('#message-input')
+    const room_id = messageInput.data('room_id');
+    appRoom.speak(messageInput.val(), room_id);
+    messageInput.val('');
     e.preventDefault()
   });
 }
