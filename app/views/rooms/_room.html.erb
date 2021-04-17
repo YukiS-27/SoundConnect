@@ -1,0 +1,5 @@
+<% @rooms.each do |room| %>
+  <div class="room">
+    <%= link_to room.id ,room_path(room.id) %>
+  </div>
+<% end %>

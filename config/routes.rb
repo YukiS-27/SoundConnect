@@ -41,5 +41,6 @@ Rails.application.routes.draw do
 
   # メッセージルーム
   resources :rooms, only: [:index, :show, :create]
+  get '/show_additionally', to: 'rooms#show_additionally'
 
 end
