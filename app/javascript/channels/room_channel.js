@@ -49,9 +49,7 @@ document.addEventListener('turbolinks:load', () => {
       e.preventDefault();
     });
 
-
-
-    // 一番下まで移動する関数。js.erb 内でも使用できるように変数を決定
+    // 一番下まで移動する関数
     window.scrollToBottom = () => {
         window.scroll(0, documentElement.scrollHeight)
     }
@@ -59,10 +57,22 @@ document.addEventListener('turbolinks:load', () => {
     // 最初にページ一番下へ移動させる
     scrollToBottom()
 
-    // 送信ボタンが押された時にボタンを無効化し，フォーム行数を3に戻す
+    const button_activation = () => {
+      if (messageContent.value === '') {
+          messageButton.classList.add('disabled')
+      } else {
+          messageButton.classList.remove('disabled')
+      }
+    }
+
+    // フォームに入力した際の動作（エラー）
+    messageContent.addEventListener('input', () => {
+        button_activation()
+    })
+
+    // 送信ボタンが押された時にボタンを無効化
     messageButton.addEventListener('click', () => {
-      messageButton.classList.add('disabled')
-      changeLineCount(3)
+        messageButton.classList.add('disabled')
     })
 
 
