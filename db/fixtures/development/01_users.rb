@@ -15,3 +15,5 @@ profile_count.times do |n|
     s.introduction = "よろしくお願いします"
   end
 end
+
+puts 'ユーザー初期データの追加が完了しました！'
