@@ -38,14 +38,16 @@ document.addEventListener('turbolinks:load', () => {
     // });
 
     const documentElement = document.documentElement;
-    const messageButton = $('#message_button');
-    const messageContent = $('#message_content');
+    const messageButton = document.getElementById('message_button');
+    // const messageContent = document.getElementById('message_content');
+    const messageContent = document.getElementById('message_content');
 
     // 送信ボタンが押されたときに発火
     $(document).on('click', '#message_button', (e) => {
-      const room_id = messageContent.data('room_id');
-      appRoom.speak(messageContent.val(), room_id);
-      messageContent.val('');
+      const room_id = messageContent.dataset.room_id;
+      // appRoom.speak(messageContent.val(), room_id);
+      appRoom.speak(messageContent.value, room_id);
+      messageContent.value = '';
       e.preventDefault();
     });
 
@@ -68,12 +70,12 @@ document.addEventListener('turbolinks:load', () => {
     // フォームに入力した際の動作（エラー）
     messageContent.addEventListener('input', () => {
         button_activation()
-    })
+    });
 
     // 送信ボタンが押された時にボタンを無効化
     messageButton.addEventListener('click', () => {
         messageButton.classList.add('disabled')
-    })
+    });
 
 
   }
