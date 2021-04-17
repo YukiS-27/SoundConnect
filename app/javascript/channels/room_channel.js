@@ -45,7 +45,6 @@ document.addEventListener('turbolinks:load', () => {
     // 送信ボタンが押されたときに発火
     $(document).on('click', '#message_button', (e) => {
       const room_id = messageContent.dataset.room_id;
-      // appRoom.speak(messageContent.val(), room_id);
       appRoom.speak(messageContent.value, room_id);
       messageContent.value = '';
       e.preventDefault();
@@ -67,16 +66,59 @@ document.addEventListener('turbolinks:load', () => {
       }
     }
 
-    // フォームに入力した際の動作（エラー）
+    // フォームに入力した際の動作
     messageContent.addEventListener('input', () => {
         button_activation()
+        changeLineCheck()
     });
 
     // 送信ボタンが押された時にボタンを無効化
     messageButton.addEventListener('click', () => {
         messageButton.classList.add('disabled')
+        changeLineCount(3)
     });
 
+    // 入力フォームの最大行数
+    const maxLineCount = 8
+
+    // 入力フォームの行数を調べる関数
+    const getLineCount = () => {
+      return (messageContent.value + '\n').match(/\r?\n/g).length;
+    }
+
+    let lineCount = getLineCount()
+    let newLineCount
+
+    const changeLineCheck = () => {
+      // 現在の入力行数を取得（最大の行数は maxLineCount）
+      newLineCount = Math.min(getLineCount(), maxLineCount)
+      // 以前の入力行数と異なる場合、かつ入力欄が3行より大きくなる場合は変更する
+      if (newLineCount >= 3 && lineCount !== newLineCount) {
+        changeLineCount(newLineCount)
+      }
+    }
+
+    const messageFooter = document.getElementById('message-footer')
+    let messageFooterHeight = messageFooter.scrollHeight
+    let newMessageFooterHeight, messageFooterHeightDiff
+
+    const changeLineCount = (newLineCount) => {
+      // フォームの行数を変更
+      messageContent.rows = lineCount = newLineCount
+      // 新しいメッセージフッターの高さを取得し、違いを計算
+      newMessageFooterHeight = messageFooter.scrollHeight
+      messageFooterHeightDiff = newMessageFooterHeight - messageFooterHeight
+
+      // 新しいメッセージフッターの高さをチャット欄の padding-bottom に反映し、スクロール
+      if (messageFooterHeightDiff > 0) {
+        messageContainer.style.paddingBottom = newMessageFooterHeight + 'px'
+        window.scrollBy(0, messageFooterHeightDiff)
+      } else {
+        window.scrollBy(0, messageFooterHeightDiff)
+        messageContainer.style.paddingBottom = newMessageFooterHeight + 'px'
+      }
+      messageFooterHeight = newMessageFooterHeight
+    }
 
   }
 });
