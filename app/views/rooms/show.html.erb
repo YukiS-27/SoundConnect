@@ -1,14 +1,14 @@
 <h3>メッセージルーム</h3>
 
-<div id="messages">
+<div id="message-container">
   <%= render @messages %>
 </div>
 
-<form>
+<form class="fixed-bottom" id="message-footer">
   <div class="form-group">
-    <textarea data-behavior="room_speaker" data-room_id="<%= @room.id %>" placeholder="メッセージを入力" class="room__message-form_textarea" id="message_content", rows="3"></textarea>
+    <textarea data-behavior="room_speaker" data-room_id="<%= @room.id %>" placeholder="メッセージを入力" class="form-control" id="message_content", rows="3"></textarea>
   </div>
   <div class="form-group">
-    <input type="submit" value="送信" class="btn btn-primary" id="message_button">
+    <input type="submit" value="送信" class="btn btn-primary btn-block" id="message_button">
   </div>
 </form>

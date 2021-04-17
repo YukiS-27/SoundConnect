@@ -1,3 +1,18 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: https://sass-lang.com/
+
+// メッセージ一覧
+#message-container {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 1rem 1rem 10rem 1rem;
+}
+
+// メッセージ投稿フォーム
+#message-footer {
+  max-width: 768px;
+  padding: 1rem;
+  margin: 0 auto;
+  background-color: white;
+}

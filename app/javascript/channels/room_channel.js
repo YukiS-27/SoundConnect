@@ -1,6 +1,9 @@
 import consumer from "./consumer"
 
 document.addEventListener('turbolinks:load', () => {
+
+  const messageContainer = document.getElementById('message-container');
+
   const appRoom = consumer.subscriptions.create("RoomChannel", {
     connected() {
       // Called when the subscription is ready for use on the server
@@ -11,8 +14,7 @@ document.addEventListener('turbolinks:load', () => {
     },
 
     received(data) {
-      const Messages = document.getElementById('messages');
-      Messages.insertAdjacentHTML('beforeend', data['message']);
+      messageContainer.insertAdjacentHTML('beforeend', data['message']);
       scrollToBottom()
       console.log('message_test')
     },
@@ -22,7 +24,7 @@ document.addEventListener('turbolinks:load', () => {
     }
   });
 
-    // チャットルームかどうかを判定
+  // チャットルームかどうかを判定
   if(/rooms/.test(location.pathname)) {
 
     // エンターキーを押したときに発火
@@ -35,7 +37,19 @@ document.addEventListener('turbolinks:load', () => {
     //   }
     // });
 
-    const documentElement = document.documentElement
+    const documentElement = document.documentElement;
+    const messageButton = $('#message_button');
+    const messageContent = $('#message_content');
+
+    // 送信ボタンが押されたときに発火
+    $(document).on('click', '#message_button', (e) => {
+      const room_id = messageContent.data('room_id');
+      appRoom.speak(messageContent.val(), room_id);
+      messageContent.val('');
+      e.preventDefault();
+    });
+
+
 
     // 一番下まで移動する関数。js.erb 内でも使用できるように変数を決定
     window.scrollToBottom = () => {
@@ -45,19 +59,11 @@ document.addEventListener('turbolinks:load', () => {
     // 最初にページ一番下へ移動させる
     scrollToBottom()
 
-
-    // 送信ボタンが押されたときに発火
-    $(document).on('click', '#message_button', (e) => {
-      const messageContent = $('#message_content')
-      const room_id = messageContent.data('room_id');
-      appRoom.speak(messageContent.val(), room_id);
-      messageContent.val('');
-      e.preventDefault();
-    });
-
-
-
-
+    // 送信ボタンが押された時にボタンを無効化し，フォーム行数を3に戻す
+    messageButton.addEventListener('click', () => {
+      messageButton.classList.add('disabled')
+      changeLineCount(3)
+    })
 
 
   }
