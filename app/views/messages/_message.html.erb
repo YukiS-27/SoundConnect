@@ -1,4 +1,6 @@
-<div class="message" id="message-<%= message.id %>">
-  <p><%= message.user.email %>: <%= l message.created_at, format: '%Y年%-m月%-d日(%a) %H:%M' %></p>
+<div class="message">
+  <div class="user-names">
+    <p><%= image_tag message.user.profile.avatar.thumb30.url, class: 'icon' %><%= message.user.profile.name %>: <%= l message.created_at, format: '%Y年%-m月%-d日(%a) %H:%M' %></p>
+  </div>
   <%= simple_format(h message.content) %>
 </div>

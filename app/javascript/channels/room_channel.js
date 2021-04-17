@@ -10,7 +10,9 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
   },
 
   received(data) {
-    return alert(data['message']);
+    const Messages = document.getElementById('messages');
+    Messages.insertAdjacentHTML('beforeend', data['message']);
+    console.log('message_test')
   },
 
   speak: function(message, room_id) {
@@ -20,12 +22,21 @@ const appRoom = consumer.subscriptions.create("RoomChannel", {
 
 // チャットルームかどうかを判定
 if(/rooms/.test(location.pathname)) {
-  $(document).on("keydown", ".room__message-form_textarea", function(e) {
-    if (e.key === "Enter") {
-      const room_id = $('textarea').data('room_id')
-      appRoom.speak(e.target.value, room_id);    // speakアクションを実行
-      e.target.value = '';
-      e.preventDefault();
-    }
-  })
+  // エンターキーを押したときに発火
+  // $(document).on('keydown', '.room__message-form_textarea', (e) => {
+  //   if (e.key === 'Enter') {
+  //     const room_id = $('textarea').data('room_id');
+  //     appRoom.speak(e.target.value, room_id);    // speakアクションを実行
+  //     e.target.value = '';
+  //     e.preventDefault();
+  //   }
+  // });
+
+  // 送信ボタンが押されたときに発火
+  $(document).on('click', '#message-button', (e) => {
+    const room_id = $('#message-input').data('room_id');
+    appRoom.speak($('#message-input').val(), room_id);
+    $('#message-input').val('');
+    e.preventDefault()
+  });
 }
