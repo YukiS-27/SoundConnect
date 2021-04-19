@@ -4,6 +4,11 @@ document.addEventListener('turbolinks:load', () => {
 
   window.messageContainer = document.getElementById('message-container');
 
+  // 以下のプログラムが他のページで動作しないようにしておく
+  if (messageContainer === null) {
+    return
+  }
+
   const appRoom = consumer.subscriptions.create("RoomChannel", {
     connected() {
       // Called when the subscription is ready for use on the server
@@ -49,8 +54,6 @@ document.addEventListener('turbolinks:load', () => {
       messageContent.value = '';
       e.preventDefault();
     });
-
-
 
     // 一番下まで移動する関数
     window.scrollToBottom = () => {

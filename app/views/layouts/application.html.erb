@@ -25,7 +25,7 @@
           <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %> |
           <%= link_to "マイページ", user_profile_path(current_user) %> |
           <%= link_to "ユーザー一覧", users_path %> |
-          <%= link_to "メッセージ", rooms_path %> |
+          <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
           <%= link_to "ログアウト", sign_out_path %><br >
           <p><%= current_user.profile.name %>としてログイン</p>
         <% else %>

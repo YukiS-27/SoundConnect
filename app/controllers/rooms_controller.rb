@@ -2,7 +2,15 @@ class RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @rooms = Room.includes(:users).all
+    @rooms = current_user.rooms.includes(:messages).order("messages.created_at desc")
+
+    # allRooms = Room.joins(:users).where(users: {id: current_user.id}).select(:id).distinct
+    # room_ids = []
+
+    # allRooms.each do |room|
+    #   room_ids.push(room.id)
+    # end
+    # @rooms = room_ids.uniq
   end
 
   def create
