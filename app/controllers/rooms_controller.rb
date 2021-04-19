@@ -25,8 +25,8 @@ class RoomsController < ApplicationController
       @messages = Message.where(room: @room).order(:id).last(30)
   end
 
-  # def show_additionally
-  #   last_id = params[:oldest_message_id].to_i - 1
-  #   @message = Message.order(:id).where(room: @room, id: 1..last_id).last(10)
-  # end
+  def show_additionally
+    last_id = params[:oldest_message_id].to_i - 1
+    @messages = Message.includes(:user).order(:id).where(id: 1..last_id).last(10)
+  end
 end

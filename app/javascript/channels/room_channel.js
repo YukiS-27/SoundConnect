@@ -20,8 +20,8 @@ document.addEventListener('turbolinks:load', () => {
 
     received(data) {
       messageContainer.insertAdjacentHTML('beforeend', data['message']);
-      scrollToBottom()
-      console.log('message_test')
+      scrollToBottom();
+      button_activation();
     },
 
     speak: function(message, room_id) {
@@ -41,8 +41,8 @@ document.addEventListener('turbolinks:load', () => {
     $(document).on('keydown', '#message_content', (e) => {
       if (e.ctrlKey || e.metaKey) {
         if (e.key === 'Enter') {
-          appRoom.speak(e.target.value, room_id); // speakアクションを実行
-          e.target.value = '';
+          appRoom.speak(messageContent.value, room_id); // speakアクションを実行
+          messageContent.value = '';
           e.preventDefault();
         }
       }
@@ -63,7 +63,7 @@ document.addEventListener('turbolinks:load', () => {
     // 最初にページ一番下へ移動させる
     scrollToBottom()
 
-    const button_activation = () => {
+    window.button_activation = () => {
       if (messageContent.value === '') {
           messageButton.classList.add('disabled')
       } else {
@@ -125,24 +125,25 @@ document.addEventListener('turbolinks:load', () => {
       messageFooterHeight = newMessageFooterHeight
     }
 
-    // let oldestMessageId
-    // // メッセージの追加読み込みの可否を決定する変数
-    // window.showAdditionally = true
-//
-    // window.addEventListener('scroll', () => {
-    //     if (documentElement.scrollTop === 0 && showAdditionally) {
-    //         showAdditionally = false
-    //         // 表示済みのメッセージの内，最も古いidを取得
-    //         oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
-    //         // Ajax を利用してメッセージの追加読み込みリクエストを送る。最も古いメッセージidも送信しておく。
-    //         $.ajax({
-    //             type: 'GET',
-    //             url: '/show_additionally',
-    //             cache: false,
-    //             data: {oldest_message_id: oldestMessageId, remote: true}
-    //         })
-    //     }
-    // }, {passive: true});
+    let oldestMessageId
+    // メッセージの追加読み込みの可否を決定する変数
+    window.showAdditionally = true
+
+    window.addEventListener('scroll', () => {
+        if (documentElement.scrollTop === 0 && showAdditionally) {
+            console.log('scroll-test')
+            showAdditionally = false
+            // 表示済みのメッセージの内，最も古いidを取得
+            oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
+            // Ajax を利用してメッセージの追加読み込みリクエストを送る。最も古いメッセージidも送信しておく。
+            $.ajax({
+                type: 'GET',
+                url: '/show_additionally',
+                cache: false,
+                data: {oldest_message_id: oldestMessageId, remote: true}
+            })
+        }
+    }, {passive: true});
 
   }
 });
