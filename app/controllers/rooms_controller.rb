@@ -3,6 +3,7 @@ class RoomsController < ApplicationController
 
   def index
     @rooms = current_user.rooms.includes(:messages).order("messages.created_at desc")
+    # binding.pry
 
     # allRooms = Room.joins(:users).where(users: {id: current_user.id}).select(:id).distinct
     # room_ids = []
