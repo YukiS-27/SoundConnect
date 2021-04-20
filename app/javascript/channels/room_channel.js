@@ -131,7 +131,6 @@ document.addEventListener('turbolinks:load', () => {
 
     window.addEventListener('scroll', () => {
         if (documentElement.scrollTop === 0 && showAdditionally) {
-            console.log('scroll-test')
             showAdditionally = false
             // 表示済みのメッセージの内，最も古いidを取得
             oldestMessageId = document.getElementsByClassName('message')[0].id.replace(/[^0-9]/g, '')
