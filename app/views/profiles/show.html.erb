@@ -4,11 +4,11 @@
 <%= image_tag @user.profile.avatar.thumb80.url, class: 'icon' %>
 
 ユーザー名：
-<%= @profile.name %><br >
+<%= @user.profile.name %><br >
 メールアドレス：
-<%= @profile.user.email %><br >
+<%= @user.email %><br >
 自己紹介文：<br >
-<%= @profile.introduction %><br >
+<%= @user.profile.introduction %><br >
 
 <%# 自分と他のユーザーのページで表示内容を変えたい %>
 <% if !current_user.blank? && current_user.id == @user.id %>
@@ -16,7 +16,9 @@
   <%= link_to 'プレイリスト', playlists_path %>
 <% else %>
   <%# 今後メッセージ画面へのリンクを追加 %>
-  <p>メッセージを送る</p>
+  <%= link_to rooms_path(params: {user_id: @user.id}), method: :post do  %>
+    <p>メッセージを送る</p>
+  <% end %>
 <% end %>
 
 <%# ユーザーの投稿を表示 %>

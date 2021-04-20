@@ -1,0 +1,7 @@
+<div class="room">
+  <% room.users.each do |room_user| %>
+    <% if room_user.id != current_user.id %>
+      <%= link_to room_user.profile.name, room_path(room.id)  %>
+    <% end %>
+  <% end %>
+</div>
