@@ -85,7 +85,6 @@ ActiveRecord::Schema.define(version: 2021_04_16_062433) do
     t.string "title", null: false
     t.string "description", default: "説明はありません。"
     t.string "sound_source", null: false
-    t.string "sound_source_path", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

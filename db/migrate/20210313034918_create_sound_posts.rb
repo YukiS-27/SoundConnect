@@ -6,7 +6,6 @@ class CreateSoundPosts < ActiveRecord::Migration[6.1]
       t.string :title, null: false
       t.string :description, default: "説明はありません。"
       t.string :sound_source, null: false
-      t.string :sound_source_path, null: false
 
       t.timestamps
     end
