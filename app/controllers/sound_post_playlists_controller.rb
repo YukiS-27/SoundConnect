@@ -3,11 +3,19 @@ class SoundPostPlaylistsController < ApplicationController
   def new
     set_playlists
     @sound_post = SoundPost.find(params[:sound_post_id]) if params[:sound_post_id].present?
+    respond_to do |format|
+      format.html
+      # link_toメソッドをremote: trueに設定したのでリクエストはjs形式で行われる（詳しくは参照記事をご覧ください）
+      format.js
+    end
   end
 
   def create
     # チェックされているかを判定
-    # if params[:sound_post][:playlist_ids].present?
+    # if params[:sound_post][:playlist_ids].nil?
+      # flash[:danger] = "プレイリストを選択してください"
+      # render :new
+    # end
       @sound_post = SoundPost.find(params[:sound_post][:sound_post_id])
 
       # チェックされた数だけ中間テーブルのレコードを生成

@@ -14,11 +14,12 @@ class PlaylistsController < ApplicationController
     @sound_post = SoundPost.find(params[:sound_post_id]) if params[:sound_post_id].present?
   end
 
+  # プレイリストの作成自体はコードまとめられそう
   def create
     # ▼音源の投稿からプレイリストを作成する場合 = sound_post_idが存在するとき
     if params[:sound_post_id].present?
       # playlist = Playlist.new(title: params[:playlist][:title])
-      playlist = Playlist.new(create_playlist_params)
+      playlist = Playlist.new(playlist_params)
       playlist.user_id = current_user.id
       sound_post = SoundPost.find(params[:sound_post_id])
 
@@ -30,7 +31,7 @@ class PlaylistsController < ApplicationController
 
     # ▼プレイリストを直接作成する場合
     else
-      playlist = Playlist.new(create_playlist_params)
+      playlist = Playlist.new(playlist_params)
       playlist.user_id = current_user.id
 
       if playlist.save
@@ -49,7 +50,7 @@ class PlaylistsController < ApplicationController
   def update
     playlist = Playlist.find(params[:id])
     # playlist.title = params[:title]
-    if playlist.update(playlist_update_params)
+    if playlist.update(playlist_params)
       redirect_to playlists_path
     else
       render :edit
@@ -74,13 +75,9 @@ class PlaylistsController < ApplicationController
     @playlists = current_user.playlists
   end
 
-  def create_playlist_params
+  def playlist_params
     # params[:playlist][:title] の形で渡ってくる
     params.require(:playlist).permit(:title, { sound_post_playlists: [] })
-  end
-
-  def playlist_update_params
-    params.permit(:title)
   end
 
 end
