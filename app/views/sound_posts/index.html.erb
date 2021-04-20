@@ -1,3 +1,5 @@
+<%= javascript_pack_tag 'playlists/playlist_modal' %>
+
 <h2>音源ファイル一覧ページ</h2>
 
 <% if user_signed_in? %>
@@ -14,7 +16,18 @@
       <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
     </audio>
 
-    <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id) %>
+    <div id="add-playlist">
+      <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id), remote: true %>
+    </div>
+    <%# モーダルウィンドウ %>
+    <div class="mask hidden" id="modal-mask">
+      <div class="modal hidden" id="add-in-playlist__modal">
+        <p>ここに部分テンプレートが入るよ</p>
+        <!--
+        <%= render partial: 'sound_post_playlists/new', locals: { sound_post: sound_post, playlists: current_user.playlists } %>
+        -->
+      </div>
+    </div>
 
     <div id="sound_post_likes_button_<%= sound_post.id %>">
       <%# いいねを部分テンプレートで呼び出し %>
@@ -22,3 +35,8 @@
     </div>
   </div>
 <% end %>
+
+
+
+<%# モーダルの周囲を薄暗くするマスク %>
+<div id="mask" class="modal-mask hidden"></div>
