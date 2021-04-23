@@ -1,6 +1,6 @@
 import consumer from "./consumer"
 
-document.addEventListener('turbolinks:load', () => {
+document.addEventListener('DOMContentLoaded', () => {
 
   window.messageContainer = document.getElementById('message-container');
 
