@@ -32,6 +32,8 @@ Rails.application.routes.draw do
   # get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
   # patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
 
+
+
   resources :sound_posts
   resources :playlists
   resources :sound_post_playlists, only: [:new, :create, :destroy]

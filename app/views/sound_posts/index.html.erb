@@ -18,6 +18,7 @@
 
     <div id="add-playlist">
       <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id), remote: true %>
+      <%= react_component("AddPlaylist", {sound_post: sound_post, playlists: current_user.playlists}) %>
     </div>
     <%# モーダルウィンドウ %>
     <div class="mask hidden" id="modal-mask">
