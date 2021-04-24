@@ -15,8 +15,7 @@
     </audio>
 
     <div id="add-playlist">
-      <%= link_to 'プレイリストに追加', new_sound_post_playlist_path(sound_post_id: sound_post.id), remote: true %>
-      <%= react_component("AddPlaylist", {sound_post: sound_post, playlists: current_user.playlists}) %>
+      <%= react_component("Playlists") %>
     </div>
 
     <div id="sound_post_likes_button_<%= sound_post.id %>">
