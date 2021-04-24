@@ -19,9 +19,6 @@ class SoundPostsController < ApplicationController
     sound_post = SoundPost.new(sound_post_params)
     sound_post.user_id = current_user.id
 
-    # 仮データ挿入 -> もしかしてsound_source_pathのカラム要らない？
-    sound_post.sound_source_path = "test"
-
     if sound_post.save
       flash[:success] = "アップロードしました"
       redirect_to root_path

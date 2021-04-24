@@ -2,7 +2,7 @@ class Api::V1::PlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    paylists = current_user.playlists.order(updated_at: :desc)
+    playlists = current_user.playlists.order(updated_at: :desc)
     render json: playlists
   end
 
