@@ -32,8 +32,6 @@ Rails.application.routes.draw do
   # get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
   # patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
 
-  get '/sound_post/playlists/new', to: 'sound_posts#index'
-
   namespace :api do
     namespace :v1 do
       resources :playlists, only: [:index, :create]

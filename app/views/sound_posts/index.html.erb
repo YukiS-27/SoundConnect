@@ -14,13 +14,15 @@
       <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
     </audio>
 
-    <div id="add-playlist">
-      <%= react_component("Playlists", sound_post: sound_post) %>
-    </div>
+    <% if user_signed_in? %>
+      <div id="add-playlist">
+        <%= react_component("Playlists", sound_post: sound_post) %>
+      </div>
 
-    <div id="sound_post_likes_button_<%= sound_post.id %>">
-      <%# いいねを部分テンプレートで呼び出し %>
-      <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
-    </div>
+      <div id="sound_post_likes_button_<%= sound_post.id %>">
+        <%# いいねを部分テンプレートで呼び出し %>
+        <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
+      </div>
+    <% end %>
   </div>
 <% end %>
