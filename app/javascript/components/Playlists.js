@@ -15,6 +15,7 @@ class Playlists extends React.Component {
     this.state = {
       playlists: [],
       sound_post_playlists: [],
+      checks: [],
       current_user: "",
       open: false
     }
@@ -22,23 +23,26 @@ class Playlists extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.getPlaylists = this.getPlaylists.bind(this);
+    // this.checkBelongsToPlaylist = this.checkBelongsToPlaylist.bind(this);
   }
 
   handleClose = () => {
     this.setState({ open: !this.state.open });
   }
 
-  handleClickOpen = (data) => {
+  handleClickOpen = (sound_post) => {
     this.setState({ open: !this.state.open });
-    this.getPlaylists(data)
+    this.getPlaylists(sound_post)
+    // this.checkBelongsToPlaylist(this.state.sound_post_playlists)
   }
 
-  getPlaylists = (data) => {
+  // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
+  getPlaylists = (sound_post) => {
     axios.all([
       api.get('/api/v1/playlists'),
       api.get('/api/v1/sound_post_playlists/index_belongs_to_playlist', {
         params: {
-          sound_post_id: data.id
+          sound_post_id: sound_post.id
         }
       })
     ])
@@ -49,11 +53,20 @@ class Playlists extends React.Component {
       })
       console.log(this.state.playlists)
       console.log(this.state.sound_post_playlists)
+
+      // this.checkBelongsToPlaylist()
     }))
     .catch(e => {
       console.log(e)
     })
   }
+
+  // checkBelongsToPlaylist = (sound_post_playlists) => {
+  //   sound_post_playlists.map(sound_post_playlist => (
+  //     if (sound_post_playlist.id ===)
+  //   ))
+//
+  // }
 
   render() {
     return (
