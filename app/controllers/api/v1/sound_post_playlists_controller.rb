@@ -15,9 +15,9 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
     # 作成したプレイリストの中に中間テーブルのレコードが存在するか確認
     # 存在する場合 => true
     # 存在しない場合 => false
-    playlists.each.with_index do | playlist, i |
+    playlists.each do |playlist|
       checkFlag = sound_post_playlists.find_by(playlist_id: playlist.id).present?
-      checks.store(plsylist.title, checkFlag)
+      checks.store(playlist.title, checkFlag)
     end
     render json: checks
   end
