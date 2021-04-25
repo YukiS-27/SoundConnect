@@ -1,8 +1,8 @@
 class Api::V1::SoundPostPlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
 
-  def index
-    sound_post_playlists = SoundPostPlaylist.all
+  def index_belongs_to_playlist
+    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
     render json: sound_post_playlists
   end
 

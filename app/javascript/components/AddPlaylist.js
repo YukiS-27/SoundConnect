@@ -14,14 +14,26 @@ function AddPlaylist(props) {
   const [check, setCheck] = useState()
   const { playlists, sound_post } = props
 
+  const [state, setState] = React.useState({
+    gilad: true,
+    jason: false,
+    antoine: false,
+  });
+
+  const handleChange = (event) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
+  };
+
   return (
-    <List>
+    <FormGroup>
       {playlists.map(playlist => (
-        <ListItem key={playlist.id}>
-          <p>{playlist.title}</p>
-        </ListItem>
+        <FormControlLabel
+          key={playlist.id}
+          control={<Checkbox checked={true} onChange={handleChange} name={playlist.title} color="primary"/>}
+          label={playlist.title}
+        />
       ))}
-    </List>
+    </FormGroup>
   )
 }
 

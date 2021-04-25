@@ -7,11 +7,14 @@ import {
 import axios from "axios"
 import AddPlaylist from './AddPlaylist'
 
+const api = axios.create()
+
 class Playlists extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       playlists: [],
+      sound_post_playlists: [],
       current_user: "",
       open: false
     }
@@ -25,17 +28,28 @@ class Playlists extends React.Component {
     this.setState({ open: !this.state.open });
   }
 
-  handleClickOpen = () => {
+  handleClickOpen = (data) => {
     this.setState({ open: !this.state.open });
-    this.getPlaylists()
+    this.getPlaylists(data)
   }
 
-  getPlaylists = () => {
-    axios.get('/api/v1/playlists')
-    .then(res => {
-      this.setState({ playlists: res.data })
+  getPlaylists = (data) => {
+    axios.all([
+      api.get('/api/v1/playlists'),
+      api.get('/api/v1/sound_post_playlists/index_belongs_to_playlist', {
+        params: {
+          sound_post_id: data.id
+        }
+      })
+    ])
+    .then( axios.spread( (res1, res2) => {
+      this.setState({
+        playlists: res1.data,
+        sound_post_playlists: res2.data
+      })
       console.log(this.state.playlists)
-    })
+      console.log(this.state.sound_post_playlists)
+    }))
     .catch(e => {
       console.log(e)
     })
@@ -44,7 +58,7 @@ class Playlists extends React.Component {
   render() {
     return (
       <>
-        <Button color="primary" onClick={this.handleClickOpen}>
+        <Button color="primary" onClick={() => this.handleClickOpen(this.props.sound_post)}>
           プレイリストに追加
         </Button>
 
@@ -58,6 +72,7 @@ class Playlists extends React.Component {
           {/* プレイリスト一覧を表示 */}
           <AddPlaylist
             playlists={this.state.playlists}
+            sound_post_playlists={this.state.sound_post_playlists}
             sound_post={this.props.sound_post}
           />
 
