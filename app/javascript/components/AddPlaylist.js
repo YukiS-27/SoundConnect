@@ -7,16 +7,9 @@ import {
 } from '@material-ui/core'
 import axios from 'axios'
 
-
 function AddPlaylist(props) {
 
   const { sound_post, playlists, sound_post_playlists, checks } = props
-
-  const [state, setState] = React.useState({
-    gilad: true,
-    jason: false,
-    antoine: false,
-  });
 
   const handleChange = (event) => {
     setState({ ...state, [event.target.name]: event.target.checked });
@@ -28,7 +21,7 @@ function AddPlaylist(props) {
         return (
           <FormControlLabel
             key={key}
-            control={<Checkbox checked={true} onChange={handleChange} name={playlist.title} color="primary"/>}
+            control={<Checkbox checked={checks[key]} onChange={handleChange} name={playlist.title} color="primary"/>}
             label={playlist.title}
           />
         )

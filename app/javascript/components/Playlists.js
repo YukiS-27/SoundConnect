@@ -23,7 +23,6 @@ class Playlists extends React.Component {
     this.handleClose = this.handleClose.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
     this.getPlaylists = this.getPlaylists.bind(this);
-    // this.checkBelongsToPlaylist = this.checkBelongsToPlaylist.bind(this);
   }
 
   handleClose = () => {
@@ -33,7 +32,6 @@ class Playlists extends React.Component {
   handleClickOpen = (sound_post) => {
     this.setState({ open: !this.state.open });
     this.getPlaylists(sound_post)
-    // this.checkBelongsToPlaylist(this.state.sound_post_playlists)
   }
 
   // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
@@ -54,22 +52,15 @@ class Playlists extends React.Component {
         sound_post_playlists: res2.data,
         checks: res3.data
       })
+      // データが取得できているかconsoleに出力
       console.log(this.state.playlists)
       console.log(this.state.sound_post_playlists)
       console.log(this.state.checks)
-      // this.checkBelongsToPlaylist()
     }))
     .catch(e => {
       console.log(e)
     })
   }
-
-  // checkBelongsToPlaylist = (sound_post_playlists) => {
-  //   sound_post_playlists.map(sound_post_playlist => (
-  //     if (sound_post_playlist.id ===)
-  //   ))
-//
-  // }
 
   render() {
     return (
