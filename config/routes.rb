@@ -35,7 +35,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :playlists, only: [:index, :create]
-      resources :sound_post_playlists, only: [:create, :destroy]
+      resources :sound_post_playlists, only: [:index, :create, :destroy]
     end
   end
 

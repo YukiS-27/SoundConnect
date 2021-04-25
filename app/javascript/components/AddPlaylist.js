@@ -4,7 +4,6 @@ import {
   Button, Checkbox,
   List, ListItem,
   FormGroup, FormControlLabel,
-  Dialog, DialogTitle, DialogContent, DialogActions
 } from '@material-ui/core'
 import axios from 'axios'
 
