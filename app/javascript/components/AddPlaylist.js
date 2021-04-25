@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import {
   Button, Checkbox,
@@ -11,17 +11,31 @@ function AddPlaylist(props) {
 
   const { sound_post, playlists, sound_post_playlists, checks } = props
 
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
+  const [ checkList, setCheckList] = useState(checks)
+
+  const replaceCheckbox = (val, index) => {
+    console.log(index)
+    console.log(checkList[index])
+    const newCheckList = [...checkList]
+    newCheckList[index] = !checkList[index]
+    setCheckList(newCheckList)
+
+    console.log(val.title)
+  }
 
   return (
     <FormGroup>
-      {playlists.map((playlist, key) => {
+      {playlists.map((playlist, index) => {
         return (
           <FormControlLabel
-            key={key}
-            control={<Checkbox checked={checks[key]} onChange={handleChange} name={playlist.title} color="primary"/>}
+            key={playlist.id}
+            control={
+              <Checkbox
+                checked={checkList[index]}
+                onClick={() => replaceCheckbox(playlist, index)}
+                name={playlist.title}
+                color="primary"
+              />}
             label={playlist.title}
           />
         )
