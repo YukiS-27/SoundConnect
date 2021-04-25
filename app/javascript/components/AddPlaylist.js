@@ -10,9 +10,7 @@ import axios from 'axios'
 
 function AddPlaylist(props) {
 
-  // const [playlists, setPlaylists] = useState([])
-  const [check, setCheck] = useState()
-  const { playlists, sound_post } = props
+  const { sound_post, playlists, sound_post_playlists, checks } = props
 
   const [state, setState] = React.useState({
     gilad: true,
@@ -26,13 +24,15 @@ function AddPlaylist(props) {
 
   return (
     <FormGroup>
-      {playlists.map(playlist => (
-        <FormControlLabel
-          key={playlist.id}
-          control={<Checkbox checked={true} onChange={handleChange} name={playlist.title} color="primary"/>}
-          label={playlist.title}
-        />
-      ))}
+      {playlists.map((playlist, key) => {
+        return (
+          <FormControlLabel
+            key={key}
+            control={<Checkbox checked={true} onChange={handleChange} name={playlist.title} color="primary"/>}
+            label={playlist.title}
+          />
+        )
+      })}
     </FormGroup>
   )
 }

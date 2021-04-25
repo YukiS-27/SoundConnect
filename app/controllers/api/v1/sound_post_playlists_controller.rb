@@ -3,12 +3,12 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
 
   # 指定のsound_post_idを含むプレイリストを取得
   def index_belongs_to_playlist
-    set_sound_post_playlists
+    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
     render json: sound_post_playlists
   end
 
   def check_belongs_to_playlist
-    set_sound_post_playlists
+    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
     playlists = current_user.playlists
     checks = []
 
@@ -48,7 +48,4 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
     params.require(:sound_post_playlist).permit(:sound_post_id, :playlist_id)
   end
 
-  def set_sound_post_playlists
-    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
-  end
 end

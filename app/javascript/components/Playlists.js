@@ -37,23 +37,26 @@ class Playlists extends React.Component {
   }
 
   // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
+  // また、すでにプレイリストに存在するかどうかのチェック
   getPlaylists = (sound_post) => {
     axios.all([
       api.get('/api/v1/playlists'),
       api.get('/api/v1/sound_post_playlists/index_belongs_to_playlist', {
-        params: {
-          sound_post_id: sound_post.id
-        }
+        params: { sound_post_id: sound_post.id }
+      }),
+      api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
+        params: { sound_post_id: sound_post.id }
       })
     ])
-    .then( axios.spread( (res1, res2) => {
+    .then( axios.spread( (res1, res2, res3) => {
       this.setState({
         playlists: res1.data,
-        sound_post_playlists: res2.data
+        sound_post_playlists: res2.data,
+        checks: res3.data
       })
       console.log(this.state.playlists)
       console.log(this.state.sound_post_playlists)
-
+      console.log(this.state.checks)
       // this.checkBelongsToPlaylist()
     }))
     .catch(e => {
@@ -84,9 +87,10 @@ class Playlists extends React.Component {
 
           {/* プレイリスト一覧を表示 */}
           <AddPlaylist
+            sound_post={this.props.sound_post}
             playlists={this.state.playlists}
             sound_post_playlists={this.state.sound_post_playlists}
-            sound_post={this.props.sound_post}
+            checks={this.state.checks}
           />
 
         </Dialog>
