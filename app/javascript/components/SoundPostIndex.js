@@ -4,11 +4,30 @@ import axios from 'axios'
 import styled from 'styled-components'
 import { ImCheckboxChecked, ImCheckboxUnchecked } from 'react-icons/im'
 
+import SideSection from './SideSection'
+
+const TopPageWrapper = styled.div`
+  display: flex;
+  height: 100%;
+`
+
+const MainWrapper = styled.div`
+`
+
 function SoundPostIndex() {
   return (
-    <div>
-      <p>こんにちは</p>
-    </div>
+    <TopPageWrapper>
+      <SideSection
+
+      />
+
+      <div className="main-wrapper">
+
+        <div className="container">
+
+        </div>
+      </div>
+    </TopPageWrapper>
   )
 }
 
