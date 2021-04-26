@@ -13,10 +13,11 @@ class Playlists extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      sound_post: this.props.sound_post,
       playlists: [],
-      sound_post_playlists: [],
-      checks: [],
-      current_user: "",
+      // sound_post_playlists: [],
+      // checks: {},
+      // current_user: "",
       open: false
     }
 
@@ -30,7 +31,9 @@ class Playlists extends React.Component {
   }
 
   handleClickOpen = (sound_post) => {
-    this.setState({ open: !this.state.open });
+    this.setState({
+      open: !this.state.open
+    });
     this.getPlaylists(sound_post)
   }
 
@@ -39,23 +42,23 @@ class Playlists extends React.Component {
   getPlaylists = (sound_post) => {
     axios.all([
       api.get('/api/v1/playlists'),
-      api.get('/api/v1/sound_post_playlists/index_belongs_to_playlist', {
-        params: { sound_post_id: sound_post.id }
-      }),
-      api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-        params: { sound_post_id: sound_post.id }
-      })
+      // api.get('/api/v1/sound_post_playlists/index_belongs_to_playlist', {
+      //   params: { sound_post_id: sound_post.id }
+      // }),
+      // api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
+      //   params: { sound_post_id: sound_post.id }
+      // })
     ])
-    .then( axios.spread( (res1, res2, res3) => {
+    .then( axios.spread( (res1) => {
       this.setState({
         playlists: res1.data,
-        sound_post_playlists: res2.data,
-        checks: res3.data
+        // sound_post_playlists: res2.data,
+        // checks: res2.data
       })
       // データが取得できているかconsoleに出力
-      console.log(this.state.playlists)
-      console.log(this.state.sound_post_playlists)
-      console.log(this.state.checks)
+      // console.log(this.state.playlists)
+      // console.log(this.state.sound_post_playlists)
+      // console.log(this.state.checks)
     }))
     .catch(e => {
       console.log(e)
@@ -65,9 +68,14 @@ class Playlists extends React.Component {
   render() {
     return (
       <>
-        <Button color="primary" onClick={() => this.handleClickOpen(this.props.sound_post)}>
+        <Button
+          onClick={() => this.handleClickOpen(this.props.sound_post)}
+          color="primary"
+        >
           プレイリストに追加
         </Button>
+        {this.props.sound_post.title}
+        {this.state.sound_post.title}
 
         <Dialog
           open={this.state.open}
@@ -78,10 +86,10 @@ class Playlists extends React.Component {
 
           {/* プレイリスト一覧を表示 */}
           <AddPlaylist
-            sound_post={this.props.sound_post}
+            sound_post={this.state.sound_post}
             playlists={this.state.playlists}
-            sound_post_playlists={this.state.sound_post_playlists}
-            checks={this.state.checks}
+            // sound_post_playlists={this.state.sound_post_playlists}
+            // checks={this.state.checks}
           />
 
         </Dialog>
