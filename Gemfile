@@ -80,3 +80,4 @@ gem 'devise-i18n-views'
 gem 'seed-fu'
 
 gem 'jquery-rails'
+gem 'react-rails'

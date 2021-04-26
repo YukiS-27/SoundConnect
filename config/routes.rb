@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  # トップページを音源投稿一覧ページへ
-  # root to: "home#index"
-  root to: 'sound_posts#index'
-  get 'home/index'
-  get 'home/show'
+  root to: "home#index"
+  # root to: 'sound_posts#index'
+  get 'sound_posts/new', to: 'home#index'
+  get 'sound_posts/:id/edit', to: 'home#index'
 
   # deviseのコントローラーを継承
   devise_for :users,
@@ -31,6 +30,15 @@ Rails.application.routes.draw do
   resources :profiles, only: [:edit, :update]
   # get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
   # patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
+
+  namespace :api do
+    namespace :v1 do
+      get 'sound_post_playlists/index_belongs_to_playlist', to: 'sound_post_playlists#index_belongs_to_playlist'
+      get 'sound_post_playlists/check_belongs_to_playlist', to: 'sound_post_playlists#check_belongs_to_playlist'
+      resources :sound_post_playlists, only: [:create, :destroy]
+      resources :playlists, only: [:index, :create]
+    end
+  end
 
   resources :sound_posts
   resources :playlists
