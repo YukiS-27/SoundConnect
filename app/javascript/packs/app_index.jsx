@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom';
-import Playlists from '../components/Playlists'
+import App from '../components/App'
 
 document.addEventListener('DOMContentLoaded', () => {
   ReactDOM.render(
     <BrowserRouter>
-      <Playlists/>
+      <App/>
     </BrowserRouter>,
-    document.querySelector('#add-playlist'),
+    document.querySelector('#root'),
   );
 });
