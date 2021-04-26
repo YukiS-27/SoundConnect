@@ -10,7 +10,7 @@ import EditSoundPost from './EditSoundPost'
 
 
 const Wrapper = styled.div`
-  width: 800px;
+  width: 90%0px;
   max-width: 90%;
   margin: 20px auto;
 `
@@ -18,8 +18,6 @@ const Wrapper = styled.div`
 function App() {
   return (
     <Wrapper>
-
-
       <Switch>
         <Route exact path="/" component={SoundPostIndex} />
         {/*

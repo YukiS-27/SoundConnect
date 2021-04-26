@@ -1,8 +1,8 @@
-class Api::V1::PlaylistsController < ApplicationController
+class Api::V1::SoundPostsController < ApplicationController
   protect_from_forgery with: :null_session
 
   def index
-    sound_posts = SoundPost.all.includes(:user)
+    sound_posts = SoundPost.all.includes(:user).order(updated_at: :desc)
     render json: sound_posts
   end
 
