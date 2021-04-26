@@ -3,7 +3,7 @@ import { Switch, Route, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
 import AddSoundPost from './AddSoundPost'
-import SoundPosts from './SoundPosts'
+import SoundPostIndex from './SoundPostIndex'
 import EditSoundPost from './EditSoundPost'
 
 const Wrapper = styled.div`
@@ -16,9 +16,11 @@ function App() {
   return (
     <Wrapper>
       <Switch>
-        <Route exact path="/sound_posts" component={SoundPosts} />
-        <Route exact path="/sound_posts/new" component={AddSoundPost} />
-        <Route path="/sound_posts/:id/edit" component={EditSoundPost} />
+        <Route exact path="/" component={SoundPostIndex} />
+        {/*
+          <Route exact path="/sound_posts/new" component={AddSoundPost} />
+          <Route path="/sound_posts/:id/edit" component={EditSoundPost} />
+        */}
       </Switch>
     </Wrapper>
   )
