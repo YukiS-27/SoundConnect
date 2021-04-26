@@ -10,16 +10,20 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
   def check_belongs_to_playlist
     sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
     playlists = current_user.playlists
-    checks = {}
+    check_array = []
 
     # 作成したプレイリストの中に中間テーブルのレコードが存在するか確認
     # 存在する場合 => true
     # 存在しない場合 => false
     playlists.each do |playlist|
+      check_hash = {}
       checkFlag = sound_post_playlists.find_by(playlist_id: playlist.id).present?
-      checks.store(playlist.title, checkFlag)
+      check_hash[playlist.title] = checkFlag
+      # check_hash = { playlist.title: checkFlag }
+      # checks.store(playlist.title, checkFlag)
+      check_array << check_hash
     end
-    render json: checks
+    render json: check_array
   end
 
   def create
