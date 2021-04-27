@@ -7,11 +7,9 @@ import {
 } from '@material-ui/core'
 
 import axios from 'axios'
-const api = axios.create()
 
 function AddPlaylist(props) {
 
-  // const { sound_post, playlists, sound_post_playlists, checks } = props
   const { sound_post, playlists, checks } = props
   // const [ playlists, setPlaylists] = useState([])
   const [ checkList, setCheckList ] = useState({})
@@ -38,35 +36,9 @@ function AddPlaylist(props) {
   //   })
   // }
 
-  useEffect((props) => {
-    console.log(checks)
-  //   axios.all([
-  //     // api.get('/api/v1/playlists'),
-  //     api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-  //       params: { sound_post_id: sound_post.id }
-  //     })
-  //   ])
-  //   .then( axios.spread( (res2) => {
-  //     // setPlaylists({ playlists: res1.data })
-  //     setCheckList({ checks: res2.data })
-
-  //     // データが取得できているかconsoleに出力
-  //     // console.log(playlists)
-  //     console.log(checkList)
-  //   }))
-  //   .catch(e => {
-  //     console.log(e)
-  //   })
-
-  //   console.log('propsデータ確認')
-
-  //   // getPlaylists(sound_post)
-  //   console.log(sound_post)
-  //   // console.log(props.playlists)
-
-  //   console.log('チェックリスト更新！')
-  //   // console.log(checkList)
-  }, [])
+  // useEffect((props) => {
+  //   // ここに処理を書く
+  // }, [])
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
@@ -108,22 +80,6 @@ function AddPlaylist(props) {
     // console.log(checks[event.target.name])
   }
 
-  const getTest = (sound_post, playlists) => {
-    axios.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-      params: { sound_post_id: sound_post.id }
-    })
-    .then(res => {
-      console.log(res.data)
-      setCheckList(res.data)
-    })
-    .catch(e => {
-      console.log(e)
-    })
-
-  //   console.log(val.target.name)  // undefined
-  //   console.log(val.target.value) // undefined
-  }
-
   return (
       <List>
         {playlists.map((playlist, index) => {
@@ -147,9 +103,6 @@ function AddPlaylist(props) {
             </ListItem>
           )
         })}
-        <Button onClick={() => getTest(sound_post, playlists)} name={"ボタン"}>
-          <p>テスト</p>
-        </Button>
       </List>
   )
 }
@@ -175,28 +128,4 @@ export default AddPlaylist
             />
             )
         })}
-*/}
-
-
-{/*
-<List>
-        {playlists.map((playlist) => {
-          const labelId = `checkbox-list-label-${playlist}`;
-          return (
-            <ListItem key={playlist.id} button dense onClick={() => handleReplaceCheckbox(playlist)} role={undefined}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checkList[playlist.title]}
-                  inputProps={{ "aria-labelledby": labelId }}
-                  name={playlist.title}
-                  color="primary"
-                  label={playlist.title}
-                />
-              </ListItemIcon>
-              <ListItemText primary={playlist.title} />
-
-            </ListItem>
-            )
-        })}
-      </List>
 */}
