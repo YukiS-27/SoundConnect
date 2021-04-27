@@ -7,12 +7,13 @@ import {
   FormControl, FormGroup, FormControlLabel,
 } from '@material-ui/core'
 import axios from 'axios'
+import { PlaylistPlay } from '@material-ui/icons'
 
 toast.configure()
 
 function AddPlaylist(props) {
 
-  const { sound_post, playlists, checks } = props
+  const { sound_post, playlists, sound_post_playlists, checks } = props
   const [ checkList, setCheckList ] = useState(checks)
   // const [ soundPostPlaylists, setSoundPostPlaylists ] = useState(sound_post_playlists)
 
@@ -25,58 +26,53 @@ function AddPlaylist(props) {
 
     // checkListを更新するための新しい配列を作成
     const newCheckList = new Set(checkList)
+    const sendParams = {
+            sound_post_id: sound_post.id,
+            playlist_id: playlist.id
+          }
 
     // まず対象のsound_post_playlistのidを取得
-    axios.get('/api/v1/sound_post_playlists/test', {
-      params: {
-        sound_post_id: sound_post.id,
-        playlist_id: playlist.id
-      }
-    })
-    .then(res => {
-      var sendParams = res.data
+    // axios.get('/api/v1/sound_post_playlists/test', {
+    //   params: {
+    //     sound_post_id: sound_post.id,
+    //     playlist_id: playlist.id
+    //   }
+    // })
+    // .then(res => {
 
-      if (newCheckList.has(playlist.id)) {
+      if (newCheckList.has(playlist.id, )) {
         // チェックを削除
-        newCheckList.delete(playlist.id)
+        // newCheckList.delete(playlist.id)
 
-          // setSoundPostPlaylist(res.data)
-          console.log('テスト')
-          console.log(res.data)
-          console.log(sendParams)
-
-          // playlistから削除するAPI叩く
-          axios.delete(`/api/v1/sound_post_playlists/${sendParams.id}`, sendParams)
+          // TODO playlistから削除するAPI叩く
+          axios.delete(`/api/v1/sound_post_playlists/${playlist.id}`, sendParams)
           .then(res => {
             removeCheckNotify(playlist.title)
-            setUpdata(update ? false : true)
           })
           .catch(e => {
             console.log(e)
           })
+          newCheckList.delete(playlist.id)
 
       } else {
         // チェックを追加
-        newCheckList.add(playlist.id)
-
-        console.log('テスト')
-        console.log(sendParams)
+        // newCheckList.add(playlist.id)
 
         // TODO playlistに追加するAPI叩く
         axios.post('/api/v1/sound_post_playlists', sendParams)
         .then(res => {
           addCheckNotify(playlist.title)
-          setUpdata(update ? false : true)
         })
         .catch(e => {
           console.log(e)
         })
+        // チェックを追加
+        newCheckList.add(playlist.id)
       }
-    })
-    .catch(e => {
-      console.log(e)
-    })
 
+    // .catch(e => {
+    //   console.log(e)
+    // })
       // setUpdata(update ? false : true)
       setCheckList([...newCheckList])
     }
