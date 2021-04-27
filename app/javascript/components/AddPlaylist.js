@@ -39,39 +39,40 @@ function AddPlaylist(props) {
   // }
 
   useEffect((props) => {
-    axios.all([
-      // api.get('/api/v1/playlists'),
-      api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-        params: { sound_post_id: sound_post.id }
-      })
-    ])
-    .then( axios.spread( (res2) => {
-      // setPlaylists({ playlists: res1.data })
-      setCheckList({ checks: res2.data })
-
-      // データが取得できているかconsoleに出力
-      // console.log(playlists)
-      console.log(checkList)
-    }))
-    .catch(e => {
-      console.log(e)
-    })
-
-    console.log('propsデータ確認')
-
-    // getPlaylists(sound_post)
-    console.log(sound_post)
-    console.log(props.playlists)
     console.log(checks)
+  //   axios.all([
+  //     // api.get('/api/v1/playlists'),
+  //     api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
+  //       params: { sound_post_id: sound_post.id }
+  //     })
+  //   ])
+  //   .then( axios.spread( (res2) => {
+  //     // setPlaylists({ playlists: res1.data })
+  //     setCheckList({ checks: res2.data })
 
-    console.log('チェックリスト更新！')
-    // console.log(checkList)
+  //     // データが取得できているかconsoleに出力
+  //     // console.log(playlists)
+  //     console.log(checkList)
+  //   }))
+  //   .catch(e => {
+  //     console.log(e)
+  //   })
+
+  //   console.log('propsデータ確認')
+
+  //   // getPlaylists(sound_post)
+  //   console.log(sound_post)
+  //   // console.log(props.playlists)
+
+  //   console.log('チェックリスト更新！')
+  //   // console.log(checkList)
   }, [])
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
   // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
   const handleReplaceCheckbox = (event) => {
+
     //var data
 //
     //if () {
@@ -92,13 +93,14 @@ function AddPlaylist(props) {
     //    console.log(e)
     //  })
     //}
-    console.log(checkList.indexOf(playlist.id))
-    console.log(event.target) // undefined
+    // console.log(checkList.indexOf(playlist.id))
+    // console.log(event.target.name) // undefined
+    console.log(event)
 
-
-    console.log({...checkList}) // {} 空のオブジェクトが返る
-    console.log(checks) // {} 空のオブジェクトが返る
-    console.log(event.target.checked) // undefined
+//
+    //console.log({...checkList}) // {} 空のオブジェクトが返る
+    //console.log(checks) // {} 空のオブジェクトが返る
+    //console.log(event.target.checked) // undefined
     // const newCheckList = [ ...checkList ]
     // newCheckList[event.target.name] = !checkList[event.target.name]
     // setCheckList({ ...checkList, [event.target.name]: event.target.checked })
@@ -118,11 +120,6 @@ function AddPlaylist(props) {
       console.log(e)
     })
 
-    console.log(checks[playlists[0].title])
-    console.log(checks[playlists[1].title])
-    console.log(checks[playlists[2].title])
-    console.log(checks[playlists[3].title])
-
   //   console.log(val.target.name)  // undefined
   //   console.log(val.target.value) // undefined
   }
@@ -133,9 +130,10 @@ function AddPlaylist(props) {
           return (
             <ListItem key={playlist.id}>
               <ListItemIcon>
-                <Checkbox
-                  // checked={checkList.indexOf(playlist.id)}
-                  checked={true}
+                <Checkbox key={playlist.id}
+                  // checked={checkList indexOf(playlist.id)}
+                  // checked={true}
+                  checked={checks[playlist.id]}
                   // onClick={() => replaceCheckbox(playlist, index)}
                   onChange={handleReplaceCheckbox}
                   name={playlist.title}
