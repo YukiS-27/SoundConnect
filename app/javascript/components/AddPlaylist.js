@@ -12,7 +12,9 @@ function AddPlaylist(props) {
 
   const { sound_post, playlists, checks } = props
   // const [ playlists, setPlaylists] = useState([])
-  const [ checkList, setCheckList ] = useState({})
+  const [ checkList, setCheckList ] = useState(checks)
+
+  console.log(checkList)
 
   // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
   // また、すでにプレイリストに存在するかどうかのチェック
@@ -36,14 +38,53 @@ function AddPlaylist(props) {
   //   })
   // }
 
-  // useEffect((props) => {
+  // useEffect((event) => {
   //   // ここに処理を書く
-  // }, [])
+  //   const changeBooleanValue = (val) => {
+  //     if (checkList[val]) {
+  //       return true
+  //     } else {
+  //       return false
+  //     }
+  //   }
+  //   changeBooleanValue(event.target.name)
+  // }, [checkList])
+
+  // const initializeClickList = (initClickList) => () => {
+  //   setCheckList([...initClickList])
+  // }
+
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
   // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
-  const handleReplaceCheckbox = (event) => {
+  const handleReplaceCheckbox = (playlistId) => () => {
+    // const newCheckList = checks
+    // newCheckList[playlist.id] = !newCheckList[playlist.id]
+    // setCheckList(newCheckList)
+
+    console.log(playlistId)
+
+    const checkedSet = new Set(checkList)
+
+    if (checkedSet.has(playlistId)) {
+      // TODO playlistから削除するAPI叩く
+      checkedSet.delete(playlistId)
+    } else {
+      // TODO playlistに追加するAPI叩く
+      checkedSet.add(playlistId)
+    }
+
+    setCheckList([...checkedSet])
+
+    // const newCheckList = [...checkList];
+    // setCheckList(newCheckList)
+
+    // console.log(playlist.title)
+    // newCheckList[event.target.name] = !checkList[val]
+
+      // console.log(event)
+      // console.log(event.target.checked)
 
     //var data
 //
@@ -65,9 +106,6 @@ function AddPlaylist(props) {
     //    console.log(e)
     //  })
     //}
-    // console.log(checkList.indexOf(playlist.id))
-    // console.log(event.target.name) // undefined
-    console.log(event)
 
 //
     //console.log({...checkList}) // {} 空のオブジェクトが返る
@@ -81,29 +119,36 @@ function AddPlaylist(props) {
   }
 
   return (
-      <List>
-        {playlists.map((playlist, index) => {
-          return (
-            <ListItem key={playlist.id}>
-              <ListItemIcon>
-                <Checkbox key={playlist.id}
-                  // checked={checkList indexOf(playlist.id)}
-                  // checked={true}
-                  checked={checks[playlist.id]}
-                  // onClick={() => replaceCheckbox(playlist, index)}
-                  onChange={handleReplaceCheckbox}
-                  name={playlist.title}
-                  value={playlist.title ? playlist.title : ''}
-                  color="primary"
-                />
-              </ListItemIcon>
+    <List>
+      {playlists.map((playlist) => {
+        return (
+          <ListItem key={playlist.id} role={undefined} dense button onClick={handleReplaceCheckbox(playlist.id)}>
+            <ListItemIcon>
+              <Checkbox key={playlist.id}
+                // TODO: チェックボックスの初期状態が反映されない
+                // checked={checkList.indexOf(playlist.id) !== -1}
+                checked={typeof checkList.indexOf(playlist.id) === 'undefined' ? (
+                  checks.indexOf(playlist.id) !== -1
+                ) : (
+                  checkList.indexOf(playlist.id) !== -1
+                )}
+                // checked={typeof checkList[playlist.id] === 'undefined' ? (
+                //   checks[playlist.id]
+                // ) : (
+                //   checkList[playlist.id]
+                // )}
+                color="primary"
+                tabIndex={-1}
+                disableRipple
+              />
+            </ListItemIcon>
 
-              <ListItemText primary={playlist.title} />
+            <ListItemText primary={playlist.title} />
 
-            </ListItem>
-          )
-        })}
-      </List>
+          </ListItem>
+        )
+      })}
+    </List>
   )
 }
 

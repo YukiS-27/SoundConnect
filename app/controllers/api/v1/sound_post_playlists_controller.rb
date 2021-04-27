@@ -1,28 +1,29 @@
 class Api::V1::SoundPostPlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
 
-  # 指定のsound_post_idを含むプレイリストを取得
-  def index_belongs_to_playlist
-    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
-    render json: sound_post_playlists
-  end
-
   def check_belongs_to_playlist
-    sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
-    playlists = current_user.playlists
+    # sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
+    # playlists = current_user.playlists
     # check_array = []
-    checks = {}
+    # checks = {}
+
+    # 選択した曲が既に存在するプレイリストのidを取得
+    checks = current_user
+              .playlists
+              .eager_load(:sound_post_playlists)
+              .where(sound_post_playlists: {sound_post_id: params[:sound_post_id]})
+              .map(&:id)
 
     # 作成したプレイリストの中に中間テーブルのレコードが存在するか確認
     # 存在する場合 => true
     # 存在しない場合 => false
-    playlists.each do |playlist|
-      # check_hash = {}
-      checkFlag = sound_post_playlists.find_by(playlist_id: playlist.id).present?
-      # check_hash[playlist.title] = checkFlag
-      checks.store(playlist.id, checkFlag)
-      # check_array << check_hash
-    end
+    # playlists.each do |playlist|
+    #   # check_hash = {}
+    #   checkFlag = sound_post_playlists.find_by(playlist_id: playlist.id).present?
+    #   # check_hash[playlist.title] = checkFlag
+    #   checks.store(playlist.id, checkFlag)
+    #   # check_array << check_hash
+    # end
     render json: checks
   end
 
