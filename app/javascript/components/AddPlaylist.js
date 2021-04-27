@@ -11,8 +11,6 @@ function AddPlaylist(props) {
   const { sound_post, playlists, checks } = props
   const [ checkList, setCheckList ] = useState(checks)
 
-  console.log(checkList)
-
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
   // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
@@ -20,17 +18,18 @@ function AddPlaylist(props) {
 
     console.log(playlistId)
 
-    const checkedSet = new Set(checkList)
+    // checkListを更新するための新しい配列を作成
+    const newCheckList = new Set(checkList)
 
-    if (checkedSet.has(playlistId)) {
+    if (newCheckList.has(playlistId)) {
       // TODO playlistから削除するAPI叩く
-      checkedSet.delete(playlistId)
+      newCheckList.delete(playlistId)
     } else {
       // TODO playlistに追加するAPI叩く
-      checkedSet.add(playlistId)
+      newCheckList.add(playlistId)
     }
 
-    setCheckList([...checkedSet])
+    setCheckList([...newCheckList])
   }
 
   return (

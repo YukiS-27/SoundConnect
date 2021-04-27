@@ -1,7 +1,7 @@
 class Api::V1::SoundPostPlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
 
-  def check_belongs_to_playlist
+  def check_contained_in_playlist
     # sound_post_playlists = SoundPostPlaylist.where(sound_post_id: params[:sound_post_id])
     # playlists = current_user.playlists
     # check_array = []

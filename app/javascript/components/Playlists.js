@@ -37,7 +37,7 @@ class Playlists extends React.Component {
   getPlaylists = (sound_post) => {
     axios.all([
       api.get('/api/v1/playlists'),
-      api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
+      api.get('/api/v1/sound_post_playlists/check_contained_in_playlist', {
         params: { sound_post_id: sound_post.id }
       })
     ])
