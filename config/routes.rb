@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     namespace :v1 do
       # resources :sound_posts, only: [:index, :new, :create, :destroy]
 
+      get 'sound_post_playlists/test', to: 'sound_post_playlists#test'
+      get 'sound_post_playlists/index_has_playlist_ids', to: 'sound_post_playlists#index_has_playlist_ids'
       get 'sound_post_playlists/check_contained_in_playlist', to: 'sound_post_playlists#check_contained_in_playlist'
       resources :sound_post_playlists, only: [:create, :destroy]
       resources :playlists, only: [:index, :create]

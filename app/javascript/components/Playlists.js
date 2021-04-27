@@ -3,6 +3,7 @@ import {
   Button,
   Dialog, DialogTitle, DialogContent, DialogActions
 } from '@material-ui/core'
+import CloseIcon from '@material-ui/icons/Close';
 
 import axios from "axios"
 import AddPlaylist from './AddPlaylist'
@@ -21,20 +22,15 @@ class Playlists extends React.Component {
 
     this.handleClose = this.handleClose.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
-    this.getPlaylists = this.getPlaylists.bind(this);
   }
 
   handleClose = () => {
     this.setState({ open: !this.state.open });
   }
 
+  // 自分のプレイリストと、選択した投稿を含む中間テーブルのidを取得
+  // また、すでにプレイリストに存在するかどうかのチェックリストも取得
   handleClickOpen = (sound_post) => {
-    this.getPlaylists(sound_post)
-  }
-
-  // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
-  // また、すでにプレイリストに存在するかどうかのチェック
-  getPlaylists = (sound_post) => {
     axios.all([
       api.get('/api/v1/playlists'),
       api.get('/api/v1/sound_post_playlists/check_contained_in_playlist', {
@@ -42,6 +38,7 @@ class Playlists extends React.Component {
       })
     ])
     .then( axios.spread( (res1, res2) => {
+      // stateの更新。このタイミングで子コンポーネントもレンダリングされる。
       this.setState({
         playlists: res1.data,
         checks: res2.data,
@@ -60,6 +57,7 @@ class Playlists extends React.Component {
     return (
       <>
         <Button
+          // onClick={() => this.handleClickOpen(this.state.sound_post)}
           onClick={() => this.handleClickOpen(this.state.sound_post)}
           color="primary"
         >
@@ -70,7 +68,11 @@ class Playlists extends React.Component {
           open={this.state.open}
           onClose={this.handleClose}
         >
-          <DialogTitle id="playlist-dialog-title">追加するプレイリスト</DialogTitle>
+          <DialogActions>
+            <DialogTitle id="playlist-dialog-title">追加するプレイリスト</DialogTitle>
+
+            <Button onClick={this.handleClose} color="primary"><CloseIcon /></Button>
+          </DialogActions>
           {this.state.sound_post.title}
 
           <AddPlaylist

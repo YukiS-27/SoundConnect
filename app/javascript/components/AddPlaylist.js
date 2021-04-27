@@ -1,45 +1,122 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components'
+import { toast } from 'react-toastify'
 import {
   Button, Checkbox,
   List, ListItem, ListItemIcon, ListItemText,
   FormControl, FormGroup, FormControlLabel,
 } from '@material-ui/core'
+import axios from 'axios'
+
+toast.configure()
 
 function AddPlaylist(props) {
 
   const { sound_post, playlists, checks } = props
   const [ checkList, setCheckList ] = useState(checks)
+  // const [ soundPostPlaylists, setSoundPostPlaylists ] = useState(sound_post_playlists)
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
   // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
-  const handleReplaceCheckbox = (playlistId) => () => {
+  const handleReplaceCheckbox = (playlist) => () => {
 
-    console.log(playlistId)
+    console.log(playlist)
 
     // checkListを更新するための新しい配列を作成
     const newCheckList = new Set(checkList)
 
-    if (newCheckList.has(playlistId)) {
-      // TODO playlistから削除するAPI叩く
-      newCheckList.delete(playlistId)
-    } else {
-      // TODO playlistに追加するAPI叩く
-      newCheckList.add(playlistId)
+    // まず対象のsound_post_playlistのidを取得
+    axios.get('/api/v1/sound_post_playlists/test', {
+      params: {
+        sound_post_id: sound_post.id,
+        playlist_id: playlist.id
+      }
+    })
+    .then(res => {
+      var sendParams = res.data
+
+      if (newCheckList.has(playlist.id)) {
+        // チェックを削除
+        newCheckList.delete(playlist.id)
+
+          // setSoundPostPlaylist(res.data)
+          console.log('テスト')
+          console.log(res.data)
+          console.log(sendParams)
+
+          // playlistから削除するAPI叩く
+          axios.delete(`/api/v1/sound_post_playlists/${sendParams.id}`, sendParams)
+          .then(res => {
+            removeCheckNotify(playlist.title)
+            setUpdata(update ? false : true)
+          })
+          .catch(e => {
+            console.log(e)
+          })
+
+      } else {
+        // チェックを追加
+        newCheckList.add(playlist.id)
+
+        console.log('テスト')
+        console.log(sendParams)
+
+        // TODO playlistに追加するAPI叩く
+        axios.post('/api/v1/sound_post_playlists', sendParams)
+        .then(res => {
+          addCheckNotify(playlist.title)
+          setUpdata(update ? false : true)
+        })
+        .catch(e => {
+          console.log(e)
+        })
+      }
+    })
+    .catch(e => {
+      console.log(e)
+    })
+
+      // setUpdata(update ? false : true)
+      setCheckList([...newCheckList])
     }
 
-    setCheckList([...newCheckList])
+    // const getSoundPostPlaylistId = (playlist) => {
+      //   axios.get('/api/v1/sound_post_playlists/test', {
+  //     params: {
+  //       sound_post_id: sound_post.id,
+  //       playlist_id: playlist.id
+  //     }
+  //   })
+  //   .then(res => {
+  //     setSoundPostPlaylists = res.data
+  //   })
+  //   .catch(e => {
+  //     console.log(e)
+  //   })
+  // }
+
+  const addCheckNotify = (playlistTitle) => {
+    toast.success(`${playlistTitle}に追加しました`, {
+      position: 'bottom-center',
+      hideProgressBar: true
+    })
+  }
+
+  const removeCheckNotify = (playlistTitle) => {
+    toast.error(`${playlistTitle}から削除しました`, {
+      position: 'bottom-center',
+      hideProgressBar: true
+    })
   }
 
   return (
     <List>
       {playlists.map((playlist) => {
         return (
-          <ListItem key={playlist.id} role={undefined} dense button onClick={handleReplaceCheckbox(playlist.id)}>
+          <ListItem key={playlist.id} role={undefined} dense button onClick={handleReplaceCheckbox(playlist)}>
             <ListItemIcon>
-              <Checkbox key={playlist.id}
-                // TODO: チェックボックスの初期状態が反映されない
+              <Checkbox
                 checked={checkList.indexOf(playlist.id) !== -1}
                 color="primary"
                 tabIndex={-1}
