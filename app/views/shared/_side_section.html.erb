@@ -1,0 +1,42 @@
+<div class="side-section-wrapper">
+  <div class="container">
+    <% if user_signed_in? %>
+
+      <div class="user-profile">
+        <%= image_tag current_user.profile.avatar.thumb80.url, class: 'icon' %>
+        <p><strong><%= current_user.profile.name %></strong></p>
+      </div>
+
+      <div class="side-section__menu">
+        <div class="side-section__menu-items">
+          <%= link_to rooms_path do %>
+
+            <p>メッセージ</p>
+          <% end %>
+        </div>
+        <div class="side-section__menu-items">
+          <%= link_to playlists_path do %>
+
+            <p>プレイリスト</p>
+          <% end %>
+        </div>
+        <div class="side-section__menu-items">
+          <%= link_to user_profile_path(current_user) do %>
+
+            <p>マイページ</p>
+          <% end %>
+        </div>
+      </div>
+      <hr>
+
+      <div class="">
+        <%= link_to new_sound_post_path, class: 'btn btn-upload' do %>
+          <i class="fas fa-upload"></i><strong> アップロード</strong>
+        <% end %>
+      </div>
+
+    <% else %>
+      <%= link_to "ログイン/新規登録", new_user_session_path, class: 'btn btn-outline-primary' %>
+    <% end %>
+  </div>
+</div>
