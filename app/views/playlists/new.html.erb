@@ -9,14 +9,11 @@
       <%# 新規プレイリストを作成 %>
       <%= form_with model: @playlist do |f| %>
         <%= f.label :title, "タイトル" %><br >
-        <%= f.text_field :title %><br >
+        <%= f.text_field :title, class: 'form-input' %><br >
 
-        <% if @sound_post.present? %>
-          <%= hidden_field_tag :sound_post_id, @sound_post.id %>
-          <%= f.submit "プレイリストを作成する（投稿から）" %>
-        <% else %>
-          <%= f.submit "プレイリストを作成" %>
-        <% end %>
+        <div class="action">
+          <%= f.submit "プレイリストを作成", class: 'btn btn-primary' %>
+        </div>
 
       <% end %>
     </div>

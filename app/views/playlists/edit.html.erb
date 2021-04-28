@@ -8,9 +8,9 @@
       <p>プレイリスト名：<%= @playlist.title %></p>
 
       <%= form_with model: @playlist do |f| %>
-        <div class="field">
-          <%= f.text_field :title, value: @playlist.title, size: 30 %>
-          <%= f.submit "変更を保存" %>
+        <div class="field form-group">
+          <%= f.text_field :title, value: @playlist.title, class: 'form-input' %>
+          <%= f.submit "変更を保存", class: 'btn btn-primary' %>
         </div>
 
         <%= link_to('プレイリストを削除', playlist_path(@playlist), method: :delete) %><br >
