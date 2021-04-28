@@ -21,7 +21,10 @@
         .post-item {
           border: 3px solid #a8a8a8;
         }
-
+      }
+      .options {
+        display: flex;
+        gap: 40px;
       }
     }
   }

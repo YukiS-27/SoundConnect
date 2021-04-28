@@ -4,14 +4,14 @@
     <%= link_to sound_post_like_path(sound_post), method: :delete, remote: true, class: 'like-albe' do %>
       <i class="fas fa-heart heart-color"></i>
     <% end %>
-    <%= sound_post.sound_post_likes.count %><br >
+    <%= sound_post.sound_post_likes.count %>
   <% else %>
     <%# いいねする %>
     <%= link_to  sound_post_likes_path(sound_post_id: sound_post.id), method: :post, remote: true do %>
       <i class="far fa-heart heart-color"></i>
     <% end %>
-    <%= sound_post.sound_post_likes.count %><br >
+    <%= sound_post.sound_post_likes.count %>
   <% end %>
 <% else %>
-  いいね数: <%= sound_post.sound_post_likes.count %><br >
+  <i class="fas fa-heart heart-color"></i> <%= sound_post.sound_post_likes.count %><br >
 <% end %>

@@ -4,6 +4,7 @@ import {
   Dialog, DialogTitle, DialogContent, DialogActions
 } from '@material-ui/core'
 import CloseIcon from '@material-ui/icons/Close';
+import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 import axios from "axios"
 import AddPlaylist from './AddPlaylist'
@@ -67,7 +68,7 @@ class Playlists extends React.Component {
           onClick={() => this.handleClickOpen(this.state.sound_post)}
           color="primary"
         >
-          プレイリストに追加
+          <PlaylistAddIcon/>プレイリストに追加
         </Button>
 
         <Dialog

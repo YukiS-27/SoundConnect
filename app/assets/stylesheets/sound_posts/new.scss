@@ -1,7 +1,7 @@
-.container {
+.new-file-wrapper {
   margin: 0 auto;
 
-  .sign_in-wrapper {
+  .container {
     margin: 20px auto;
     padding: 30px 30px;
     background-color: #fff;
@@ -14,16 +14,16 @@
     filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.3));
     border-radius: 5px;
 
-    .sign_in-title {
-      padding-bottom: 10px;
+    .new-file-title {
+      padding-bottom: 20px;
       color: #1B435D;
     }
 
     .form-input {
       width: 280px;
     }
-    .action {
-      padding-bottom: 20px;
+    .upload {
+      padding: 20px 0;
     }
 
     .links {

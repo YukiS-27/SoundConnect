@@ -1,22 +1,28 @@
-<h1>投稿を編集</h1>
+<div class="new-file-wrapper">
+  <div class="container">
+    <h3 class="new-file-title">投稿を編集</h3>
 
-<%= form_with model: @sound_post do |f| %>
-  <div class="field">
-    <%= f.label :title, "タイトル" %><br >
-    <%= f.text_field :title %>
+    <%= form_with model: @sound_post do |f| %>
+      <div class="field form-group">
+        <%= f.label :title, "タイトル" %><br >
+        <%= f.text_field :title, class: 'form-input' %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :instrument_id %><br >
+        <%= f.collection_select :instrument_id, @instruments, :id, :name, {selected: @sound_post.instrument_id} %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :description, "説明文" %><br >
+        <%= f.text_area :description, class: 'form-input' %>
+      </div>
+
+    <div class="action">
+      <%= f.submit "変更を保存", class: 'btn btn-primary btn-block' %>
+    </div>
+    <% end %>
+
+    <%= link_to 'キャンセル', sound_post_path(@sound_post) %>
   </div>
-
-  <div class="field">
-    <%= f.label :instrument_id %><br >
-    <%= f.collection_select :instrument_id, @instruments, :id, :name, {selected: @sound_post.instrument_id} %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description, "説明文" %><br >
-    <%= f.text_area :description %>
-  </div>
-
-  <%= f.submit "変更を保存" %>
-<% end %>
-
-<%= link_to 'キャンセル', sound_post_path(@sound_post) %>
+</div>

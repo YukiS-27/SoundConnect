@@ -1,28 +1,34 @@
-<!-- 仮作成 -->
-<h2>ファイルのアップロード</h2>
+<div class="new-file-wrapper">
+  <div class="container">
 
-<%= form_with model: @sound_post do |f| %>
+    <h3 class="new-file-title">ファイルのアップロード</h3>
 
-  <div class="field">
-    <%= f.label :sound_source %><br >
-    <%= f.file_field :sound_source, :size => 140 %>
+    <%= form_with model: @sound_post do |f| %>
+
+      <div class="field form-group">
+        <%= f.label :sound_source %><br >
+        <%= f.file_field :sound_source, :size => 140 %>
+      </div>
+
+      <%# プルダウンから楽器を一つ選択 %>
+      <div class="field form-group">
+        <%= f.label :instrument_id %><br >
+        <%= f.collection_select :instrument_id, @instruments, :id, :name, {prompt: "楽器を選択してください"}, class: 'form-input' %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :title %><br >
+        <%= f.text_field :title, class: 'form-input' %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :description %><br >
+        <%= f.text_area :description, class: 'form-input' %>
+      </div>
+
+      <div class="upload">
+        <%= f.submit "アップロード", class: 'btn btn-primary btn-block' %>
+      </div>
+    <% end %>
   </div>
-
-  <%# プルダウンから楽器を一つ選択 %>
-  <div class="field">
-    <%= f.label :instrument_id %><br >
-    <%= f.collection_select :instrument_id, @instruments, :id, :name, {prompt: "楽器を選択してください"} %>
-  </div>
-
-  <div class="field">
-    <%= f.label :title %><br >
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :description %><br >
-    <%= f.text_field :description %>
-  </div>
-
-  <%= f.submit "アップロード" %>
-<% end %>
+</div>
