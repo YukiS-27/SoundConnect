@@ -1,8 +1,16 @@
 <% if user_signed_in? %>
   <% if current_user.liked_by?(sound_post) %>
-    <%= link_to "いいねを外す", sound_post_like_path(sound_post), method: :delete, remote: true %> <%= sound_post.sound_post_likes.count %><br >
+    <%# いいね解除 %>
+    <%= link_to sound_post_like_path(sound_post), method: :delete, remote: true, class: 'like-albe' do %>
+      <i class="fas fa-heart heart-color"></i>
+    <% end %>
+    <%= sound_post.sound_post_likes.count %><br >
   <% else %>
-    <%= link_to "いいね！", sound_post_likes_path(sound_post_id: sound_post.id), method: :post, remote: true %> <%= sound_post.sound_post_likes.count %><br >
+    <%# いいねする %>
+    <%= link_to  sound_post_likes_path(sound_post_id: sound_post.id), method: :post, remote: true do %>
+      <i class="far fa-heart heart-color"></i>
+    <% end %>
+    <%= sound_post.sound_post_likes.count %><br >
   <% end %>
 <% else %>
   いいね数: <%= sound_post.sound_post_likes.count %><br >
