@@ -10,26 +10,43 @@ header {
   .container {
     display: flex;
     align-items: center;
-  }
 
-  .header-logo {
-    margin-right: auto;
-  }
-
-  ul {
-    list-style: none;
-    li {
-      padding: 10px 10px 10px 10px;
-      display: inline-block;
+    .header-logo {
+      margin-right: auto;
+      align-self: flex-end;
     }
-  }
 
-  .btn {
-    color: #fff;
-    background-color: #0054A6;
-    &:hover {
-      color: #fff;
-      background: #0054A6;
+    .header-menu {
+      align-self: flex-end;
+
+      ul {
+        list-style: none;
+        li {
+          display: inline-block;
+          padding: 0 10px;
+        }
+      }
+
+      .btn-signup {
+        color: #fff;
+        background-color: #0054A6;
+        &:hover {
+          color: #fff;
+          background: #0054A6;
+          opacity: 0.85;
+        }
+      }
+
+      .btn-login {
+        color: #0054A6;
+        background-color: #fff;
+        border: 2px solid;
+        &:hover {
+          color: #0054A6;
+          background: #fff;
+          opacity: 0.85;
+        }
+      }
     }
   }
 

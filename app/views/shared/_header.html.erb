@@ -16,21 +16,20 @@
             <%= link_to "アカウント設定", edit_user_registration_path %>
           </li>
           <li>
-            <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %>
+            <i class="fas fa-user"></i><%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %>
           </li>
           <li>
-            <i class="fas fa-user"></i><%= link_to "マイページ", user_profile_path(current_user) %>
+            <%= link_to "マイページ", user_profile_path(current_user) %>
           </li>
           <%= link_to "ユーザー一覧", users_path %> |
-          <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
           <%= link_to "ログアウト", sign_out_path %><br >
         </ul>
       </div>
       <% else %>
       <div class="header-menu">
         <div class="btn-menu">
-          <%= link_to 'ログイン', new_user_session_path, { class: 'btn btn--orange' } %>
-          <%= link_to '新規登録', new_user_registration_path, { class: 'btn' } %>
+          <%= link_to 'ログイン', new_user_session_path, { class: 'btn btn-login a' } %>
+          <%= link_to '新規登録', new_user_registration_path, { class: 'btn btn-signup a' } %>
         </div>
         <% end %>
       </div>
