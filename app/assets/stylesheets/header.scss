@@ -1,0 +1,36 @@
+header {
+  margin: 0 auto;
+  background-color: #C8ECF6;
+  height: 60px;
+
+  nav {
+    padding: 10px 10px;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+  }
+
+  .header-logo {
+    margin-right: auto;
+  }
+
+  ul {
+    list-style: none;
+    li {
+      padding: 10px 10px 10px 10px;
+      display: inline-block;
+    }
+  }
+
+  .btn {
+    color: #fff;
+    background-color: #0054A6;
+    &:hover {
+      color: #fff;
+      background: #0054A6;
+    }
+  }
+
+}

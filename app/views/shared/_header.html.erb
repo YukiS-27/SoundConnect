@@ -1,20 +1,39 @@
 <header>
   <nav>
-    <%= link_to "トップページへ", root_path %> |
+    <div class="container">
+      <div class="header-logo">
+        <%= link_to root_path do %>
+          <%= image_tag 'SoundConnect_logo.png' %>
+        <% end %>
+      </div>
 
-    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-    <% if user_signed_in? %>
-      <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
-      <%= link_to "アカウント設定", edit_user_registration_path %> |
-      <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %> |
-      <%= link_to "マイページ", user_profile_path(current_user) %> |
-      <%= link_to "ユーザー一覧", users_path %> |
-      <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
-      <%= link_to "ログアウト", sign_out_path %><br >
-      <p><%= current_user.profile.name %>としてログイン</p>
-    <% else %>
-      <%= link_to "サインアップ", new_user_registration_path %> |
-      <%= link_to "ログイン", new_user_session_path %>
-    <% end %>
+      <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+      <% if user_signed_in? %>
+      <div class="header-menu">
+        <ul class="header-menu-list">
+          <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+          <li>
+            <%= link_to "アカウント設定", edit_user_registration_path %>
+          </li>
+          <li>
+            <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %>
+          </li>
+          <li>
+            <i class="fas fa-user"></i><%= link_to "マイページ", user_profile_path(current_user) %>
+          </li>
+          <%= link_to "ユーザー一覧", users_path %> |
+          <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
+          <%= link_to "ログアウト", sign_out_path %><br >
+        </ul>
+      </div>
+      <% else %>
+      <div class="header-menu">
+        <div class="btn-menu">
+          <%= link_to 'ログイン', new_user_session_path, { class: 'btn btn--orange' } %>
+          <%= link_to '新規登録', new_user_registration_path, { class: 'btn' } %>
+        </div>
+        <% end %>
+      </div>
+    </div>
   </nav>
 </header>
