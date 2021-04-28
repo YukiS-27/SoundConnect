@@ -1,39 +1,35 @@
-
 <div class="top-page-wrapper">
   <%= render partial: 'shared/side_section' %>
 
-  <div class="main-contents">
+  <div class="main-content-wrapper">
     <div class="container">
-      <div class="top-page-title">
-        <h3>ホーム</h3>
+      <h3 class="top-page-title">ホーム - 投稿一覧</h3>
+
+      <div class="post-items">
+        <% @sound_posts.each do |sound_post| %>
+          <div class="post-field">
+            ▼<%= sound_post.user.profile.name %>が投稿<br >
+            <strong><%= link_to sound_post.title, sound_post_path(sound_post.id) %></strong><br >
+            <%# 楽器の名前を表示 %>
+            楽器：<%= sound_post.instrument.name %><br >
+            <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
+              <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
+            </audio>
+
+            <% if user_signed_in? %>
+              <div id="add-playlist">
+                <%= react_component("Playlists", sound_post: sound_post) %>
+              </div>
+
+              <div id="sound_post_likes_button_<%= sound_post.id %>">
+                <%# いいねを部分テンプレートで呼び出し %>
+                <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
+              </div>
+            <% end %>
+          </div>
+
+        <% end %>
       </div>
-
-      <% if user_signed_in? %>
-        <%= link_to "アップロードする", new_sound_post_path %>
-      <% end %>
-
-      <% @sound_posts.each do |sound_post| %>
-        <div class="post">
-          ▼<%= sound_post.user.profile.name %>が投稿<br >
-          <strong><%= link_to sound_post.title, sound_post_path(sound_post.id) %></strong><br >
-          <%# 楽器の名前を表示 %>
-          楽器：<%= sound_post.instrument.name %><br >
-          <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
-            <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
-          </audio>
-
-          <% if user_signed_in? %>
-            <div id="add-playlist">
-              <%= react_component("Playlists", sound_post: sound_post) %>
-            </div>
-
-            <div id="sound_post_likes_button_<%= sound_post.id %>">
-              <%# いいねを部分テンプレートで呼び出し %>
-              <%= render partial: 'sound_post_likes/like', locals: { sound_post: sound_post } %>
-            </div>
-          <% end %>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

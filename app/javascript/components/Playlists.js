@@ -79,7 +79,6 @@ class Playlists extends React.Component {
 
             <Button onClick={this.handleClose} color="primary"><CloseIcon /></Button>
           </DialogActions>
-          {this.state.sound_post.title}
 
           <AddPlaylist
             sound_post={this.state.sound_post}

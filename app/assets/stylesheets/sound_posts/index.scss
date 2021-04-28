@@ -1,9 +1,24 @@
 .top-page-wrapper {
   display: flex;
+  justify-content: flex-start;
+  padding: 20px 20px;
   height: 100%;
 
-  .main-contants {
+  .main-content-wrapper {
+    background-color: #fff;
+    margin-left: 40px;
+    padding: 24px 0;
+    padding-left: 40px;
     width: 100%;
-  }
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.2));
+    border-radius: 5px;
 
+    .main-contant {
+      text-align: center;
+
+      .post-field {
+        padding: 10px 20px;
+      }
+    }
+  }
 }

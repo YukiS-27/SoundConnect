@@ -1,5 +1,6 @@
 .side-section-wrapper {
-  flex-basis: 30%;
+  min-width: fit-content;
+  max-width: 380px;
   padding: 0 24px;
 
   .side-section {
@@ -7,7 +8,7 @@
     margin: 0 auto;
     padding: 20px 0;
     filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.2));
-    border-radius: 2%;
+    border-radius: 5px;
   }
 
   .container {
