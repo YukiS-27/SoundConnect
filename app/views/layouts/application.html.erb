@@ -39,13 +39,13 @@
               <li>
                 <%= link_to "マイページ", user_profile_path(current_user) %>
               </li>
-              <%= link_to "ユーザー一覧", users_path %> |
-              <%= link_to "ログアウト", sign_out_path %><br >
+              <%= link_to "ユーザー一覧", users_path %>
+              <%= link_to "ログアウト", sign_out_path, class: 'btn btn-primary' %><br >
             </ul>
           </div>
           <% else %>
           <div class="header-menu">
-            <div class="btn-menu">
+            <div class="header-menu-list">
               <%= link_to 'ログイン', new_user_session_path, { class: 'btn btn-login' } %>
               <%= link_to '新規登録', new_user_registration_path, { class: 'btn btn-signup' } %>
             </div>

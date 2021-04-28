@@ -1,10 +1,13 @@
 header {
   margin: 0 auto;
-  background-color: #C8ECF6;
-  height: 60px;
+  background-color: #78BBE6;
+  height: 68px;
 
   nav {
     padding: 10px 10px;
+  }
+  a, i {
+    color: #fff;
   }
 
   .container {
@@ -13,11 +16,11 @@ header {
 
     .header-logo {
       margin-right: auto;
-      align-self: flex-end;
+      padding-bottom: 12px;
     }
 
     .header-menu {
-      align-self: flex-end;
+      align-items: center;
 
       ul {
         list-style: none;
