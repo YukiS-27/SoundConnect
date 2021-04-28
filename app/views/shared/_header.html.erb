@@ -1,0 +1,20 @@
+<header>
+  <nav>
+    <%= link_to "トップページへ", root_path %> |
+
+    <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+    <% if user_signed_in? %>
+      <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+      <%= link_to "アカウント設定", edit_user_registration_path %> |
+      <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %> |
+      <%= link_to "マイページ", user_profile_path(current_user) %> |
+      <%= link_to "ユーザー一覧", users_path %> |
+      <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
+      <%= link_to "ログアウト", sign_out_path %><br >
+      <p><%= current_user.profile.name %>としてログイン</p>
+    <% else %>
+      <%= link_to "サインアップ", new_user_registration_path %> |
+      <%= link_to "ログイン", new_user_session_path %>
+    <% end %>
+  </nav>
+</header>
