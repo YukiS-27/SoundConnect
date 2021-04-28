@@ -75,6 +75,7 @@ gem 'devise'
 gem 'rails-i18n', '~> 6.0'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'devise-bootstrap-views'
 
 # シードファイルの使い勝手向上
 gem 'seed-fu'
