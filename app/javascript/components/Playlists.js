@@ -1,4 +1,5 @@
 import React from "react"
+import axios from "axios"
 import {
   Button,
   Dialog, DialogTitle, DialogContent, DialogActions
@@ -6,8 +7,7 @@ import {
 import CloseIcon from '@material-ui/icons/Close';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
-import axios from "axios"
-import AddPlaylist from './AddPlaylist'
+import RegisterWithPlaylist from './RegisterWithPlaylist'
 
 const api = axios.create()
 
@@ -17,9 +17,8 @@ class Playlists extends React.Component {
     this.state = {
       sound_post: this.props.sound_post,
       playlists: [],
-      sound_post_playlists: [],
       checks: [],
-      open: false
+      isOpen: false
     }
 
     this.handleClose = this.handleClose.bind(this);
@@ -27,7 +26,7 @@ class Playlists extends React.Component {
   }
 
   handleClose = () => {
-    this.setState({ open: !this.state.open });
+    this.setState({ isOpen: !this.state.isOpen });
   }
 
   // 自分のプレイリストと、選択した投稿を含む中間テーブルのidを取得
@@ -48,7 +47,7 @@ class Playlists extends React.Component {
         playlists: res1.data,
         sound_post_playlists: res2.data,
         checks: res3.data,
-        open: !this.state.open
+        isOpen: !this.state.isOpen
       })
       // データが取得できているかconsoleに出力
       console.log(this.state.playlists)
@@ -72,7 +71,7 @@ class Playlists extends React.Component {
         </Button>
 
         <Dialog
-          open={this.state.open}
+          open={this.state.isOpen}
           onClose={this.handleClose}
         >
           <DialogActions>
@@ -81,7 +80,7 @@ class Playlists extends React.Component {
             <Button onClick={this.handleClose} color="primary"><CloseIcon /></Button>
           </DialogActions>
 
-          <AddPlaylist
+          <RegisterWithPlaylist
             sound_post={this.state.sound_post}
             playlists={this.state.playlists}
             sound_post_playlists={this.state.sound_post_playlists}
