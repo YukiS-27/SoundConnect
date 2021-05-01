@@ -40,13 +40,13 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
     end
   end
 
-  def destroy
-    # sound_post_playlist = SoundPostPlaylist.find_by(
-    #   playlist_id: params[:playlist_id],
-    #   sound_post_id: params[:sound_post_id]
-    # )
+  def delete
+    sound_post_playlist = SoundPostPlaylist.where(
+      playlist_id: params[:playlist_id],
+      sound_post_id: params[:sound_post_id]
+    )
 
-    if SoundPostPlaylist.destroy(params[:id])
+    if sound_post_playlist.delete_all
       head :no_content
     else
       render json: { error: "削除に失敗しました" }, status: 422
@@ -55,8 +55,8 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
 
   private
   def sound_post_playlist_params
-    # params.require(:sound_post_playlist).permit(:sound_post_id, :playlist_id)
-    params.permit(:sound_post_id, :playlist_id)
+    params.require(:sound_post_playlist).permit(:sound_post_id, :playlist_id)
+    # params.permit(:sound_post_id, :playlist_id)
   end
 
 end

@@ -13,9 +13,8 @@ toast.configure()
 
 function AddPlaylist(props) {
 
-  const { sound_post, playlists, sound_post_playlists, checks } = props
+  const { sound_post, playlists, checks } = props
   const [ checkList, setCheckList ] = useState(checks)
-  // const [ soundPostPlaylists, setSoundPostPlaylists ] = useState(sound_post_playlists)
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
@@ -31,34 +30,21 @@ function AddPlaylist(props) {
             playlist_id: playlist.id
           }
 
-    // まず対象のsound_post_playlistのidを取得
-    // axios.get('/api/v1/sound_post_playlists/test', {
-    //   params: {
-    //     sound_post_id: sound_post.id,
-    //     playlist_id: playlist.id
-    //   }
-    // })
-    // .then(res => {
-
-      if (newCheckList.has(playlist.id, )) {
+      if (newCheckList.has(playlist.id)) {
+        // playlistから削除するAPI叩く
+        axios.post('/api/v1/sound_post_playlists/delete', sendParams)
+        .then(res => {
+          removeCheckNotify(playlist.title)
+          console.log('deleted!!')
+        })
+        .catch(e => {
+          console.log(e)
+        })
         // チェックを削除
-        // newCheckList.delete(playlist.id)
-
-          // TODO playlistから削除するAPI叩く
-          axios.delete(`/api/v1/sound_post_playlists/${playlist.id}`, sendParams)
-          .then(res => {
-            removeCheckNotify(playlist.title)
-          })
-          .catch(e => {
-            console.log(e)
-          })
-          newCheckList.delete(playlist.id)
+        newCheckList.delete(playlist.id)
 
       } else {
-        // チェックを追加
-        // newCheckList.add(playlist.id)
-
-        // TODO playlistに追加するAPI叩く
+        // playlistに追加するAPI叩く
         axios.post('/api/v1/sound_post_playlists', sendParams)
         .then(res => {
           addCheckNotify(playlist.title)
@@ -69,28 +55,8 @@ function AddPlaylist(props) {
         // チェックを追加
         newCheckList.add(playlist.id)
       }
-
-    // .catch(e => {
-    //   console.log(e)
-    // })
-      // setUpdata(update ? false : true)
       setCheckList([...newCheckList])
     }
-
-    // const getSoundPostPlaylistId = (playlist) => {
-      //   axios.get('/api/v1/sound_post_playlists/test', {
-  //     params: {
-  //       sound_post_id: sound_post.id,
-  //       playlist_id: playlist.id
-  //     }
-  //   })
-  //   .then(res => {
-  //     setSoundPostPlaylists = res.data
-  //   })
-  //   .catch(e => {
-  //     console.log(e)
-  //   })
-  // }
 
   const addCheckNotify = (playlistTitle) => {
     toast.success(`${playlistTitle}に追加しました`, {
@@ -130,75 +96,3 @@ function AddPlaylist(props) {
 }
 
 export default AddPlaylist
-
-
-
-//* ---------------------------------------------------------------- *//
-// function AddPlaylist(props) {
-
-//   const { sound_post, playlists, checks } = props
-//   // const [ playlists, setPlaylists] = useState([])
-//   const [ checkList, setCheckList ] = useState(checks)
-
-//   console.log(checkList)
-
-//   // const initializeClickList = (initClickList) => () => {
-//   //   setCheckList([...initClickList])
-//   // }
-
-
-//   // チェックボックスをクリックしたとき、
-//   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
-//   // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
-//   const handleReplaceCheckbox = (playlistId) => () => {
-
-//     console.log(playlistId)
-
-//     const checkedSet = new Set(checkList)
-
-//     if (checkedSet.has(playlistId)) {
-//       // TODO playlistから削除するAPI叩く
-//       checkedSet.delete(playlistId)
-//     } else {
-//       // TODO playlistに追加するAPI叩く
-//       checkedSet.add(playlistId)
-//     }
-
-//     setCheckList([...checkedSet])
-//   }
-
-//   return (
-//     <List>
-//       {playlists.map((playlist) => {
-//         return (
-//           <ListItem key={playlist.id} role={undefined} dense button onClick={handleReplaceCheckbox(playlist.id)}>
-//             <ListItemIcon>
-//               <Checkbox key={playlist.id}
-//                 // TODO: チェックボックスの初期状態が反映されない
-//                 // checked={checkList.indexOf(playlist.id) !== -1}
-//                 checked={typeof checkList.indexOf(playlist.id) === 'undefined' ? (
-//                   checks.indexOf(playlist.id) !== -1
-//                 ) : (
-//                   checkList.indexOf(playlist.id) !== -1
-//                 )}
-//                 // checked={typeof checkList[playlist.id] === 'undefined' ? (
-//                 //   checks[playlist.id]
-//                 // ) : (
-//                 //   checkList[playlist.id]
-//                 // )}
-//                 color="primary"
-//                 tabIndex={-1}
-//                 disableRipple
-//               />
-//             </ListItemIcon>
-
-//             <ListItemText primary={playlist.title} />
-
-//           </ListItem>
-//         )
-//       })}
-//     </List>
-//   )
-// }
-
-// export default AddPlaylist
