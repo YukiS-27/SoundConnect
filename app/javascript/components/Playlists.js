@@ -8,6 +8,7 @@ import CloseIcon from '@material-ui/icons/Close';
 import PlaylistAddIcon from '@material-ui/icons/PlaylistAdd';
 
 import RegisterWithPlaylist from './RegisterWithPlaylist'
+import { ContactsOutlined } from "@material-ui/icons";
 
 const api = axios.create()
 
@@ -18,11 +19,13 @@ class Playlists extends React.Component {
       sound_post: this.props.sound_post,
       playlists: [],
       checks: [],
-      isOpen: false
+      isOpen: false,
+      createPlaylist: true
     }
 
     this.handleClose = this.handleClose.bind(this);
     this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.forceUpdate = this.forceUpdate.bind(this);
   }
 
   handleClose = () => {
@@ -47,7 +50,8 @@ class Playlists extends React.Component {
         playlists: res1.data,
         sound_post_playlists: res2.data,
         checks: res3.data,
-        isOpen: !this.state.isOpen
+        isOpen: !this.state.isOpen,
+        createPlaylist: true
       })
       // データが取得できているかconsoleに出力
       console.log(this.state.playlists)
@@ -57,6 +61,21 @@ class Playlists extends React.Component {
     .catch(e => {
       console.log(e)
     })
+  }
+
+  rerender = () => {
+    console.log('called rerender')
+    console.log(this.state.createPlaylist)
+    this.forceUpdate()
+  }
+
+  forceUpdate = () => {
+    console.log('called forceUpdate')
+    this.setState({
+      createPlaylist: false,
+      isOpen: this.state.isOpen
+    })
+    console.log(this.state.createPlaylist)
   }
 
   render() {
@@ -85,6 +104,8 @@ class Playlists extends React.Component {
             playlists={this.state.playlists}
             sound_post_playlists={this.state.sound_post_playlists}
             checks={this.state.checks}
+            createPlaylist={this.state.createPlaylist}
+            rerender={this.rerender}
           />
         </Dialog>
       </>

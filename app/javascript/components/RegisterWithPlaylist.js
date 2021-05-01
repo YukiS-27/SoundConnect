@@ -4,19 +4,24 @@ import styled from 'styled-components'
 import { toast } from 'react-toastify'
 import {
   Button, Checkbox,
-  Divider,
+  Divider, TextField,
   List, ListItem, ListItemIcon, ListItemText,
 } from '@material-ui/core'
 
-import AddPlaylist from './AddPlaylist'
+// import AddPlaylist from './AddPlaylist'
+import AddRoundedIcon from '@material-ui/icons/AddRounded'
+
 
 toast.configure()
 
 export default function RegisterWithPlaylist(props) {
 
-  const { sound_post, playlists, checks } = props
+  const { sound_post, playlists, checks, createPlaylist } = props
   const [ checkList, setCheckList ] = useState(checks)
-  // const [ createNewPlaylist, setCreateNewPlaylist ] = useState(true)
+  const [ isCreatePlaylist, setIsCreatePlaylist ] = useState(true)
+  const [ title, setTitle ] = useState('')
+  const [, setState] = React.useState();
+  const forceUpdate = React.useCallback(() => setState({}), []);
 
   // チェックボックスをクリックしたとき、
   // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
@@ -32,35 +37,65 @@ export default function RegisterWithPlaylist(props) {
             playlist_id: playlist.id
           }
 
-      if (newCheckList.has(playlist.id)) {
-        // playlistから削除するAPI叩く
-        axios.post('/api/v1/sound_post_playlists/delete', sendParams)
-        .then(res => {
-          // removeCheckNotify(playlist.title)
-          console.log('deleted!!')
-        })
-        .catch(e => {
-          console.log(e)
-        })
-        // チェックを削除
-        newCheckList.delete(playlist.id)
-        removeCheckNotify(playlist.title)
+    if (newCheckList.has(playlist.id)) {
+      // playlistから削除するAPI叩く
+      axios.post('/api/v1/sound_post_playlists/delete', sendParams)
+      .then(res => {
+        // removeCheckNotify(playlist.title)
+        console.log('deleted!!')
+      })
+      .catch(e => {
+        console.log(e)
+      })
+      // チェックを削除
+      newCheckList.delete(playlist.id)
+      removeCheckNotify(playlist.title)
 
-      } else {
-        // playlistに追加するAPI叩く
-        axios.post('/api/v1/sound_post_playlists', sendParams)
-        .then(res => {
-          // addCheckNotify(playlist.title)
-        })
-        .catch(e => {
-          console.log(e)
-        })
-        // チェックを追加
-        newCheckList.add(playlist.id)
-        addCheckNotify(playlist.title)
-      }
-      setCheckList([...newCheckList])
+    } else {
+      // playlistに追加するAPI叩く
+      axios.post('/api/v1/sound_post_playlists', sendParams)
+      .then(res => {
+        // addCheckNotify(playlist.title)
+      })
+      .catch(e => {
+        console.log(e)
+      })
+      // チェックを追加
+      newCheckList.add(playlist.id)
+      addCheckNotify(playlist.title)
     }
+    setCheckList([...newCheckList])
+  }
+
+  const clickHandler = () => {
+    console.log('called!!')
+    props.rerender()
+  }
+
+  const handleClickOpen = () => {
+    setIsCreatePlaylist(!isCreatePlaylist)
+  }
+
+  const handleChange = (event) => {
+    setTitle(() => event.target.value)
+  }
+
+  const handleCreatePlaylist = () => {
+    console.log(title)
+    const sendParams = {
+      title: title
+    }
+    axios.post('/api/v1/playlists', sendParams)
+    .then(res => {
+      console.log(res.data)
+      clickHandler()
+      setIsCreatePlaylist(!isCreatePlaylist)
+      forceUpdate()
+    })
+    .catch(e => {
+      console.log(e)
+    })
+  }
 
   const addCheckNotify = (playlistTitle) => {
     toast.success(`${playlistTitle}に追加しました`, {
@@ -75,10 +110,6 @@ export default function RegisterWithPlaylist(props) {
       hideProgressBar: true
     })
   }
-
-  // const handleClickOpen = () => {
-  //   setCreateNewPlaylist(!createNewPlaylist)
-  // }
 
   return (
     <div>
@@ -102,7 +133,35 @@ export default function RegisterWithPlaylist(props) {
       </List>
       <Divider/>
 
-      <AddPlaylist/>
+      {/* <AddPlaylist/> */}
+      {isCreatePlaylist
+        ? <ListItem>
+            <Button color="primary" onClick={() => handleClickOpen()}>
+              <AddRoundedIcon/> 新しいプレイリストを作成
+            </Button>
+          </ListItem>
+        : <div>
+            <ListItem style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}>
+              <TextField
+                required
+                id="standard-required"
+                label="タイトル"
+                placeholder="新規プレイリスト"
+                style={{width: '80%'}}
+                onChange={(event) => handleChange(event)}
+              />
+            </ListItem>
+            <ListItem style={{
+              display: 'flex',
+              justifyContent: 'flex-end'
+            }}>
+              <Button color="primary" onClick={() => handleCreatePlaylist()}>作成する</Button>
+            </ListItem>
+          </div>
+      }
     </div>
 
   )

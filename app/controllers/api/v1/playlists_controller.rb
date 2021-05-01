@@ -35,7 +35,6 @@ class Api::V1::PlaylistsController < ApplicationController
 
   private
   def playlist_params
-    binding.pry
     params.require(:playlist).permit(:title, :user_id).merge(user_id: current_user.id)
   end
 end
