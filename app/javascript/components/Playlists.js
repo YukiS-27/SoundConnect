@@ -71,9 +71,16 @@ class Playlists extends React.Component {
 
   forceUpdate = () => {
     console.log('called forceUpdate')
-    this.setState({
-      createPlaylist: false,
-      isOpen: this.state.isOpen
+    api.get('/api/v1/playlists')
+    .then(res => {
+      this.setState({
+        playlists: res.data,
+        createPlaylist: false,
+        isOpen: this.state.isOpen
+      })
+    })
+    .catch(e => {
+      console.log(e)
     })
     console.log(this.state.createPlaylist)
   }
