@@ -2,15 +2,6 @@ class Api::V1::SoundPostPlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
   # skip_before_action :verify_authenticity_token
 
-  def test
-    sound_post_playlist = SoundPostPlaylist.find_by(
-      sound_post_id: params[:sound_post_id],
-      playlist_id: params[:playlist_id]
-    )
-    render json: sound_post_playlist
-  end
-
-
   def index_has_playlist_ids
     sound_post_playlists = SoundPostPlaylist
                             .eager_load(:playlist)
