@@ -1,6 +1,6 @@
 class Api::V1::SoundPostPlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
-  # skip_before_action :verify_authenticity_token
+  skip_before_action :verify_authenticity_token
 
   def index_has_playlist_ids
     sound_post_playlists = SoundPostPlaylist
