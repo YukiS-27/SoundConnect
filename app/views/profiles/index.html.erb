@@ -1,9 +1,17 @@
-<h1>Profiles#index</h1>
+<div class="top-page-wrapper">
+  <%= render partial: 'shared/side_section' %>
 
-<% @users.each do |user| %>
-  <div class="user-names">
-    <%= image_tag user.profile.avatar.thumb40.url, class: 'icon', alt: 'プロフィール画像' %>
+  <div class="main-content-wrapper">
+    <div class="container">
+      <h3 class="new-file-title">ユーザー一覧</h3>
 
-    <%= link_to user.profile.name, user_profile_path(user.id), class: 'user-name' %><br >
+      <% @users.each do |user| %>
+        <div class="user-names">
+          <%= image_tag user.profile.avatar.thumb40.url, class: 'icon', alt: 'プロフィール画像' %>
+
+          <%= link_to user.profile.name, user_profile_path(user.id), class: 'user-name' %><br >
+        </div>
+      <% end %>
+    </div>
   </div>
-<% end %>
+</div>

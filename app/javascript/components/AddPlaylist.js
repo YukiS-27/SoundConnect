@@ -1,204 +1,70 @@
-import React, { useState, useEffect } from 'react'
-import styled from 'styled-components'
+import React, { useState } from 'react'
 import {
-  Button, Checkbox,
-  List, ListItem, ListItemIcon, ListItemText,
-  FormControl, FormGroup, FormControlLabel,
+  Button, List, ListItem, TextField
 } from '@material-ui/core'
-
+import AddRoundedIcon from '@material-ui/icons/AddRounded'
 import axios from 'axios'
-const api = axios.create()
 
-function AddPlaylist(props) {
+export default function AddPlaylist() {
 
-  // const { sound_post, playlists, sound_post_playlists, checks } = props
-  const { sound_post, playlists, checks } = props
-  // const [ playlists, setPlaylists] = useState([])
-  const [ checkList, setCheckList ] = useState({})
+  const [ createPlaylist, setCreatePlaylist ] = useState(true)
+  const [ title, setTitle ] = useState('')
 
-  // 自分のプレイリストと、選択した投稿を含む中間テーブルのデータを取得
-  // また、すでにプレイリストに存在するかどうかのチェック
-  // const getPlaylists = (sound_post) => {
-  //   axios.all([
-  //     api.get('/api/v1/playlists'),
-  //     // api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-  //     //   params: { sound_post_id: sound_post.id }
-  //     // })
-  //   ])
-  //   .then( axios.spread( (res1) => {
-  //     setPlaylists({ playlists: res1.data })
-  //     // setCheckList({ checks: res2.data })
-
-  //     // データが取得できているかconsoleに出力
-  //     console.log(playlists)
-  //     // console.log(checkList)
-  //   }))
-  //   .catch(e => {
-  //     console.log(e)
-  //   })
-  // }
-
-  useEffect((props) => {
-    axios.all([
-      // api.get('/api/v1/playlists'),
-      api.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-        params: { sound_post_id: sound_post.id }
-      })
-    ])
-    .then( axios.spread( (res2) => {
-      // setPlaylists({ playlists: res1.data })
-      setCheckList({ checks: res2.data })
-
-      // データが取得できているかconsoleに出力
-      // console.log(playlists)
-      console.log(checkList)
-    }))
-    .catch(e => {
-      console.log(e)
-    })
-
-    console.log('propsデータ確認')
-
-    // getPlaylists(sound_post)
-    console.log(sound_post)
-    console.log(props.playlists)
-    console.log(checks)
-
-    console.log('チェックリスト更新！')
-    // console.log(checkList)
-  }, [])
-
-  // チェックボックスをクリックしたとき、
-  // チェックを付ける＝該当のcheckListが false から true -> postリクエスト（create）
-  // チェックをはずす＝該当のcheckListが true から false -> deleteリクエスト（destroy）
-  const handleReplaceCheckbox = (event) => {
-    //var data
-//
-    //if () {
-//
-    //  axios.post('/api/v1/sound_post_playlists', data)
-    //  .then(res => {
-//
-    //  })
-    //  .catch(e => {
-    //    console.log(e)
-    //  })
-    //} else {
-    //  axios.delete('/api/v1/sound_post_playlists', data)
-    //  .then(res => {
-//
-    //  })
-    //  .catch(e => {
-    //    console.log(e)
-    //  })
-    //}
-    console.log(checkList.indexOf(playlist.id))
-    console.log(event.target) // undefined
-
-
-    console.log({...checkList}) // {} 空のオブジェクトが返る
-    console.log(checks) // {} 空のオブジェクトが返る
-    console.log(event.target.checked) // undefined
-    // const newCheckList = [ ...checkList ]
-    // newCheckList[event.target.name] = !checkList[event.target.name]
-    // setCheckList({ ...checkList, [event.target.name]: event.target.checked })
-
-    // console.log(checks[event.target.name])
+  const handleClickOpen = () => {
+    setCreatePlaylist(!createPlaylist)
   }
 
-  const getTest = (sound_post, playlists) => {
-    axios.get('/api/v1/sound_post_playlists/check_belongs_to_playlist', {
-      params: { sound_post_id: sound_post.id }
-    })
+  const handleChange = (event) => {
+    setTitle(() => event.target.value)
+  }
+
+  const handleCreatePlaylist = () => {
+    console.log(title)
+    const sendParams = {
+      title: title
+    }
+    axios.post('/api/v1/playlists', sendParams)
     .then(res => {
       console.log(res.data)
-      setCheckList(res.data)
+      setCreatePlaylist(!createPlaylist)
     })
     .catch(e => {
       console.log(e)
     })
-
-    console.log(checks[playlists[0].title])
-    console.log(checks[playlists[1].title])
-    console.log(checks[playlists[2].title])
-    console.log(checks[playlists[3].title])
-
-  //   console.log(val.target.name)  // undefined
-  //   console.log(val.target.value) // undefined
   }
 
   return (
-      <List>
-        {playlists.map((playlist, index) => {
-          return (
-            <ListItem key={playlist.id}>
-              <ListItemIcon>
-                <Checkbox
-                  // checked={checkList.indexOf(playlist.id)}
-                  checked={true}
-                  // onClick={() => replaceCheckbox(playlist, index)}
-                  onChange={handleReplaceCheckbox}
-                  name={playlist.title}
-                  value={playlist.title ? playlist.title : ''}
-                  color="primary"
-                />
-              </ListItemIcon>
-
-              <ListItemText primary={playlist.title} />
-
+    <div>
+      {createPlaylist
+        ? <ListItem>
+            <Button color="primary" onClick={() => handleClickOpen()}>
+              <AddRoundedIcon/> 新しいプレイリストを作成
+            </Button>
+          </ListItem>
+        : <div>
+            <ListItem style={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}>
+              <TextField
+                required
+                id="standard-required"
+                label="タイトル"
+                placeholder="新規プレイリスト"
+                style={{width: '80%'}}
+                onChange={(event) => handleChange(event)}
+              />
             </ListItem>
-          )
-        })}
-        <Button onClick={() => getTest(sound_post, playlists)} name={"ボタン"}>
-          <p>テスト</p>
-        </Button>
-      </List>
+            <ListItem style={{
+              display: 'flex',
+              justifyContent: 'flex-end'
+            }}>
+              <Button color="primary" onClick={() => handleCreatePlaylist()}>作成する</Button>
+            </ListItem>
+          </div>
+      }
+    </div>
   )
 }
 
-export default AddPlaylist
-
-
-{/*
-{playlists.map((playlist, index) => {
-          return (
-            <FormControlLabel
-              key={playlist.id}
-              control={
-                <Checkbox
-                  checked={checkList[playlist.title]}
-                  // onClick={() => replaceCheckbox(playlist, index)}
-                  onChange={handleReplaceCheckbox}
-                  name={playlist.title}
-                  color="primary"
-                />
-              }
-              label={playlist.title}
-            />
-            )
-        })}
-*/}
-
-
-{/*
-<List>
-        {playlists.map((playlist) => {
-          const labelId = `checkbox-list-label-${playlist}`;
-          return (
-            <ListItem key={playlist.id} button dense onClick={() => handleReplaceCheckbox(playlist)} role={undefined}>
-              <ListItemIcon>
-                <Checkbox
-                  checked={checkList[playlist.title]}
-                  inputProps={{ "aria-labelledby": labelId }}
-                  name={playlist.title}
-                  color="primary"
-                  label={playlist.title}
-                />
-              </ListItemIcon>
-              <ListItemText primary={playlist.title} />
-
-            </ListItem>
-            )
-        })}
-      </List>
-*/}
+// export default AddPlaylist

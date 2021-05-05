@@ -1,35 +1,31 @@
-/* hiddenクラスがないとマスクとモーダルが表示される（JavaScriptでhiddenクラスを消したとき）*/
-.modal-mask {
-  background-color: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  z-index: 1;
-}
+.top-page-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  padding: 20px 20px;
+  height: 100%;
 
-#add-in-playlist__modal {
-  position: fixed;   /* スクロールで移動しないようmodalの位置を固定 */
-  top: 30vh;
-  /* 以下3行：モーダルを左右中央揃えにする方法 */
-  left: 0;
-  right: 0;
-  margin: 0 auto;
-  transform: translate(0, 0) scale(1);
-  transition: 0.2s;   /* transitionでアニメーションを作成 */
-  z-index: 2;   /* マスクより上に重なるようにする */
-  width: 30%;   /* showビューの幅に合わせて設定 */
-}
+  .main-content-wrapper {
+    background-color: #fff;
+    margin-left: 40px;
+    padding: 24px 0;
+    padding-left: 40px;
+    width: 100%;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.2));
+    border-radius: 5px;
 
-/* hiddenクラスで最初は表示されないようにする */
-.modal-mask.hidden {
-  opacity: 0;
-  display: none;
-}
+    .main-contant {
+      text-align: center;
 
-#add-in-playlist__modal.hidden {
-  opacity: 0;
-  display: none;
-  transform: translate(0, 0) scale(0.8);   /* 大きさ0.8倍から等倍にモーダルが拡大される */
+      .post-field {
+        padding: 10px 20px;
+        .post-item {
+          border: 3px solid #a8a8a8;
+        }
+      }
+      .options {
+        display: flex;
+        gap: 40px;
+      }
+    }
+  }
 }

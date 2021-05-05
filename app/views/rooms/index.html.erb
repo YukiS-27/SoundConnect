@@ -1,3 +1,11 @@
-<h1>メッセージ一覧</h1>
+<div class="top-page-wrapper">
+  <%= render partial: 'shared/side_section' %>
 
-<%= render partial: 'rooms/room', collection: @rooms %>
+  <div class="main-content-wrapper">
+    <div class="container">
+      <h3 class="top-page-title">メッセージ一覧</h3>
+
+      <%= render partial: 'rooms/room', collection: @rooms %>
+    </div>
+  </div>
+</div>

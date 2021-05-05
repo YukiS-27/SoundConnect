@@ -10,6 +10,7 @@ import Rails from "@rails/ujs"
 // import Turbolinks from "turbolinks"
 import * as ActiveStorage from "@rails/activestorage"
 import "channels"
+import "popper.js"
 
 Rails.start()
 // Turbolinks.start()
@@ -19,4 +20,6 @@ var componentRequireContext = require.context("components", true);
 var ReactRailsUJS = require("react_ujs");
 ReactRailsUJS.useContext(componentRequireContext);
 
-import "./app_index"
+// import "./app_index"
+import 'bootstrap'
+// import "../stylesheets/application"

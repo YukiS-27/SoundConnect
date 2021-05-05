@@ -1,0 +1,56 @@
+header {
+  margin: 0 auto;
+  background-color: #78BBE6;
+  height: 68px;
+
+  nav {
+    padding: 10px 10px;
+  }
+  a, i {
+    color: #fff;
+  }
+
+  .container {
+    display: flex;
+    align-items: center;
+
+    .header-logo {
+      margin-right: auto;
+      padding-bottom: 12px;
+    }
+
+    .header-menu {
+      align-items: center;
+
+      ul {
+        list-style: none;
+        li {
+          display: inline-block;
+          padding: 0 10px;
+        }
+      }
+
+      .btn-signup {
+        color: #fff;
+        background-color: #0054A6;
+        &:hover {
+          color: #fff;
+          background: #0054A6;
+          opacity: 0.85;
+        }
+      }
+
+      .btn-login {
+        color: #0054A6;
+        background-color: #fff;
+        border: 2px solid;
+        &:hover {
+          color: #0054A6;
+          background: #fff;
+          opacity: 0.85;
+        }
+      }
+    }
+  }
+
+}

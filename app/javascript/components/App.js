@@ -2,13 +2,16 @@ import React from 'react'
 import { Switch, Route, Link } from 'react-router-dom'
 import styled from 'styled-components'
 
+import SideSection from './SideSection'
+
 import AddSoundPost from './AddSoundPost'
 import SoundPostIndex from './SoundPostIndex'
 import EditSoundPost from './EditSoundPost'
 
+
 const Wrapper = styled.div`
-  width: 700px;
-  max-width: 85%;
+  width: 90%0px;
+  max-width: 90%;
   margin: 20px auto;
 `
 

@@ -1,16 +1,21 @@
-<h1>プレイリストを作成</h1>
+<div class="top-page-wrapper">
+  <%= render partial: 'shared/side_section' %>
 
-<%= @sound_post %>
-<%# 新規プレイリストを作成 %>
-<%= form_with model: @playlist do |f| %>
-  <%= f.label :title, "タイトル" %><br >
-  <%= f.text_field :title %><br >
+  <div class="main-content-wrapper">
+    <div class="container">
+      <h3 class="new-file-title">プレイリストを作成</h3>
 
-  <% if @sound_post.present? %>
-    <%= hidden_field_tag :sound_post_id, @sound_post.id %>
-    <%= f.submit "プレイリストを作成する（投稿から）" %>
-  <% else %>
-    <%= f.submit "プレイリストを作成" %>
-  <% end %>
+      <%= @sound_post %>
+      <%# 新規プレイリストを作成 %>
+      <%= form_with model: @playlist do |f| %>
+        <%= f.label :title, "タイトル" %><br >
+        <%= f.text_field :title, class: 'form-input' %><br >
 
-<% end %>
+        <div class="action">
+          <%= f.submit "プレイリストを作成", class: 'btn btn-primary' %>
+        </div>
+
+      <% end %>
+    </div>
+  </div>
+</div>

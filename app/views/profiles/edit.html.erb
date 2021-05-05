@@ -1,28 +1,37 @@
 <%= javascript_pack_tag 'profiles/avatar_preview' %>
 
-<h1>プロフィール編集</h1>
+<div class="top-page-wrapper">
+  <%= render partial: 'shared/side_section' %>
 
-<%= form_with model: @profile do |f| %>
-  <div class="field">
-    <%= image_tag @profile.avatar.thumb80.url, class: 'icon preview', id: :img_prev, alt: 'プロフィール画像', name: "avatar" %>
-    <%= f.file_field :avatar, id: :user_img %>
-    <%= f.hidden_field :avatar_cache %>
+  <div class="main-content-wrapper">
+    <div class="container">
+      <h3 class="new-file-title">プロフィール編集</h3>
+
+      <%= form_with model: @profile, class: 'sign_up-form' do |f| %>
+        <div class="field">
+          <%= image_tag @profile.avatar.thumb80.url, class: 'icon preview', id: :img_prev, alt: 'プロフィール画像', name: "avatar" %>
+          <%= f.file_field :avatar, id: :user_img %>
+          <%= f.hidden_field :avatar_cache %>
+        </div>
+
+        <div class="field">
+          <%= f.label :name, 'ユーザー名' %><br />
+          <%= f.text_field :name, class: 'form-input' %>
+        </div>
+
+        <div class="field">
+          <%= f.label :introduction, '自己紹介文' %><br />
+          <%= f.text_area :introduction, rows: '3', class: 'form-input' %>
+        </div>
+
+        <div class="action">
+          <%= f.submit "更新", class: 'btn btn-primary' %>
+        </div>
+      <% end %>
+
+      <%# マイページへ戻る %>
+      <%= link_to t('devise.shared.links.back'), user_profile_path(current_user) %>
+
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :name, 'ユーザー名' %><br />
-    <%= f.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= f.label :introduction, '自己紹介文' %><br />
-    <%= f.text_area :introduction %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "更新" %>
-  </div>
-<% end %>
-
-<%# マイページへ戻る %>
-<%= link_to t('devise.shared.links.back'), user_profile_path(current_user) %>
+</div>

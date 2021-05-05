@@ -1,0 +1,33 @@
+.new-file-wrapper {
+  margin: 0 auto;
+
+  .container {
+    margin: 20px auto;
+    padding: 30px 30px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 60%;
+    filter: drop-shadow(4px 4px 4px rgba(0,0,0,0.3));
+    border-radius: 5px;
+
+    .new-file-title {
+      padding-bottom: 20px;
+      color: #1B435D;
+    }
+
+    .form-input {
+      width: 280px;
+    }
+    .upload {
+      padding: 20px 0;
+    }
+
+    .links {
+      text-align: center;
+    }
+  }
+}

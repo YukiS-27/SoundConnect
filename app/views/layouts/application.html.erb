@@ -7,33 +7,52 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/krishdevdb/reseter.css/css/reseter.min.css">
+    <script src="https://kit.fontawesome.com/6a75c98e24.js" crossorigin="anonymous"></script>
     <%= stylesheet_link_tag 'application', media: 'all' %>
     <%= javascript_pack_tag 'application' %>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
   </head>
 
   <body>
+
     <header>
       <nav>
-        <%= link_to "トップページへ", root_path %> |
+        <div class="container">
+          <div class="header-logo">
+            <%= link_to root_path do %>
+              <%= image_tag 'SoundConnect_logo.png' %>
+            <% end %>
+          </div>
 
-        <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
-        <% if user_signed_in? %>
-          <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
-          <%= link_to "アカウント設定", edit_user_registration_path %> |
-          <%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %> |
-          <%= link_to "マイページ", user_profile_path(current_user) %> |
-          <%= link_to "ユーザー一覧", users_path %> |
-          <%= link_to "メッセージ", rooms_path, 'data-turbolinks': false %> |
-          <%= link_to "ログアウト", sign_out_path %><br >
-          <p><%= current_user.profile.name %>としてログイン</p>
-        <% else %>
-          <%= link_to "サインアップ", new_user_registration_path %> |
-          <%= link_to "ログイン", new_user_session_path %>
-        <% end %>
+          <!-- user_signed_in? はユーザがログインしているか調べるdeviseのHelperメソッド -->
+          <% if user_signed_in? %>
+          <div class="header-menu">
+            <ul class="header-menu-list">
+              <!-- current_user は現在ログインしているUserオブジェクトを返すdeviseのHelperメソッド -->
+              <li>
+                <%= link_to "アカウント設定", edit_user_registration_path %>
+              </li>
+              <li>
+                <i class="fas fa-user"></i><%= link_to "プロフィール設定", edit_profile_path(current_user.profile.id) %>
+              </li>
+              <li>
+                <%= link_to "マイページ", user_profile_path(current_user) %>
+              </li>
+              <%= link_to "ユーザー一覧", users_path %>
+              <%= link_to "ログアウト", sign_out_path, class: 'btn btn-primary' %><br >
+            </ul>
+          </div>
+          <% else %>
+          <div class="header-menu">
+            <div class="header-menu-list">
+              <%= link_to 'ログイン', new_user_session_path, { class: 'btn btn-login' } %>
+              <%= link_to '新規登録', new_user_registration_path, { class: 'btn btn-signup' } %>
+            </div>
+            <% end %>
+          </div>
+        </div>
       </nav>
-
     </header>
 
     <p><%= flash[:success] %></p>

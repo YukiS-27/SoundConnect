@@ -1,9 +1,17 @@
-<h1>プレイリスト一覧</h1>
+<div class="top-page-wrapper">
+  <%= render partial: 'shared/side_section' %>
 
-<% @playlists.each do |playlist| %>
-  <%= link_to playlist_path(playlist) do %>
-    <%= playlist.title %><br >
-  <% end %>
-<% end %>
+  <div class="main-content-wrapper">
+    <div class="container">
+      <h3 class="new-file-title">プレイリスト一覧</h3>
 
-<%= link_to '＋新規プレイリストを作成', new_playlist_path %>
+      <% @playlists.each do |playlist| %>
+        <%= link_to playlist_path(playlist) do %>
+          <h6><%= playlist.title %></h6>
+        <% end %>
+      <% end %>
+
+      <%= link_to '＋新規プレイリストを作成', new_playlist_path %>
+    </div>
+  </div>
+</div>

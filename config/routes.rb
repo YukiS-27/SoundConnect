@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
-  root to: "home#index"
-  # root to: 'sound_posts#index'
-  get 'sound_posts/new', to: 'home#index'
-  get 'sound_posts/:id/edit', to: 'home#index'
+  # root to: "home#index"
+  root to: 'sound_posts#index'
+  # get 'sound_posts/new', to: 'home#index'
+  # get 'sound_posts/:id/edit', to: 'home#index'
 
   # deviseのコントローラーを継承
   devise_for :users,
@@ -31,11 +31,15 @@ Rails.application.routes.draw do
   # get 'edit/profile', to: 'users/registrations#edit_profile', as: 'edit_profile'
   # patch 'update/profile', to: 'users/registrations#update_profile', as: 'update_profile'
 
+  # apiコントローラー
   namespace :api do
     namespace :v1 do
-      get 'sound_post_playlists/index_belongs_to_playlist', to: 'sound_post_playlists#index_belongs_to_playlist'
-      get 'sound_post_playlists/check_belongs_to_playlist', to: 'sound_post_playlists#check_belongs_to_playlist'
-      resources :sound_post_playlists, only: [:create, :destroy]
+      # resources :sound_posts, only: [:index, :new, :create, :destroy]
+
+      get 'sound_post_playlists/index_has_playlist_ids', to: 'sound_post_playlists#index_has_playlist_ids'
+      get 'sound_post_playlists/check_contained_in_playlist', to: 'sound_post_playlists#check_contained_in_playlist'
+      post 'sound_post_playlists/delete', to: 'sound_post_playlists#delete'
+      resources :sound_post_playlists, only: [:create]
       resources :playlists, only: [:index, :create]
     end
   end

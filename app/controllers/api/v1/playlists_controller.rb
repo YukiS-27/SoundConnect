@@ -1,5 +1,6 @@
 class Api::V1::PlaylistsController < ApplicationController
   protect_from_forgery with: :null_session
+  skip_before_action :verify_authenticity_token
 
   def index
     playlists = current_user.playlists.order(updated_at: :desc)
@@ -34,6 +35,6 @@ class Api::V1::PlaylistsController < ApplicationController
 
   private
   def playlist_params
-    params.require(:playlist).permit(:title, :user_id)
+    params.require(:playlist).permit(:title, :user_id).merge(user_id: current_user.id)
   end
 end
