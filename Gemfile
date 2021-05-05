@@ -5,8 +5,6 @@ ruby '2.7.2'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3'
-# Use mysql as the database for Active Record
-gem 'mysql2', '~> 0.5'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
@@ -42,9 +40,15 @@ gem 'bootsnap', '>= 1.4.4', require: false
 # Bootstrap v5.0.0-beta2    Read more: https://github.com/twbs/bootstrap-rubygem/blob/master/README.md
 gem 'bootstrap', '~> 5.0.0.beta2'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Use mysql as the database for Active Record
+  gem 'mysql2', '~> 0.5'
 end
 
 group :development do
