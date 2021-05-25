@@ -6,23 +6,36 @@
     <%= form_with model: @sound_post do |f| %>
 
       <div class="field form-group">
-        <%= f.label :sound_source %><br >
+        <%= f.label :sound_source, "アップロードファイル" %><br >
         <%= f.file_field :sound_source, :size => 140 %>
       </div>
 
       <%# プルダウンから楽器を一つ選択 %>
       <div class="field form-group">
-        <%= f.label :instrument_id %><br >
+        <%= f.label :instrument_id, "楽器" %><br >
         <%= f.collection_select :instrument_id, @instruments, :id, :name, {prompt: "楽器を選択してください"}, class: 'form-input' %>
       </div>
 
+      <%# ジャンルを選択 %>
       <div class="field form-group">
-        <%= f.label :title %><br >
+        <span>ムード</span>
+        <%= f.collection_check_boxes(:mood_ids, Mood.all, :id, :name) do |m| %>
+          <div>
+            <%= m.label do %>
+              <%= m.check_box %>
+              <%= m.text %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="field form-group">
+        <%= f.label :title, "タイトル" %><br >
         <%= f.text_field :title, class: 'form-input' %>
       </div>
 
       <div class="field form-group">
-        <%= f.label :description %><br >
+        <%= f.label :description, "説明" %><br >
         <%= f.text_area :description, class: 'form-input' %>
       </div>
 
