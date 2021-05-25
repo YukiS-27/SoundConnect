@@ -9,6 +9,9 @@ class SoundPost < ApplicationRecord
   belongs_to :user
   belongs_to :instrument
 
+  has_many :sound_post_moods, dependent: :destroy
+  has_many :moods, through: :sound_post_moods
+
   has_many :sound_post_likes
   has_many :sound_post_like_users, through: :sound_post_likes, source: :user
 
