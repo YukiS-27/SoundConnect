@@ -5,3 +5,5 @@ Instrument.seed(:id,
   { id: 4, name: "シンセサイザー" },
   { id: 5, name: "ドラム" }
 )
+
+puts '楽器データの追加が完了しました！'
