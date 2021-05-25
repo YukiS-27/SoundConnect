@@ -1,0 +1,2 @@
+class SoundPostMood < ApplicationRecord
+end

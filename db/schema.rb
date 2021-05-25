@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_25_071719) do
+ActiveRecord::Schema.define(version: 2021_05_25_073105) do
 
   create_table "instruments", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "name", null: false
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(version: 2021_05_25_071719) do
     t.index ["user_id"], name: "index_sound_post_likes_on_user_id"
   end
 
+  create_table "sound_post_moods", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+    t.bigint "sound_post_id", null: false
+    t.bigint "mood_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["mood_id"], name: "index_sound_post_moods_on_mood_id"
+    t.index ["sound_post_id"], name: "index_sound_post_moods_on_sound_post_id"
+  end
+
   create_table "sound_post_playlists", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.integer "sound_post_id", null: false
     t.integer "playlist_id", null: false
@@ -114,4 +123,6 @@ ActiveRecord::Schema.define(version: 2021_05_25_071719) do
   add_foreign_key "room_users", "users"
   add_foreign_key "sound_post_likes", "sound_posts"
   add_foreign_key "sound_post_likes", "users"
+  add_foreign_key "sound_post_moods", "moods"
+  add_foreign_key "sound_post_moods", "sound_posts"
 end
