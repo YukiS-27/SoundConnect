@@ -8,5 +8,4 @@ class ApplicationController < ActionController::Base
   #   新規登録時にnameの取得を許可する
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   # end
-
 end

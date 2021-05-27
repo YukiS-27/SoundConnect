@@ -59,7 +59,9 @@ class SoundPostsController < ApplicationController
 
   def sound_post_params
     params.require(:sound_post).permit(
-      :title, :description, :sound_source, :instrument_id
+      :title, :description, :sound_source,
+      :instrument_id,
+      mood_ids: []
     )
   end
 
