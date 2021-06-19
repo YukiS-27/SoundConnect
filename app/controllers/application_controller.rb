@@ -9,9 +9,13 @@ class ApplicationController < ActionController::Base
   #   devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   # end
 
-  helper_method :mood_index
+  helper_method :mood_index, :instrument_index
 
   def mood_index
     Mood.all
+  end
+
+  def instrument_index
+    Instrument.all
   end
 end
