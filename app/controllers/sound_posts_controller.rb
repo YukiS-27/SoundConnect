@@ -5,6 +5,11 @@ class SoundPostsController < ApplicationController
 
   def index
     @sound_posts = SoundPost.all
+
+    if params[:mood_id]
+      @mood = Mood.find(params[:mood_id])
+      @sound_posts = @mood.sound_posts
+    end
   end
 
   def show

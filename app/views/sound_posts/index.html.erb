@@ -14,7 +14,7 @@
             楽器：<%= sound_post.instrument.name %><br >
             ムード：
               <% sound_post.moods.each do |mood| %>
-                <%= mood.name %>
+                <%= link_to mood.name, root_path(mood_id: mood.id) %>
               <% end %><br >
             <audio src="<%= "#{sound_post.sound_source}" %>" controls="">
               <!-- <a src="<%= "#{sound_post.sound_source}" %>">ダウンロード</a> -->
