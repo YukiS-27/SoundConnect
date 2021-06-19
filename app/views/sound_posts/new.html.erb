@@ -16,7 +16,7 @@
         <%= f.collection_select :instrument_id, @instruments, :id, :name, {prompt: "楽器を選択してください"}, class: 'form-input' %>
       </div>
 
-      <%# ジャンルを選択 %>
+      <%# ムードを選択 %>
       <div class="field form-group">
         <span>ムード</span>
         <%= f.collection_check_boxes(:mood_ids, Mood.all, :id, :name) do |m| %>
